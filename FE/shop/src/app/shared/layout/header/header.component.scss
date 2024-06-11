@@ -5,6 +5,8 @@
   position: fixed;
   z-index: 1999;
   width: 100%;
+  // background: transparent;
+  // backdrop-filter: blur(10px);
 
   &__container {
     .nav__top {
@@ -21,8 +23,9 @@
     .nav__content {
       padding: 0 12rem;
       height: 4.5rem;
-      font-size: 1.8rem;
       background-color: #f5f5f5;
+      box-shadow: 0 2px 4px #dce1e1;
+
       @include flex-center;
 
       &-wrapper {
@@ -32,16 +35,44 @@
 
       &-list {
         @include flex-center;
-        button {
-          border: none;
-          cursor: pointer;
-          font-size: 1.8rem;
-        }
       }
 
       &-item {
         margin: 0 1.4rem;
+
+        img {
+          width: 20px;
+        }
       }
     }
   }
+
+  .nav__content-button {
+    @include flex-center;
+    cursor: pointer;
+    border: none;
+    font-size: 1.8rem;
+    background-color: #f5f5f5;
+    padding: 1rem;
+    // border: 0.1rem solid;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    span {
+      @include flex-center;
+    }
+  }
+}
+
+.glowing-animation::before {
+  // content: '';
+  // position: absolute;
+  // left: 0;
+  // top: 0;
+  // width: 50%;
+  // height: 100%;
+  // -webkit-box-shadow: 0
 }

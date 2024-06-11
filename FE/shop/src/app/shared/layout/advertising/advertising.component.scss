@@ -1,0 +1,11 @@
+@import "./../../../../styles.scss";
+
+.advertising {
+  color: black;
+  background-color: #ccc;
+  top: 12rem;
+  position: fixed;
+  // @include flex-center;
+  max-width: 9.375%;
+  left: 1.5625%;
+}

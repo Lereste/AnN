@@ -1,35 +1,9 @@
 swiper-container {
-  height: 32rem;
+  height: 36rem;
 
   img {
     cursor: pointer;
   }
-
-  ng-deep .swiper-button-next::after {
-    color: red;
-  }
-
-  .swiper-button-prev::before,
-  .swiper-button-next:after {
-    color: #ccc  !important;
-  }
 }
 
-::ng-deep .swiper-button-next,
-::ng-deep .swiper-button-prev {
-  color: #207868 !important;
-}
 
-:host {
-  --swiper-theme-color: red  !important;
-}
-
-.swiper-button-prev{
-  position: absolute;
-  top: 50%;
-  left: -40px;
-  width: 45px;
-  height: 45px;
-  transform: translateY(-50%);
-  margin-top: 0px;
-}

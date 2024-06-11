@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../layout/header/header.component';
-import { FooterComponent } from '../../layout/footer/footer.component';
-import { HeroComponent } from '../../layout/hero/hero.component';
 import { AdvertisingComponent } from '../../layout/advertising/advertising.component';
 import { QuickContactsComponent } from '../../layout/quick-contacts/quick-contacts.component';
 import { MainComponent } from '../../layout/main/main.component';
+import { GoToTopComponent } from '../../components/go-to-top/go-to-top.component';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +13,7 @@ import { MainComponent } from '../../layout/main/main.component';
     MainComponent,
     AdvertisingComponent,
     QuickContactsComponent,
-    FooterComponent,
+    GoToTopComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

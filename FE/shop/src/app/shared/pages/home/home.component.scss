@@ -10,12 +10,11 @@
 .home__content {
   @include flex-center;
   flex: 1;
-
-  position: absolute;
   width: 100%;
-
-  &-ads, &-contacts {
-    width: 12.5%;
+  
+  &-advertising, &-contacts {
+    width: 100%;
+    max-width: 12.5%;
   }
 
   &-main {
@@ -23,8 +22,8 @@
   }
 }
 
-.home__footer {
-  position: absolute;
-  width: 100%;
-  margin-top: 45rem;
-}
+// .home__footer {
+//   position: absolute;
+//   width: 100%;
+//   margin-top: 45rem;
+// }

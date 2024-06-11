@@ -1,0 +1,31 @@
+.category__hero {
+    height: 36rem;
+
+    &-container {
+        padding: 0.8rem;
+    }
+}
+
+.hero__category-list {
+    padding: 0.4rem;
+    cursor: pointer;
+}
+
+.hero__category-list:hover {
+    color: rgb(239, 99, 74);
+    .hero__category-item {
+        display: block;
+        padding: 0.4rem;
+        color: teal;
+        margin-left: 1.2rem;
+    }
+}
+
+.hero__category-item {
+    display: none;
+}
+
+.hero__category-item:hover {
+    background-color: #f5f5f5;
+    min-width: 16rem;
+}

@@ -1,0 +1,11 @@
+<div class="category__hero">
+    <div class="category__hero-container">
+        <ng-container *ngFor="let category of categoryDataInput">
+            <ul class="hero__category-list">{{category.parentCategory}}
+                <ng-container *ngFor="let childItem of category.childCategory">
+                    <li class="hero__category-item">{{childItem}}</li>
+                </ng-container>
+            </ul>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+// :root {
+//     --primaryColor: #f1f1f1;
+//     --black: #222;
+//     --black2: #555;
+//     --black3: #252525;
+//     --black4: #000;
+//     --black5: #212529;
+//     --orange: #eb0028;
+//     --white: #fff;
+//     --grey: #959595;
+//     --grey2: #666;
+//     --grey3: #ccc;
+//     --secondaryColor: #2b1f4d;
+//     --yellow: #ffcc00;
+//     --green: #59b210;
+//     --pink: #c23564;
+// }
+
+@keyframes bounce {
+    0% {
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    0% {
+        transform: scale(1);
+    }
+}
+
+.goto-top:link,
+.goto-top:visited {
+    position: fixed;
+    right: 2%;
+    bottom: 10%;
+    padding: 0.8rem 1.4rem;
+    border-radius: 1rem;
+    background-color: #eb0028;
+    cursor: pointer;
+    transition: 0.3s;
+    animation: bounce 3s ease-in-out infinite;
+    visibility: hidden;
+}
+
+.goto-top svg {
+    width: 1.3rem;
+    height: 1.3rem;
+    fill: #fff;
+}
+
+.goto-top:hover {
+    background-color: #000;
+}
+
+.show-top:link,
+.show-top:visited {
+   visibility: visible;
+   z-index: 1999;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    opacity: 0;
+    transition: all .2s ease-in-out;
+}
+
+.show-scrollTop {
+    opacity: 1;
+    transition: all .2s ease-in-out;
+}

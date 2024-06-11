@@ -1,13 +1,10 @@
 <section class="hero">
   <div class="hero__category">
-    <ul class="hero__category-list">Pc</ul>
-    <ul class="hero__category-list">Laptop</ul>
-    <ul class="hero__category-list">Monitor</ul>
-    <ul class="hero__category-list">Keyboard</ul>
-    <ul class="hero__category-list">Mouse</ul>
+    <app-category-hero [categoryDataInput]="categoryData"></app-category-hero>
   </div>
-
-  <div class="hero__swiper">
-      <app-swiper></app-swiper>
+  <hr>
+  <div class="hero__carousel">
+      <!-- <app-swiper></app-swiper> -->
+      <app-carousel [images]="imagesData" [autoSlide]="true" [slideInterval]="3000"></app-carousel>
   </div>
 </section>

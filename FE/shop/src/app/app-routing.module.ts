@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./shared/pages/home/home.component";
+import { Page404Component } from "./authentication/page404/page404.component";
 
 export const routes: Routes = [
     {
@@ -22,6 +23,10 @@ export const routes: Routes = [
             import("./authentication/authentication.module").then(
                 (mod) => mod.AuthenticationModule
             ),
+    },
+    {
+        path: "**",
+        component: Page404Component,
     },
 ];
 
