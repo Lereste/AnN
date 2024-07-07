@@ -1,14 +1,18 @@
 <div class="category__hero">
-    <div class="category__hero-container">
-        <ng-container *ngFor="let category of categoryDataInput">
-            <ul class="hero__category-list">{{category.parentCategory}}
-                <ng-container *ngFor="let childItem of category.childCategory">
-                    <li class="hero__category-item">{{childItem}}</li>
-                </ng-container>
-            </ul>
-        </ng-container>
-    </div>
-    <div class="submenu">
+  <div class="category__hero-container">
+    <ul class="hero__category-parent-list">
+      <li class="hero__category-parent-item" *ngFor="let parentCategory of categoryDataInput"
+        (click)="onSelectedParent(parentCategory.parentName)"
+        [ngClass]="{ active: isActive(parentCategory.parentName) }">
+        <span>{{ parentCategory.parentName }}</span>
 
-    </div>
+        <ul style="display: none" class="hero__category-children-list">
+          <li class="hero__category-children-item" *ngFor="let child of parentCategory.childCategory"
+            (click)="onSelectedChildren(child.brandName)" [ngClass]="{ active: isActive(child.brandName) }" class="inactive">
+            <span>{{ child.brandName }}</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </div>

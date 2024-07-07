@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { SwiperComponent } from '../../../components/swiper/swiper.component';
 import { register } from 'swiper/element/bundle';
-import { CarouselComponent } from '../../../components/carousel/carousel.component';
+import { CarouselComponent } from './carousel/carousel.component';
 import { CommonModule, NgFor } from '@angular/common';
 import { CategoryHeroComponent } from './category-hero/category-hero.component';
 
@@ -95,20 +95,72 @@ export class HeroComponent implements OnInit {
 
   categoryData = [
     {
-      parentCategory: 'Laptop Gaming',
-      childCategory: ['ASUS', 'ACER', 'MSI', 'LENOVO', 'DELL', 'HP', 'LG'],
+      parentName: 'Laptop Gaming',
+      childCategory: [
+        {
+          brandName: 'ASUS',
+        },
+        {
+          brandName: 'ACER',
+        },
+        {
+          brandName: 'MSI',
+        },
+        {
+          brandName: 'LENOVO',
+        },
+        {
+          brandName: 'DELL',
+        },
+        {
+          brandName: 'HP',
+        },
+        {
+          brandName: 'LG',
+        },
+      ],
     },
     {
-      parentCategory: 'PC Gaming',
-      childCategory: ['PC Amd', 'Pc Intel', 'Mini Pc'],
+      parentName: 'PC Gaming',
+      childCategory: [
+        {
+          brandName: 'PC Amd',
+        },
+        {
+          brandName: 'Pc Intel',
+        },
+        {
+          brandName: 'Mini Pc',
+        },
+      ],
     },
     {
-      parentCategory: 'Monitor',
-      childCategory: ['LG', 'Samsung', 'View sonic'],
+      parentName: 'Monitor',
+      childCategory: [
+        {
+          brandName: 'LG',
+        },
+        {
+          brandName: 'Samsung',
+        },
+        {
+          brandName: 'View sonic',
+        },
+      ],
     },
     {
-      parentCategory: 'Gaming gear',
-      childCategory: ['Mouse', 'Keyboard', 'Headphone'],
+      parentName: 'Gaming gear',
+      childCategory: [
+        {
+          brandName: 'Mouse',
+        },
+        {
+          brandName: 'Keyboard',
+        },
+        {
+          brandName: 'Headphone',
+        },
+      ],
     },
   ];
 
