@@ -1,79 +1,117 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, NgFor, NgStyle } from '@angular/common';
 import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    Input,
-    OnInit,
-    ViewChild,
-} from "@angular/core";
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 
 interface carouselImage {
-    imageSrc: string;
-    imageAlt: string;
+  id: number;
+  imageSrc: string;
+  imageAlt: string;
+  content: {
+    title: string;
+    description: string;
+  };
 }
 
 @Component({
-    selector: "app-carousel",
-    standalone: true,
-    imports: [CommonModule],
-    templateUrl: "./carousel.component.html",
-    styleUrl: "./carousel.component.scss",
+  selector: 'app-carousel',
+  standalone: true,
+  imports: [CommonModule, NgFor, NgStyle],
+  templateUrl: './carousel.component.html',
+  styleUrl: './carousel.component.scss',
 })
 export class CarouselComponent implements OnInit, AfterViewInit {
-    @Input() images: carouselImage[] = [];
-    @Input() indicators = true;
-    @Input() controls = true;
-    @Input() isAutoSlide = true;
-    @Input() slideTimer: number = 5000;
-    setInterval: any;
+  @Input() imagesDataInput: carouselImage[] = [];
+  @Input() indicators = true;
+  @Input() controls = true;
+  @Input() isAutoSlide = true;
+  @Input() slideTimer: number = 6000;
+  setInterval: any;
 
-    @ViewChild("autoplay") autoplay!: ElementRef<any>;
+  @ViewChild('autoplay') autoplay!: ElementRef<any>;
+  @ViewChild('slider') slider!: ElementRef<any>;
 
-    selectedIndex = 0;
+  selectedIndex = 0;
 
-    ngOnInit(): void {
-        this.autoSlideImage(this.isAutoSlide);
+  ngOnInit(): void {
+    this.autoSlideImage(this.isAutoSlide);
+  }
+
+  ngAfterViewInit() {
+    this.loadEvent();
+  }
+
+  loadEvent() {
+    this.autoplay?.nativeElement.addEventListener('mouseover', () => {
+      this.autoSlideImage((this.isAutoSlide = false));
+    });
+    this.autoplay?.nativeElement.addEventListener('mouseleave', () => {
+      this.autoSlideImage((this.isAutoSlide = true));
+    });
+  }
+
+  autoSlideImage(isAutoSlide: boolean): void {
+    if (isAutoSlide) {
+      this.setInterval = setInterval(() => {
+        this.onNextClick();
+      }, this.slideTimer);
+    } else {
+      clearInterval(this.setInterval);
+    }
+  }
+
+  // sets index of image on dot/indicator click
+  selectImage(index: number): void {
+    this.selectedIndex = index;
+
+    // this.imagesDataInput.find((item:any, idx) => {
+
+    //   if (this.selectedIndex === idx) {
+    //     console.log('this.selectedIndex', this.selectedIndex);
+    //     const ccc = this.slider.nativeElement.children[idx]; // lấy ảnh ở index 5 là The Migration
+    //     console.log('ccc', ccc);
+    //     this.slider.nativeElement?.append(ccc);
+    //   }
+    // })
+  }
+
+  onPrevClick(): void {
+    if (this.selectedIndex === 0) {
+      this.selectedIndex = this.imagesDataInput.length - 1;
+    } else {
+      this.selectedIndex--;
     }
 
-    ngAfterViewInit() {
-        this.autoplay.nativeElement.addEventListener("mouseover", () => {
-            this.autoSlideImage(this.isAutoSlide = false);
-        });
+    const currentItem =
+      this.slider.nativeElement.children[
+        this.slider.nativeElement.children.length - 1
+      ];
+    this.slider.nativeElement?.prepend(currentItem);
+  }
 
-        this.autoplay.nativeElement.addEventListener("mouseleave", () => {
-          this.autoSlideImage(this.isAutoSlide = true);
-      });
+  onNextClick(): void {
+    if (this.selectedIndex === this.imagesDataInput.length - 1) {
+      this.selectedIndex = 0;
+    } else {
+      this.selectedIndex++;
     }
 
-    autoSlideImage(isAutoSlide: boolean): void {
-        if (isAutoSlide) {
-            this.setInterval = setInterval(() => {
-                this.onNextClick();
-            }, this.slideTimer);
-        } else {
-            clearInterval(this.setInterval);
-        }
-    }
+    const childrenList = this.slider.nativeElement.children;
+    this.slider.nativeElement?.append(childrenList[0]);
+  }
 
-    // sets index of image on dot/indicator click
-    selectImage(index: number): void {
-        this.selectedIndex = index;
-    }
+  onMouseOver(){
+      this.autoSlideImage((this.isAutoSlide = false));
+  }
 
-    onPrevClick(): void {
-        if (this.selectedIndex === 0) {
-            this.selectedIndex = this.images.length - 1;
-        } else {
-            this.selectedIndex--;
-        }
-    }
-
-    onNextClick(): void {
-        if (this.selectedIndex === this.images.length - 1) {
-            this.selectedIndex = 0;
-        } else {
-            this.selectedIndex++;
-        }
-    }
+  onMouseLeave() {
+    this.autoSlideImage((this.isAutoSlide = true));
+  }
 }

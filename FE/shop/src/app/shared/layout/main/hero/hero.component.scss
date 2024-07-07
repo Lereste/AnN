@@ -1,30 +1,21 @@
-@import "./../../../../styles.scss";
+@import "./../../../../../styles.scss";
 
 .hero {
   @include flex-center;
   width: 100%;
   // padding: 0 12rem;
   margin-top: 8rem;
-  height: 36rem;
+  height: 46rem;
 
   &__category {
     // height: 36rem;
     width: 20%;
+    padding-right: 0.4rem;
   }
 
   &__carousel {
     // height: 36rem;
     width: 80%;
-    padding: 0 1rem;
+    padding-left: 0.4rem;
   }
-
-  hr {
-    border: 0.1px solid #ccc;
-    height: 34rem;
-    // width: 1rem;
-  }
-}
-
-.hero:hover {
-  // background-color: #ccc;
 }

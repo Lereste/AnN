@@ -1,6 +1,6 @@
 <!--Scroll to top-->
-<ng-container class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
-    <button (click)="scrollToTop()">
-        <i class="fa fa-chevron-up"></i>
-    </button>
-</ng-container>
+<button [ngClass]="{'show-scroll': showScroll}" (click)="scrollToTop()" class="scroll-to-top">
+  <div class="goto-top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </div>
+</button>

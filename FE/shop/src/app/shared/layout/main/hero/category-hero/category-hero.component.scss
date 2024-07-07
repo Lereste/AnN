@@ -1,9 +1,13 @@
 .category__hero {
-    height: 36rem;
+    height: 44rem; // default 46rem
 
     &-container {
         padding: 0.8rem;
     }
+
+    background: #f5f5f5;
+    border-radius: 0.4rem;
+    border: 1px solid #ccc;
 }
 
 .hero__category-list {
@@ -29,3 +33,12 @@
     background-color: #f5f5f5;
     min-width: 16rem;
 }
+
+// .submenu {
+//   position: absolute;
+//   width: 59.79%;
+//   height: 100px;
+//   background-color: red;
+//   left: 27.69%;
+//   z-index: 11111;
+// }

@@ -1,4 +1,4 @@
-<div *ngIf="images && images.length > 0" class="carousel-container" #autoplay>
+<!-- <div *ngIf="images && images.length > 0" class="carousel-container" #autoplay>
     <img *ngFor="let image of images; let idx = index" [src]="image.imageSrc" [alt]="image.imageAlt"
         [ngClass]="{'image-active': selectedIndex === idx}" class="fade" >
 
@@ -13,4 +13,37 @@
     <button *ngIf="controls" class="btn-carousel btn-next" (click)="onNextClick()">
         <i class="fas fa-arrow-circle-right icon-carousel icon-next"></i>
     </button>
-</div>
+</div> -->
+
+<main>
+  <ng-container *ngIf="imagesDataInput.length > 0" >
+    <img src="" alt="">
+    <ul class='slider' #slider #autoplay>
+      <li class='item' *ngFor="let image of imagesDataInput; let idx = index"
+        [ngStyle]="{'background-image': 'url(' + image.imageSrc + ')'}">
+        <div class='content'>
+          <h2 class='title'>{{image.content.title}}</h2>
+          <p class='description'>{{image.content.description}}</p>
+          <button>Read More</button>
+        </div>
+      </li>
+    </ul>
+
+    <div *ngIf="indicators" class="carousel-dot-container" >
+      <span *ngFor="let image of imagesDataInput; let idx = index" class="dot"
+        [ngClass]="{'dot-active': selectedIndex === idx}" (click)="selectImage(idx)"></span>
+    </div>
+
+    <div class='nav'>
+      <button class='btn prev' name="arrow-back-outline" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (click)="onPrevClick()">
+        <i class="fa-regular fa-circle-left"></i>
+      </button>
+      <button class='btn next' name="arrow-forward-outline" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (click)="onNextClick()">
+        <i class="fa-regular fa-circle-right"></i>
+      </button>
+    </div>
+  </ng-container>
+</main>
+
+<!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
