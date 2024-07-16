@@ -96,6 +96,7 @@ export class HeroComponent implements OnInit {
   categoryData = [
     {
       parentName: 'Laptop Gaming',
+      icon: 'fa-solid fa-laptop',
       childCategory: [
         {
           brandName: 'ASUS',
@@ -122,6 +123,7 @@ export class HeroComponent implements OnInit {
     },
     {
       parentName: 'PC Gaming',
+      icon: 'fa-solid fa-computer',
       childCategory: [
         {
           brandName: 'PC Amd',
@@ -136,6 +138,7 @@ export class HeroComponent implements OnInit {
     },
     {
       parentName: 'Monitor',
+      icon: 'fa-solid fa-desktop',
       childCategory: [
         {
           brandName: 'LG',
@@ -150,6 +153,7 @@ export class HeroComponent implements OnInit {
     },
     {
       parentName: 'Gaming gear',
+      icon: 'fa-regular fa-keyboard',
       childCategory: [
         {
           brandName: 'Mouse',

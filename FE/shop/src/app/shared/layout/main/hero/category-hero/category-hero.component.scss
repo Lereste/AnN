@@ -15,45 +15,31 @@
   cursor: pointer;
 }
 
-// .hero__category-list:hover {
-//     color: rgb(239, 99, 74);
-//     .hero__category-item {
-//         display: block;
-//         padding: 0.4rem;
-//         color: teal;
-//         margin-left: 1.2rem;
-//     }
-// }
+.hero__category-parent-item {
+  padding: 0.6rem 0;
+  i {
+    font-size: 1.2rem;
+    margin-right: 0.4rem;
+  }
 
-.hero__category-item {
-  display: none;
 }
 
-// // .active {
-// //   display: block;
-// //   padding: 0.4rem;
-// //   color: teal;
-// //   margin-left: 1.2rem;
-// // }
+.hero__category-children-list{
+  padding-left: 2rem;
 
-// .hero__category-item:hover {
-//   background-color: #f5f5f5;
-//   min-width: 16rem;
-// }
 
-// .submenu {
-//   position: absolute;
-//   width: 59.79%;
-//   height: 100px;
-//   background-color: red;
-//   left: 27.69%;
-//   z-index: 11111;
-// }
+  .hero__category-children-item{
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+}
+
 ul li {
   cursor: pointer;
 }
 .active {
-  color: blue;
+  color: orangered;
 }
 .active ul {
   display: block !important;
@@ -61,4 +47,5 @@ ul li {
 
 .inactive {
   color: black;
+  padding: 0.4rem 0;
 }

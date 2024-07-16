@@ -1,8 +1,9 @@
-import { NgFor, NgClass } from '@angular/common';
+import { NgFor, NgClass, NgIf } from '@angular/common';
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
 interface categoryDataModel {
   parentName: string;
+  icon: string;
   childCategory: childCategory[];
 }
 
@@ -15,7 +16,7 @@ interface childCategory {
 @Component({
   selector: 'app-category-hero',
   standalone: true,
-  imports: [NgFor, NgClass],
+  imports: [NgFor, NgClass, NgIf],
   templateUrl: './category-hero.component.html',
   styleUrl: './category-hero.component.scss',
 })

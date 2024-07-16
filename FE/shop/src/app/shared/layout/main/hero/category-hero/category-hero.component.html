@@ -1,14 +1,28 @@
 <div class="category__hero">
   <div class="category__hero-container">
     <ul class="hero__category-parent-list">
-      <li class="hero__category-parent-item" *ngFor="let parentCategory of categoryDataInput"
+      <li
+        class="hero__category-parent-item"
+        *ngFor="let parentCategory of categoryDataInput"
         (click)="onSelectedParent(parentCategory.parentName)"
-        [ngClass]="{ active: isActive(parentCategory.parentName) }">
-        <span>{{ parentCategory.parentName }}</span>
+        [ngClass]="{ active: isActive(parentCategory.parentName) }"
+      >
+        <i [class]="parentCategory.icon"></i>
+        <span>{{ parentCategory.parentName }} </span>
+        <ng-container *ngIf="!isActive(parentCategory.parentName); else active">
+          <i class="fa-solid fa-chevron-right"></i>
+        </ng-container>
+        <ng-template #active>
+          <i class="fa-solid fa-chevron-down"></i>
+        </ng-template>
 
         <ul style="display: none" class="hero__category-children-list">
-          <li class="hero__category-children-item" *ngFor="let child of parentCategory.childCategory"
-            (click)="onSelectedChildren(child.brandName)" [ngClass]="{ active: isActive(child.brandName) }" class="inactive">
+          <li
+            class="hero__category-children-item inactive"
+            *ngFor="let child of parentCategory.childCategory"
+            (click)="onSelectedChildren(child.brandName)"
+            [ngClass]="{ active: isActive(child.brandName) }"
+          >
             <span>{{ child.brandName }}</span>
           </li>
         </ul>

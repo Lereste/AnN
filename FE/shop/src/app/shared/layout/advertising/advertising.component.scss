@@ -1,11 +1,15 @@
 @import "./../../../../styles.scss";
 
 .advertising {
-  color: black;
-  background-color: #ccc;
-  top: 12rem;
+  top: 8.8rem;
   position: fixed;
   // @include flex-center;
   max-width: 9.375%;
   left: 1.5625%;
+
+  img {
+    width: 100%;
+    height: 50rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
 }
