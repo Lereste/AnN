@@ -10,10 +10,10 @@ import { LoginComponent } from './login/login.component';
     LoginRoutingModule
   ],
   exports: [
-    LoginComponent
+    // LoginComponent
   ],
   declarations: [
-    LoginComponent
+    // LoginComponent
   ],
   providers: [
   ],

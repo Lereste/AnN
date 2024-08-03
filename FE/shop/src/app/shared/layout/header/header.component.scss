@@ -13,11 +13,20 @@
       background-color: #e3e3e3;
       height: 3rem;
       @include flex-center;
+      font-size: 1.6rem;
 
       > span {
         color: #dc2f2f;
-        font-size: 1.4rem;
-        font-weight: 500;
+        // font-weight: 400;
+      }
+
+      div {
+        margin: 0 1.2rem;
+
+        a {
+          color: #dc2f2f;
+          font-weight: 500;
+        }
       }
     }
 

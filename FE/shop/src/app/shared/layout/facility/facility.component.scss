@@ -1,0 +1,116 @@
+@import "../../../../styles.scss";
+
+.facility {
+    position: relative;
+    padding: 0.4rem 0;
+    width: 100%;
+
+    &-title {
+        @include flex-center;
+
+        span {
+            @include flex-center;
+
+            font-size: 2.4rem;
+            font-weight: 600;
+            text-transform: capitalize;
+            border-bottom: 1px solid #ccc;
+            min-width: 800px;
+            padding: 1.6rem 0.4rem 0.4rem;
+
+            &::after {
+                content: "";
+                width: 220px;
+                height: 1.2px;
+                background-color: #d91605;
+                position: absolute;
+                left: 50%;
+                // bottom: -3px;
+                margin-top: 36px;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    &__container {
+        padding: 3.2rem 0;
+        display: flex;
+        justify-content: space-between;
+
+        &-item {
+            width: 30rem;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 0.8rem;
+            padding: 0.8rem;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 4px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+                rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+            .facility-icon {
+                font-size: 3.2rem;
+                transition: 1s;
+                perspective: 4000;
+
+                position: relative;
+                display: inline-block;
+                line-height: 8rem;
+                width: 8rem;
+                height: 8rem;
+                border: 2px double #f5f5f5;
+                border-radius: 50%;
+                z-index: 1;
+                margin: 0.4rem 0;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    display: inline-block;
+                    border-radius: 50%;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    margin: 0.7rem; /* viền ngoài */
+                    background-color: #f5f5f5;
+                    z-index: -1;
+
+                    // &:hover {
+                    //     background-color: red
+                    // }
+                }
+
+                &:hover {
+                    // transition: 1s;
+                    transform: rotateY(180deg);
+                    // line-height: 9.5rem;
+
+                    border: 1.5px double #d91605;
+                    color: white;
+
+                    &::before {
+                        background-color: #d91605;
+                    }
+                }
+            }
+
+            .facility-desc {
+                p:first-child {
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    margin: 0.8rem 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1920px) {
+    .facility {
+        &__container {
+            &-item {
+                width: 26rem;
+            }
+        }
+    }
+}

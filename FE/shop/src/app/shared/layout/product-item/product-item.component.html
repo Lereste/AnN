@@ -1,0 +1,38 @@
+<section class="product-item">
+        <owl-carousel-o [options]="customOptions" #owlCar>
+            <ng-container *ngFor="let productItem of productList">
+                <ng-template carouselSlide [id]="productItem.id.toString()">
+                    <div class="product-item-content" >
+                        <div class="product-item-content-image">
+                            <img [src]="productItem.imageSrc" [alt]="productItem.imageAlt">
+                        </div>
+                        <div class="product-item-content-name">
+                            <span>{{ productItem.productName }}</span>
+                        </div>
+
+                        <div class="product-item-content-detail">
+                            <button>
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+
+                        <div class="product-item-content-price-wrapper">
+                            <div class="product-item-content-price">
+                                <!-- <div class="sale-price">
+                                    <span>{{productItem.productDefaultPrice}}đ</span>
+                                </div> -->
+                                <div class="default-price">
+                                    <span>{{productItem.productDefaultPrice}}đ</span>
+                                    <img src="../../../../../assets/image/gif/fire.gif" alt="">
+                                </div>
+                            </div>
+
+                            <div class="product-item-content-addCart">
+                                <button><i class="fa-solid fa-cart-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+</section>
