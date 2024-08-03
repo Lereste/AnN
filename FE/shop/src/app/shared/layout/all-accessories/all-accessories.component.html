@@ -1,0 +1,27 @@
+<section class="all-accessories">
+    <div class="all-accessories-title">
+        <span>PHỤ KIỆN ĐÀN</span>
+    </div>
+
+    <div class="all-accessories-content">
+        <div class="all-accessories-content-type">
+            <button [class.active]="selectedAccessories === ACCESSORIES_TYPE.GUITAR" (click)="toggleGuitarAccessories()">Phụ Kiện Guitar</button>
+            <button [class.active]="selectedAccessories === ACCESSORIES_TYPE.PIANO" (click)="togglePianoAccessories()">Phụ Kiện Piano</button>
+            <button [class.active]="selectedAccessories === ACCESSORIES_TYPE.ORGAN" (click)="toggleOrganAccessories()">Phụ Kiện Organ</button>
+        </div>
+
+        <div [ngSwitch]="selectedAccessories">
+            <ng-template ngSwitchDefault>
+                <app-product-item [productList]="guitarAccessories"></app-product-item>
+            </ng-template>
+
+            <div *ngSwitchCase="ACCESSORIES_TYPE.PIANO">
+                <app-product-item [productList]="pianoAccessories"></app-product-item>
+            </div>
+
+            <div *ngSwitchCase="ACCESSORIES_TYPE.ORGAN">
+                <app-product-item [productList]="organAccessories"></app-product-item>
+            </div>
+        </div>
+    </div>
+</section>

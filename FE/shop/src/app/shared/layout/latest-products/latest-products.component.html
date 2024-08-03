@@ -1,0 +1,55 @@
+<section class="latest-products">
+  <div class="latest-products-title">
+    <span>Sản Phẩm Mới Nhất</span>
+  </div>
+
+  <div class="latest-products-content">
+    <ul class="latest-products-list" *ngIf="latestProducts && latestProducts.length > 0" #slider #controlAutoPlay>
+      <li *ngFor="let productItem of latestProducts; let idx = index">
+        <div class="latest-products-item">
+          <div class="latest-products-item-image">
+            <img class="fade" [src]="productItem.imageSrc" [alt]="productItem.imageAlt"
+              [ngClass]="{ 'image-active': selectedIndex === idx }" />
+          </div>
+          <div class="latest-products-item-productName">
+            <span>{{ productItem.productName }}</span>
+          </div>
+
+          <div class="latest-products-item-detailProduct">
+            <button>
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+
+          <div class="latest-products-item-content">
+            <div class="latest-products-item-price">
+              <div class="sale-price">
+                <span>2.000.000 đ</span>
+              </div>
+              <div class="default-price">
+                <span>1.000.000 đ</span>
+                <img src="../../../../../assets/image/gif/fire.gif" alt="">
+              </div>
+            </div>
+
+            <div class="latest-products-item-content-addCart">
+              <button><i class="fa-solid fa-cart-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+
+    <div class="button-area" #controlAutoPlay>
+      <button type="button" class="prev" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()"
+        (click)="onPrevClick()">
+        <i class="fa-regular fa-circle-left"></i>
+      </button>
+      <button type="button" class="next" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()"
+        (click)="onNextClick()">
+        <i class="fa-regular fa-circle-right"></i>
+      </button>
+    </div>
+  </div>
+</section>

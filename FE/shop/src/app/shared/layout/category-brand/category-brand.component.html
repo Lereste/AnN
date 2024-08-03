@@ -1,0 +1,17 @@
+<section class="category-brand">
+    <div class="category-brand-title">
+        <span>THƯƠNG HIỆU</span>
+    </div>
+
+    <div class="category-brand-content">
+        <owl-carousel-o [options]="customOptions" #owlCar>
+            <ng-container *ngFor="let category of categoryBrand">
+                <ng-template carouselSlide [id]="category.id.toString()">
+                  <div class="category-brand-content-image">
+                    <img [src]="category.image" alt="">
+                  </div>
+                </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+    </div>
+</section>

@@ -2,9 +2,12 @@
     <nav class="nav">
         <div class="nav__container">
             <div class="nav__top">
-                <span
-                    >Hi there! Nice to see you. We have a 15% promo code for new customers! Would you like to get yours now?.</span
-                >
+                <div>
+                    <span>Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>. Áp dụng cho khu vực nội thành HCM.</span>
+                </div>
+                <div>
+                    <a href="tel:19001009">Gọi ngay: 1900.1009</a>
+                </div>
             </div>
 
             <div class="nav__content">
@@ -20,18 +23,18 @@
                     <div class="nav__content-mid">
                         <ul class="nav__content-list">
                             <li class="nav__content-item">
-                                <button class="nav__content-button">
-                                    <span>Home</span>
+                                <button class="nav__content-button" (click)="goToHome()">
+                                    <span>Trang Chủ</span>
                                 </button>
                             </li>
                             <li class="nav__content-item">
                                 <button class="nav__content-button">
-                                    <span>About</span>
+                                    <span>Sản Phẩm</span>
                                 </button>
                             </li>
                             <li class="nav__content-item">
                                 <button class="nav__content-button">
-                                    <span>Contact</span>
+                                    <span>Bài Viết</span>
                                 </button>
                             </li>
                         </ul>
@@ -48,7 +51,7 @@
                                         src="../../../../assets/image/icons/phone.png"
                                         alt=""
                                     /> -->
-                                    <a href="tel:19001009">1900.1009</a>
+                                    <span>Liên Hệ</span>
                                 </button>
                             </li>
                             <li class="nav__content-item">
@@ -57,14 +60,14 @@
                                         src="../../../../assets/image/cart.png"
                                         alt=""
                                     /> -->
-                                    <span>Cart</span>
+                                    <span>Giỏ Hàng</span>
                                 </button>
                             </li>
-                            <li class="nav__content-item">
-                                <button class="nav__content-button">
-                                    <span>Login</span>
+                            <!-- <li class="nav__content-item">
+                                <button class="nav__content-button" (click)="goToLogin()">
+                                    <span>Đăng Nhập</span>
                                 </button>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>

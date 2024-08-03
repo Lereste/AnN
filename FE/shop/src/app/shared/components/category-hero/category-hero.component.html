@@ -1,0 +1,35 @@
+<div class="category__hero">
+    <div class="category__hero-container">
+        <!-- <ng-container> -->
+        <ul class="hero__category-parent-list" *ngFor="let parentCategory of categoryData">
+            <li class="hero__category-parent-item">
+                <div>
+                    <img class="hero__category-parent-item-image"
+                        [src]="'../../../../assets/image/icons/' + parentCategory.icon + '.png'" alt="">
+                    <span>{{parentCategory.parentName}}</span>
+                  
+                </div>
+                <div>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                
+                <ul class="hero__category-children-list">
+                    <div class="test">
+                        
+                        <li *ngFor="let childItem of parentCategory.childCategory" class="hero__category-children-item">
+                            <span>{{childItem.brandName}}</span>
+                        </li>
+                    </div>
+                </ul>
+            </li>
+
+           
+            <!-- <div class="overlay">
+            </div> -->
+
+        </ul>
+        <!-- </ng-container> -->
+    </div>
+    
+   
+</div>

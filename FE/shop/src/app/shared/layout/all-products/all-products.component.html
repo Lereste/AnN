@@ -1,0 +1,27 @@
+<section class="all-products">
+    <div class="all-products-title">
+        <span>THỂ LOẠI ĐÀN</span>
+    </div>
+
+    <div class="all-products-content">
+        <div class="all-products-content-type">
+            <button [class.active]="selectedProduct === PRODUCT_TYPE.GUITAR" (click)="toggleGuitarProducts()">Đàn Guitar</button>
+            <button [class.active]="selectedProduct === PRODUCT_TYPE.PIANO" (click)="togglePianoProducts()">Đàn Piano</button>
+            <button [class.active]="selectedProduct === PRODUCT_TYPE.ORGAN" (click)="toggleOrganProducts()">Đàn Organ</button>
+        </div>
+
+        <div [ngSwitch]="selectedProduct">
+            <ng-template ngSwitchDefault>
+                <app-product-item [productList]="guitarProducts"></app-product-item>
+            </ng-template>
+
+            <div *ngSwitchCase="PRODUCT_TYPE.PIANO">
+                <app-product-item [productList]="pianoProducts"></app-product-item>
+            </div>
+
+            <div *ngSwitchCase="PRODUCT_TYPE.ORGAN">
+                <app-product-item [productList]="organProducts"></app-product-item>
+            </div>
+        </div>
+    </div>
+</section>
