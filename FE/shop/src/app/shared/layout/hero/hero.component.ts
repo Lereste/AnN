@@ -30,7 +30,7 @@ export class HeroComponent implements OnInit {
     {
       id: 1,
       imageSrc:
-        '../../../../../assets/image/carousel/piano.jpg',
+        'assets/image/carousel/piano.jpg',
       imageAlt: 'Piano background',
       content: {
         title: 'Đàn Piano',
@@ -41,7 +41,7 @@ export class HeroComponent implements OnInit {
     {
       id: 2,
       imageSrc:
-        '../../../../../assets/image/carousel/organ.jpg',
+        'assets/image/carousel/organ.jpg',
       imageAlt: 'Đàn Organ',
       content: {
         title: 'Đàn Organ',
@@ -52,7 +52,7 @@ export class HeroComponent implements OnInit {
     {
       id: 3,
       imageSrc:
-        '../../../../../assets/image/carousel/guitar.jpg',
+        'assets/image/carousel/guitar.jpg',
       imageAlt: 'Đàn Guitar',
       content: {
         title: 'Đàn Guitar',
@@ -63,7 +63,7 @@ export class HeroComponent implements OnInit {
     {
       id: 4,
       imageSrc:
-        '../../../../../assets/image/carousel/ukulele.jpg',
+        'assets/image/carousel/ukulele.jpg',
       imageAlt: 'Đàn Ukulele',
       content: {
         title: 'Đàn Ukulele',
@@ -74,7 +74,7 @@ export class HeroComponent implements OnInit {
     {
       id: 5,
       imageSrc:
-        '../../../../../assets/image/carousel/kalimba.jpg',
+        'assets/image/carousel/kalimba.jpg',
       imageAlt: 'Đàn Kalimba',
       content: {
         title: 'Đàn Kalimba',
@@ -85,7 +85,7 @@ export class HeroComponent implements OnInit {
     {
       id: 6,
       imageSrc:
-        '../../../../../assets/image/carousel/violin.jpg',
+        'assets/image/carousel/violin.jpg',
       imageAlt: 'Đàn Violin',
       content: {
         title: 'Đàn Violin',

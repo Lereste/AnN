@@ -1,27 +1,45 @@
-import { NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { ProductItemComponent, Products } from '../product-item/product-item.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Products } from '../../layout/product-item/product-item.component';
+import { CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { FormsModule, NgModel } from '@angular/forms';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
+import urlSlug from 'url-slug'
+
+enum DESCRIBE_TYPE {
+  DESCRIPTION = 'description',
+  SPECIFICATION = 'SPECIFICATION',
+  VIDEO = 'VIDEO'
+}
 
 @Component({
-  selector: 'app-sale-products',
+  selector: 'app-product-detail',
   standalone: true,
-  imports: [NgFor, NgIf, CarouselModule, ProductItemComponent],
-  templateUrl: './sale-products.component.html',
-  styleUrl: './sale-products.component.scss'
+  imports: [NgIf, FormsModule, CommonModule, AngularToastifyModule, NgSwitch, NgSwitchDefault, NgSwitchCase],
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss'
 })
-
-export class SaleProductsComponent implements OnInit {
+export class ProductDetailComponent implements OnInit {
   saleProducts: Products[] = [];
-  scrWidth: number = 0;
-  owlCar: any;
+  cloneSaleProducts: Products[] = [];
+  currentProductDetailItem: Products | undefined;
 
-  days: number = 0;
-  hours: number = 0;
-  minutes: number = 0;
-  seconds: number = 0;
+  
+  decreaseQuantity: number = 0;
+  increaseQuantity: number = 0;
+  currentInputValue: number = 1; // default quantity product is 1
 
-  constructor() {
+  DESCRIBE_TYPE = DESCRIBE_TYPE;
+  selectedDescribe: string = DESCRIBE_TYPE.DESCRIPTION;
+
+  constructor(
+    private router: Router, 
+    private activatedRoute: ActivatedRoute,
+    private toastService: ToastService
+  ) {
+    //   this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+    //     this.currentUrl = this.router.routerState.snapshot.url; // get currentURL after change
+    // });
     this.saleProducts = [
       {
         id: 1,
@@ -102,59 +120,101 @@ export class SaleProductsComponent implements OnInit {
         productSalePrice: "7.450.000"
       },
     ];
+
+    // Simulator already have api (with productSlug)
+    this.saleProducts.forEach(productItem => {
+      let temp = Object.assign({
+        productSlug: urlSlug(productItem.productName, {
+          dictionary: {
+            'đ': 'd',
+            'Đ': 'D'
+          }
+        }),
+        ...productItem
+      })
+      this.cloneSaleProducts.push(temp)
+    })
   }
 
   ngOnInit(): void {
-    const today = new Date(); // Get today's date
-    const dayOfWeek = today.getDay(); // Get the current day of the week
-    const daysUntilMonday = 8 - dayOfWeek; // Calculate how many days until Monday
-    let nextMonday;
+    console.log('Url slug: ', this.activatedRoute.snapshot.params['productSlug']);
 
-    if (dayOfWeek === 0) { // If today is Sunday
-      nextMonday = today;
-    } else {
-      nextMonday = new Date(today.getTime() + daysUntilMonday * 24 * 60 * 60 * 1000); // Add those days to today's date
+    this.cloneSaleProducts.forEach(productItem => {
+      if (productItem.productSlug === this.activatedRoute.snapshot.params['productSlug']) {
+        this.currentProductDetailItem = productItem
+      }
+    })
+
+    // console.log('currentProductDetailItem', this.currentProductDetailItem);
+  }
+
+  onSelectedQuantity(event: any) {
+    // Limit value between 1 and 99
+    if (parseInt(event.target.value) < parseInt(event.target.min)) {
+      event.target.value = event.target.min;
+    }
+    if (parseInt(event.target.value) > parseInt(event.target.max)) {
+      event.target.value = event.target.max;
     }
 
-    this.countDown(nextMonday.toLocaleDateString());
+    this.currentInputValue = event.target.value;
+
   }
 
-  outputEvent(event: any) {
-    this.owlCar = event
+  onValidate(event: any): void {
+    // chỉ có keydown mới validate đc text, keyup thì không
+    if (['e', 'E', '+', '-'].includes(event.key)) {
+      console.log(event.preventDefault());
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
+
+    if (this.isEmpty(event.target.value)) {
+      console.log('blur');
+      
+      this.currentInputValue = 1;
+    }
   }
 
-  onPrev() {
-    this.owlCar.prev();
+  isEmpty(str: string) {
+    return !str.trim().length;
   }
 
-  onNext() {
-    this.owlCar.next();
+  onDecreaseQuantity(): void {
+    if (this.currentInputValue > 1 && this.currentInputValue < 100) {
+      --this.currentInputValue;
+    }
   }
 
-  stopAutoplay(): void {
-    this.owlCar.stopAutoplay();
+  onIncreaseQuantity(): void {
+    if (this.currentInputValue < 99) {
+      ++this.currentInputValue;
+    }
   }
 
-  startAutoplay(): void {
-    this.owlCar.startAutoplay();
+  addToCart(): void {
+    this.toastService.success('Đã thêm sản phẩm vào giỏ hàng!');
   }
 
-  countDown(lastDay: string) {
-    const initialInterval = setInterval(() => {
-      const second = 1000;
-      const minute = 1000 * 60;
-      const hour = 1000 * 60 * 60;
-      const day = 1000 * 60 * 60 * 24;
-      const remainingTime = new Date(lastDay).getTime() - new Date().getTime();
+  onBuyNow(): void {
 
-      this.days = Math.floor(remainingTime / (day));
-      this.hours = Math.floor((remainingTime % (day)) / (hour));
-      this.minutes = Math.floor((remainingTime % (hour)) / (minute));
-      this.seconds = Math.floor((remainingTime % (minute)) / second);
+  }
 
-      if (remainingTime <= 0) {
-        clearInterval(initialInterval);
-      }
-    }, 1000);
+  onCallToBuy(): void {
+    console.log('Calling to buy...');
+  }
+
+  // 
+  toggleDescription(): void {
+    this.selectedDescribe = DESCRIBE_TYPE.DESCRIPTION;
+  }
+
+  toggleSpecifications(): void {
+    this.selectedDescribe = DESCRIBE_TYPE.SPECIFICATION;
+  }
+
+  toggleVideo(): void {
+    this.selectedDescribe = DESCRIBE_TYPE.VIDEO;
   }
 }

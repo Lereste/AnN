@@ -1,0 +1,140 @@
+<section class="productDetail">
+    <h3>Có thể là nơi hiển thị breadcrumb</h3>
+
+    <div class="productDetail-content" *ngIf="currentProductDetailItem">
+        <div class="productDetail-content-left">
+            <img [src]="currentProductDetailItem.imageSrc" alt="">
+        </div>
+
+        <div class="productDetail-content-right">
+            <div class="productDetail-content-right-container">
+                <div class="productDetail-name">
+                    <span>{{currentProductDetailItem.productName}}</span>
+                </div>
+
+                <div class="productDetail-price">
+                    <span>{{currentProductDetailItem.productDefaultPrice}}đ</span>
+                </div>
+
+                <div class="productDetail-description">
+                    <span>{{currentProductDetailItem.productDescription}}</span>
+                </div>
+
+                <hr>
+
+                <div class="productDetail-wrapper">
+                    <!-- Begin: Select quantity and Add to cart -->
+                    <div class="productDetail-quantity">
+                        <button class="productDetail-quantity-decrease" (click)="onDecreaseQuantity()">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+
+                        <input class="productDetail-quantity-count" type="number" min="1" max="99"
+                            [(ngModel)]="currentInputValue" (keydown)="onValidate($event)" (blur)="onValidate($event)"
+                            (keyup)="onSelectedQuantity($event)">
+
+                        <button class="productDetail-quantity-increase" (click)="onIncreaseQuantity()">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <!-- End: Select quantity and Add to cart -->
+
+                    <div class="productDetail-addCart">
+                        <button (click)="addToCart()">
+                            <span>Thêm vào giỏ hàng</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Begin: Buy now and Call to buy -->
+                <div class="productDetail-wrapper">
+                    <div class="productDetail-buy">
+                        <button (click)="onBuyNow()">
+                            <span>Mua Ngay</span>
+                            <span>(Giao tận nơi hoặc lấy ở cửa hàng)</span>
+                        </button>
+                    </div>
+
+                    <div class="productDetail-call">
+                        <button (click)="onCallToBuy()">
+                            <span>Tư vấn sản phẩm</span>
+                            <span>(1900.1009)</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- End: Buy now and Call to buy -->
+
+                <!-- Begin: Facility -->
+                <div class="productDetail-icon">
+                    <div class="productDetail-icon-item">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <span>Đổi trả sản phẩm trong vòng 7 ngày, bất kể lỗi gì.</span>
+                    </div>
+
+                    <div class="productDetail-icon-item">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <span>Vận chuyển miễn phí cho đơn hàng từ <strong>2</strong> triệu, khu vực nội thành
+                            Tp.HCM.</span>
+                    </div>
+
+                    <div class="productDetail-icon-item">
+                        <i class="fa-regular fa-handshake"></i>
+                        <span>Bảo hành 12 tháng cho tất cả sản phẩm được bán ra.</span>
+                    </div>
+
+                    <div class="productDetail-icon-item">
+                        <i class="fa-solid fa-headphones"></i>
+                        <span>Tư vấn 24/7 và hỗ trợ khách hàng trong quá trình sử dụng.</span>
+                    </div>
+                </div>
+                <!-- End: Facility -->
+            </div>
+        </div>
+    </div>
+
+    <div class="productDetail-describe">
+        <div class="productDetail-describe-button">
+            <button [class.active]="selectedDescribe === DESCRIBE_TYPE.DESCRIPTION" (click)="toggleDescription()">Mô tả sản phẩm</button>
+            <button [class.active]="selectedDescribe === DESCRIBE_TYPE.SPECIFICATION" (click)="toggleSpecifications()">Thông số kỹ thuật</button>
+            <button [class.active]="selectedDescribe === DESCRIBE_TYPE.VIDEO" (click)="toggleVideo()">Video sản phẩm</button>
+        </div>
+
+        <div [ngSwitch]="selectedDescribe">
+            <ng-template ngSwitchDefault>
+                <div class="productDetail-describe-description">
+                    <ul class="productDetail-describe-left">
+                        <li class="productDetail-describe-left-item">
+                            <p>Sản phẩm tuyệt vời!</p>
+                            <p>Thích thì mua, không thích cũng mua</p>
+                        </li>
+                    </ul>
+                    
+                    <div class="productDetail-describe-right">
+                        <img src=".././../../../assets/image/detail-product/review-sanpham.jpg" alt="">
+                    </div>
+                </div>
+            </ng-template>
+
+            <div *ngSwitchCase="DESCRIBE_TYPE.SPECIFICATION" class="productDetail-describe-specifications">
+                    <ul class="productDetail-describe-left">
+                        <li class="productDetail-describe-left-item">Thông số đẳng cấp!</li>
+                    </ul>
+                    <div class="productDetail-describe-right">
+                        <img src=".././../../../assets/image/detail-product/review-sanpham.jpg" alt="">
+                    </div>
+            </div>
+
+            <div *ngSwitchCase="DESCRIBE_TYPE.VIDEO" class="productDetail-describe-video">
+                <ul class="productDetail-describe-left">
+                    <li class="productDetail-describe-left-item">Đang cập nhật Video...</li>
+                </ul>
+                <div class="productDetail-describe-right">
+                    <img src=".././../../../assets/image/detail-product/review-sanpham.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toastify -->
+    <lib-toastify-toast-container [position]="'top-right'"></lib-toastify-toast-container>
+</section>

@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { IMAGE_LOADER, ImageLoaderConfig, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -11,9 +11,10 @@ interface Category {
 @Component({
   selector: 'app-category-brand',
   standalone: true,
-  imports: [NgFor, NgIf, CarouselModule],
+  imports: [NgFor, NgIf, CarouselModule, NgOptimizedImage],
   templateUrl: './category-brand.component.html',
-  styleUrl: './category-brand.component.scss'
+  styleUrl: './category-brand.component.scss',
+  
 })
 export class CategoryMainComponent implements OnInit {
   categoryBrand: Category[] = []
@@ -49,54 +50,54 @@ export class CategoryMainComponent implements OnInit {
     this.categoryBrand = [
       {
         id: 1,
-        brandName: "Dell",
-        image: "https://mygear.vn/media/brand/dell.jpg"
+        brandName: "Roland",
+        image: "assets/image/brands/roland.jpg"
       },
       {
         id: 2,
-        brandName: "Lenovo",
-        image: "https://mygear.vn/media/brand/lenovo.png"
+        brandName: "Yamaha",
+        image: "assets/image/brands/yamaha.jpg"
       },
       {
         id: 3,
-        brandName: "LG",
-        image: "https://mygear.vn/media/brand/lg.jpg"
+        brandName: "Martin",
+        image: "assets/image/brands/martin.png"
 
       },
       {
         id: 4,
-        brandName: "Samsung",
-        image: "https://mygear.vn/media/brand/samsung.jpg"
+        brandName: "Marshall",
+        image: "assets/image/brands/marshall.png"
       },
       {
         id: 5,
-        brandName: "Alienware",
-        image: "https://mygear.vn/media/brand/alienware.webp"
+        brandName: "Kurtzman",
+        image: "assets/image/brands/kurtzman.png"
       },
       {
         id: 6,
-        brandName: "AOC",
-        image: "https://mygear.vn/media/brand/aoc.jpg"
+        brandName: "Nux",
+        image: "assets/image/brands/nux.jpg"
       },
       {
         id: 7,
-        brandName: "Gigabyte",
-        image: "https://mygear.vn/media/brand/gigabyte.jpg"
+        brandName: "Bora",
+        image: "assets/image/brands/bora.png"
       },
       {
         id: 8,
-        brandName: "Intel",
-        image: "https://mygear.vn/media/brand/intel.jpg"
+        brandName: "Boston",
+        image: "assets/image/brands/boston.png"
       },
       {
         id: 9,
-        brandName: "Dareu",
-        image: "https://mygear.vn/media/brand/dareu.jpg"
+        brandName: "Hexinstruments",
+        image: "assets/image/brands/hexinstruments.jpg"
       },
       {
         id: 10,
-        brandName: "Galax",
-        image: "https://mygear.vn/media/brand/galax.png"
+        brandName: "Tokai",
+        image: "assets/image/brands/tokai.jpg"
       },
     ]
   }

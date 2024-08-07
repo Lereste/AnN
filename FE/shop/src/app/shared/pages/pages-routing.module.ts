@@ -10,35 +10,28 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                loadChildren: () => import('./home/home.module').then((m) => m.HomeModule)
+                loadChildren: () => import('./home/home.module').then((module) => module.HomeModule)
             },
             {
-                path: 'login',
-                loadChildren: () => import('../../authentication/authentication.module').then((m) => m.AuthenticationModule)
-            }
+                path: 'contact',
+                loadChildren: () => import('./contact/contact-routing.module').then((route) => route.CONTACT_ROUTES)
+            },
+            {
+                path: "product-detail/:productSlug",
+                loadChildren: () => import('./product-detail/product-detail-routing.module').then((route) => route.PRODUCT_DETAIL_ROUTES)
+            },
+            {
+                path: "**",
+                loadChildren: () => import('../../authentication/page404/page404-routing.module').then((route) => route.PAGE404_ROUTES)
+            },
         ]
     },
     // {
-    //     path: "home",
-    //     component: MainComponent,
-    // },
-    // {
-    //     path: 'home',
-    //     loadChildren: () => import('../../layout/main/main.module').then((m) => m.MainModule)
-    // },
-    // {
-    //     path: 'login',
-    //     loadChildren: () => import('../../../authentication/authentication.module').then((m) => m.AuthenticationModule)
-    // },
-    // // {
-    // //     path: "**",
-    // //     component: Page404Component,
-    // // },
-    // {
-    //     path: '**',
-    //     loadComponent: () => import('../../../authentication/page404/page404.component').then((c) => c.Page404Component)
+    //     path: "**",
+    //     component: Page404Component
     // }
 ];
+// Page404RoutingModule
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

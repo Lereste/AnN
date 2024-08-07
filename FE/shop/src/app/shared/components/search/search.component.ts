@@ -13,9 +13,10 @@ export class SearchComponent {
     textElement: string = "";
 
     @Input() wordArray: string[] = [
-        "What are you looking for?   ",
-        "Latop gaming Asus...",
-        "Laptop gaming Msi...",
+        "Bạn đang muốn tìm gì?   ",
+        "Đàn guitar...",
+        "Đàn ukulele...",
+        "Đàn piano...",
     ];
     // @Input() textColor = "black";
     // @Input() fontSize = "20px";
