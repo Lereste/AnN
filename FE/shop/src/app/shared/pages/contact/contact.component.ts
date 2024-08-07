@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-
+  constructor() {
+    console.log('contact work');
+  }
 }

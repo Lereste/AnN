@@ -4,58 +4,21 @@
     </div>
 
     <div class="sale-products-content">
-        <!-- <owl-carousel-o [options]="customOptions" #owlCar>
-            <ng-container *ngFor="let productItem of saleProducts">
-                <ng-template carouselSlide [id]="productItem.id.toString()">
-                    <div class="sale-products-item" >
-                        <div class="sale-products-item-image">
-                            <img [src]="productItem.imageSrc" [alt]="productItem.imageAlt">
-                        </div>
-                        <div class="sale-products-item-name">
-                            <span>{{ productItem.productName }}</span>
-                        </div>
-
-                        <div class="sale-products-item-detail">
-                            <button>
-                                <i class="fa-regular fa-eye"></i>
-                            </button>
-                        </div>
-
-                        <div class="sale-products-item-price-content">
-                            <div class="sale-products-item-price">
-                                <div class="sale-price">
-                                    <span>{{productItem.productDefaultPrice}}đ</span>
-                                </div>
-                                <div class="default-price">
-                                    <span>{{productItem.productSalePrice}}đ</span>
-                                    <img src="../../../../../assets/image/gif/fire.gif" alt="">
-                                </div>
-                            </div>
-
-                            <div class="sale-products-item-addCart">
-                                <button><i class="fa-solid fa-cart-plus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </ng-container>
-        </owl-carousel-o> -->
+        <!-- Re-used Product Item -->
         <app-product-item [productList]="saleProducts" (newItemEvent)="outputEvent($event)" #owlCar></app-product-item>
 
+        <!-- Button Prev / Next -->
         <div class="button-area">
-            <!-- <button type="button" class="prev" (mouseover)="owlCar.stopAutoplay()" (mouseleave)="owlCar.startAutoplay()"
-                (click)="owlCar.prev()">
-                <i class="fa-regular fa-circle-left"></i>
-            </button>
-            <button type="button" class="next" (mouseover)="owlCar.stopAutoplay()" (mouseleave)="owlCar.startAutoplay()"
-                (click)="owlCar.next()">
-                <i class="fa-regular fa-circle-right"></i>
-            </button> -->
             <button type="button" class="prev" (mouseover)="stopAutoplay()" (mouseleave)="startAutoplay()" (click)="onPrev()">
                 <i class="fa-regular fa-circle-left"></i>
             </button>
+
+            <button type="button" class="next" (mouseover)="stopAutoplay()" (mouseleave)="startAutoplay()" (click)="onNext()">
+                <i class="fa-regular fa-circle-right"></i>
+            </button>
         </div>
 
+        <!-- Product Flash Sale -->
         <div class="sale-products-time">
             <div class="sale-products-time-left">
                 <span>Kết thúc sau:</span>

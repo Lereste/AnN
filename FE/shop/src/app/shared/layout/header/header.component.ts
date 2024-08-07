@@ -14,14 +14,15 @@ export class HeaderComponent {
 
   }
 
-  goToLogin(): void {
-    
-    this.router.navigate(['/login']);
-  }
+ 
 
   goToHome(): void {
     console.log('clicked');
     this.router.navigate(['/']);
     // this.router.navigateByUrl('/home')
+  }
+
+  goToContact(): void {
+    this.router.navigate(['/contact']);
   }
 }

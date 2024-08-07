@@ -29,7 +29,7 @@ export class AllProductsComponent {
       {
         id: 1,
         imageSrc:
-          '../../../../assets/image/products/guitar/Đàn Guitar Acoustic Martin 000Jr-10.jpg',
+          'assets/image/products/guitar/Đàn Guitar Acoustic Martin 000Jr-10.jpg',
         imageAlt: 'Đàn Guitar Acoustic Martin 000Jr-10',
         productName: 'Đàn Guitar Acoustic Martin 000Jr-10',
         productDescription:
@@ -40,7 +40,7 @@ export class AllProductsComponent {
       {
         id: 2,
         imageSrc:
-          '../../../../assets/image/products/guitar/Đàn Guitar Cordoba C1M-CE.jpg',
+          'assets/image/products/guitar/Đàn Guitar Cordoba C1M-CE.jpg',
         imageAlt: 'Đàn Guitar Cordoba C1M-CE',
         productName: 'Đàn Guitar Cordoba C1M-CE',
         productDescription:
@@ -52,7 +52,7 @@ export class AllProductsComponent {
       {
         id: 3,
         imageSrc:
-          '../../../../assets/image/products/guitar/Đàn Guitar Kapok-ld-14.jpg',
+          'assets/image/products/guitar/Đàn Guitar Kapok-ld-14.jpg',
         imageAlt: 'Đàn Guitar Kapok-ld-14',
         productName: 'Đàn Guitar Kapok-ld-14',
         productDescription:
@@ -63,7 +63,7 @@ export class AllProductsComponent {
       {
         id: 4,
         imageSrc:
-          '../../../../assets/image/products/guitar/Đàn Guitar Tanglewood TWBB SFCE.jpg',
+          'assets/image/products/guitar/Đàn Guitar Tanglewood TWBB SFCE.jpg',
         imageAlt: 'Đàn Guitar Tanglewood TWBB SFCE',
         productName: 'Đàn Guitar Tanglewood TWBB SFCE',
         productDescription:
@@ -74,7 +74,7 @@ export class AllProductsComponent {
       {
         id: 5,
         imageSrc:
-          '../../../../assets/image/products/guitar/Đàn Guitar Suzuki-SDG-6NL.jpg',
+          'assets/image/products/guitar/Đàn Guitar Suzuki-SDG-6NL.jpg',
         imageAlt: 'Đàn Guitar Suzuki SDG-6NL',
         productName: 'Đàn Guitar Suzuki SDG-6NL',
         productDescription:
@@ -85,7 +85,7 @@ export class AllProductsComponent {
       {
         id: 6,
         imageSrc:
-          '../../../../assets/image/products/guitar/Đàn Guitar Kapok-D-118AC.jpg',
+          'assets/image/products/guitar/Đàn Guitar Kapok-D-118AC.jpg',
         imageAlt: 'Đàn Guitar Kapok-D-118AC',
         productName: 'Đàn Guitar Kapok-D-118AC',
         productDescription:
@@ -96,7 +96,7 @@ export class AllProductsComponent {
       {
         id: 7,
         imageSrc:
-          '../../../../assets/image/products/guitar/Đàn Guitar Tanglewood twcr dce crossroads.jpg',
+          'assets/image/products/guitar/Đàn Guitar Tanglewood twcr dce crossroads.jpg',
         imageAlt: 'Đàn Guitar Tanglewood twcr dce crossroads',
         productName: 'Đàn Guitar Tanglewood twcr dce crossroads',
         productDescription:
@@ -110,7 +110,7 @@ export class AllProductsComponent {
       {
         id: 1,
         imageSrc:
-          '../../../../assets/image/products/piano/Đàn Piano Điện Bora BX5 – 88 Phím.jpg',
+          'assets/image/products/piano/Đàn Piano Điện Bora BX5 – 88 Phím.jpg',
         imageAlt: 'Đàn Piano Điện Bora BX5 – 88 Phím',
         productName: 'Đàn Piano Điện Bora BX5 – 88 Phím',
         productDescription:
@@ -121,7 +121,7 @@ export class AllProductsComponent {
       {
         id: 2,
         imageSrc:
-          '../../../../assets/image/products/piano/Alesis 88 key Virtue WSB Đàn Piano Điện.jpg',
+          'assets/image/products/piano/Alesis 88 key Virtue WSB Đàn Piano Điện.jpg',
         imageAlt: 'Alesis 88 key Virtue WSB Đàn Piano Điện',
         productName: 'Alesis 88 key Virtue WSB Đàn Piano Điện',
         productDescription:
@@ -133,7 +133,7 @@ export class AllProductsComponent {
       {
         id: 3,
         imageSrc:
-          '../../../../assets/image/products/piano/Đàn Piano Điện Alesis Concert.jpg',
+          'assets/image/products/piano/Đàn Piano Điện Alesis Concert.jpg',
         imageAlt: 'Đàn Piano Điện Alesis Concert',
         productName: 'Đàn Piano Điện Alesis Concert',
         productDescription:
@@ -144,7 +144,7 @@ export class AllProductsComponent {
       {
         id: 4,
         imageSrc:
-          '../../../../assets/image/products/piano/Đàn Piano Điện Yamaha P-S500.jpg',
+          'assets/image/products/piano/Đàn Piano Điện Yamaha P-S500.jpg',
         imageAlt: 'Đàn Piano Điện Yamaha P-S500 Black / White',
         productName: 'Đàn Piano Điện Yamaha P-S500 Black / White',
         productDescription:
@@ -155,7 +155,7 @@ export class AllProductsComponent {
       {
         id: 5,
         imageSrc:
-          '../../../../assets/image/products/piano/Đàn Piano Điện Roland FP-10.jpg',
+          'assets/image/products/piano/Đàn Piano Điện Roland FP-10.jpg',
         imageAlt: 'Đàn Piano Điện Roland FP-10',
         productName: 'Đàn Piano Điện Roland FP-10',
         productDescription:
@@ -166,7 +166,7 @@ export class AllProductsComponent {
       {
         id: 6,
         imageSrc:
-          '../../../../assets/image/products/piano/Đàn Piano Điện Yamaha P-125AWH + LP1.jpg',
+          'assets/image/products/piano/Đàn Piano Điện Yamaha P-125AWH + LP1.jpg',
         imageAlt: 'Đàn Piano Điện Yamaha P-125AWH + LP1',
         productName: 'Đàn Piano Điện Yamaha P-125AWH + LP1',
         productDescription:
@@ -177,7 +177,7 @@ export class AllProductsComponent {
       {
         id: 7,
         imageSrc:
-          '../../../../assets/image/products/piano/Đàn Piano Cơ Kawai K-400.jpg',
+          'assets/image/products/piano/Đàn Piano Cơ Kawai K-400.jpg',
         imageAlt: 'Đàn Piano Cơ Kawai K-400',
         productName: 'Đàn Piano Cơ Kawai K-400',
         productDescription:
@@ -191,7 +191,7 @@ export class AllProductsComponent {
       {
         id: 1,
         imageSrc:
-          '../../../../assets/image/products/organ/Đàn Organ Casio CTK-3400.jpg',
+          'assets/image/products/organ/Đàn Organ Casio CTK-3400.jpg',
         imageAlt: 'Đàn Organ Casio CTK-3400',
         productName: 'Đàn Organ Casio CTK-3400',
         productDescription:
@@ -202,7 +202,7 @@ export class AllProductsComponent {
       {
         id: 2,
         imageSrc:
-          '../../../../assets/image/products/organ/Đàn Organ Kurtzman K300S.jpg',
+          'assets/image/products/organ/Đàn Organ Kurtzman K300S.jpg',
         imageAlt: 'Đàn Organ Kurtzman K300S',
         productName: 'Đàn Organ Kurtzman K300S',
         productDescription:
@@ -214,7 +214,7 @@ export class AllProductsComponent {
       {
         id: 3,
         imageSrc:
-          '../../../../assets/image/products/organ/Đàn Organ Roland EX10 – 61 KEY.jpg',
+          'assets/image/products/organ/Đàn Organ Roland EX10 – 61 KEY.jpg',
         imageAlt: 'Đàn Organ Roland EX10 – 61 KEY',
         productName: 'Đàn Organ Roland EX10 – 61 KEY',
         productDescription:
@@ -225,7 +225,7 @@ export class AllProductsComponent {
       {
         id: 4,
         imageSrc:
-          '../../../../assets/image/products/organ/Đàn Organ Casio CT-X3000.jpg',
+          'assets/image/products/organ/Đàn Organ Casio CT-X3000.jpg',
         imageAlt: 'Đàn Organ Casio CT-X3000',
         productName: 'Đàn Organ Casio CT-X3000',
         productDescription:
@@ -236,7 +236,7 @@ export class AllProductsComponent {
       {
         id: 5,
         imageSrc:
-          '../../../../assets/image/products/organ/Đàn Organ Kurtzman K360 – Keyboard.jpg',
+          'assets/image/products/organ/Đàn Organ Kurtzman K360 – Keyboard.jpg',
         imageAlt: 'Đàn Organ Kurtzman K360 – Keyboard',
         productName: 'Đàn Organ Kurtzman K360 – Keyboard',
         productDescription:
@@ -247,7 +247,7 @@ export class AllProductsComponent {
       {
         id: 6,
         imageSrc:
-          '../../../../assets/image/products/organ/Đàn Organ Roland BK3.jpg',
+          'assets/image/products/organ/Đàn Organ Roland BK3.jpg',
         imageAlt: 'Đàn Organ Roland BK3',
         productName: 'Đàn Organ Roland BK3',
         productDescription:
@@ -258,7 +258,7 @@ export class AllProductsComponent {
       {
         id: 7,
         imageSrc:
-          '../../../../assets/image/products/organ/Đàn Organ Kurtzman SV800.jpg',
+          'assets/image/products/organ/Đàn Organ Kurtzman SV800.jpg',
         imageAlt: 'Đàn Organ Kurtzman SV800',
         productName: 'Đàn Organ Kurtzman SV800',
         productDescription:
