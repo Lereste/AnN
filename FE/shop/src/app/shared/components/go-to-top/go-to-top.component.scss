@@ -4,7 +4,26 @@ button {
   // padding: 20px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 0.8rem;
+  z-index: 1999;
+
+  .goto-top {
+    i {
+      font-size: 2rem;
+      border-radius: 20%;
+      color: white;
+      background-color: #dc2f2f;
+      padding: 0.6rem 1rem;
+      text-align: center;
+  
+      &:hover {
+        background-color: #212529;
+      }
+  
+      transition: 0.3s;
+      animation: bounce 3s ease-in-out infinite;
+    }
+  }
 }
 
 .scroll-to-top {
@@ -19,24 +38,6 @@ button {
   opacity: 1;
 }
 
-.goto-top {
-  i {
-    font-size: 2rem;
-    border-radius: 20%;
-    color: white;
-    background-color: #dc2f2f;
-    padding: 0.6rem 1rem;
-    text-align: center;
-
-    &:hover {
-      background-color: #212529;
-    }
-
-    transition: 0.3s;
-    animation: bounce 3s ease-in-out infinite;
-  }
-}
-
 @keyframes bounce {
   0% {
     transform: scale(0.5);
@@ -46,5 +47,18 @@ button {
   }
   0% {
     transform: scale(1);
+  }
+}
+
+@media only screen and (max-width: 46.1875em) {
+  button {
+    .goto-top i {
+      font-size: 1.4rem;
+    }
+  }
+
+  .scroll-to-top {
+    bottom: 6rem;
+    right: 2.8rem;
   }
 }

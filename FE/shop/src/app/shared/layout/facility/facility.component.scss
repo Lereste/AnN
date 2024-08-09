@@ -15,7 +15,7 @@
             font-weight: 600;
             text-transform: capitalize;
             border-bottom: 1px solid #ccc;
-            min-width: 800px;
+            width: 800px;
             padding: 1.6rem 0.4rem 0.4rem;
 
             &::after {
@@ -37,8 +37,10 @@
         padding: 3.2rem 0;
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
 
         &-item {
+            // flex-basis: 200;
             width: 30rem;
             background-color: #fff;
             text-align: center;
@@ -110,6 +112,40 @@
         &__container {
             &-item {
                 width: 26rem;
+            }
+        }
+    }
+}
+
+// Responsive
+// Mobile < 740px
+@media only screen and (max-width: 46.1875em) {
+    .facility {
+        &-title {
+            span {
+                width: 350px;
+                padding: 0.4rem;
+            }
+        }
+
+        &__container {
+            justify-content: space-around;
+
+            &-item {
+                max-width: 18rem;
+                margin: 0.8rem 0;
+            }
+
+            .facility-desc {
+                p:first-child {
+                    font-size: 1.6rem;
+                    font-weight: bold;
+                    margin: 0.8rem 0;
+                }
+
+                p:last-child {
+                    font-size: 1.4rem;
+                }
             }
         }
     }

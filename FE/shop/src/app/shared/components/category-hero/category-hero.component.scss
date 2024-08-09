@@ -1,3 +1,5 @@
+@import "../../../../styles.scss";
+
 .category__hero {
     height: 44rem; // default 46rem
 
@@ -18,127 +20,72 @@
     z-index: 10000;
 
     .hero__category-parent-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 0.5px solid #ccc;
+        @include flex-space-between;
+        border-bottom: 0.04rem solid #ccc;
         padding: 0.8rem 0.6rem;
-        // margin: 0.6rem 0;
 
-        &-image {
-        }
+        &-left {
+            @include flex-center;
 
-        > div {
-            display: flex;
-            align-items: center;
-        }
+            .hero__category-parent-item-image {
+                width: 2.2rem;
+                height: 2.2rem;
+            }
 
-        img {
-            width: 2.2rem;
-            height: 2.2rem;
-        }
-
-        span {
-            margin-left: 0.4rem;
-            font-size: 1.5rem;
+            .hero__category-parent-item-name {
+                margin-left: 0.4rem;
+                font-size: 1.5rem;
+            }
         }
 
         i {
-            &:last-child {
-                display: none;
+            display: none;
+
+            &:hover {
+                display: inline-flex;
             }
         }
-    }
 
-    &:hover {
-        // color: #f5f5f5;
-        // background-color: #dc2f2f;
-        background-color: #f7d8d8;
-
-        .hero__category-parent-item {
-            svg {
-                fill: white;
-            }
-
-            img {
-                // background-color: white;
-                filter: brightness(50%) sepia(100) saturate(100) hue-rotate(25deg);
-            }
+        &:hover {
+            background-color: #f7d8d8;
 
             i {
-                &:last-child {
-                    display: block;
-                }
+                display: block;
             }
 
             .hero__category-children-list {
                 display: block;
-                z-index: 101;
-                // z-index: 10;
-    
+                z-index: 10;
                 background-color: transparent;
-                // width: 1057px;
-                width: 500px;
+                width: 28rem;
                 height: 44rem; // default 46rem
                 position: absolute;
                 top: 90px;
-                // left: 622px;
                 left: 30.41%;
             }
-    
+
             .hero__category-children-item {
-                // background-color: #ccc;
-                // margin-left: 12px;
-            }
-    
-            .overlay {
-                display: block;
+                background-color: #ffff;
+                margin-left: 12px;
+                padding: 0.94rem;
+                border: 1px solid #ccc;
+                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+            
+                &:hover {
+                    background-color: #f78686;
+
+                    span {
+                        color: #fff
+                    }
+                }
             }
         }
 
-      
+        .hero__category-children-list {
+            display: none;
+            color: #141010;
+        }
     }
-}
-
-.overlay {
-    position: absolute;
-    background-color: #ccc;
-    opacity: 0.6;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 100;
-    display: none;
-}
-
-.hero__category-children-list {
-    display: none;
-    color: #141010;
-
-    span:hover {
-        color: #dc2f2f;
-    }
-}
-
-// .submenu {
-//   position: absolute;
-//   width: 59.79%;
-//   height: 100px;
-//   background-color: red;
-//   left: 27.69%;
-//   z-index: 11111;
-// }
-
-.test {
-    background-color: #ffff;
-    margin-left: 12px;
-    padding: 1.2rem;
-    height: 44rem; // default 46rem
-    border: 1px solid #ccc;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 @media only screen and (max-width: 1700px) {
@@ -148,3 +95,10 @@
         }
     }
 }
+
+// Mobile <740px
+@media only screen and (max-width: 46.1875em) {
+    .category__hero {
+            display: none;
+    }
+  }

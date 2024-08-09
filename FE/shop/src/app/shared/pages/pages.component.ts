@@ -4,6 +4,7 @@ import { AdvertisingComponent } from '../layout/advertising/advertising.componen
 import { QuickContactsComponent } from '../layout/quick-contacts/quick-contacts.component';
 import { GoToTopComponent } from '../components/go-to-top/go-to-top.component';
 import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from '../layout/footer/footer.component';
 
 @Component({
   selector: 'app-pages',
@@ -13,6 +14,7 @@ import { RouterOutlet } from '@angular/router';
     AdvertisingComponent,
     QuickContactsComponent,
     GoToTopComponent,
+    FooterComponent,
     RouterOutlet
   ],
   templateUrl: './pages.component.html',

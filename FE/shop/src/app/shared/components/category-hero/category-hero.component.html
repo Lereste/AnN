@@ -1,35 +1,21 @@
 <div class="category__hero">
-    <div class="category__hero-container">
-        <!-- <ng-container> -->
-        <ul class="hero__category-parent-list" *ngFor="let parentCategory of categoryData">
-            <li class="hero__category-parent-item">
-                <div>
-                    <img class="hero__category-parent-item-image"
-                        [src]="'../../../../assets/image/icons/' + parentCategory.icon + '.png'" alt="">
-                    <span>{{parentCategory.parentName}}</span>
-                  
-                </div>
-                <div>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
-                
-                <ul class="hero__category-children-list">
-                    <div class="test">
-                        
-                        <li *ngFor="let childItem of parentCategory.childCategory" class="hero__category-children-item">
-                            <span>{{childItem.brandName}}</span>
-                        </li>
-                    </div>
-                </ul>
-            </li>
+    <ul class="hero__category-parent-list" >
+        <li *ngFor="let parentCategory of categoryData" class="hero__category-parent-item">
+            <div class="hero__category-parent-item-left">
+                <img class="hero__category-parent-item-image"
+                    [src]="'../../../../assets/image/icons/' + parentCategory.icon + '.png'" alt="">
+                <span class="hero__category-parent-item-name">{{parentCategory.parentName}}</span>
+            </div>
 
-           
-            <!-- <div class="overlay">
-            </div> -->
+            <div class="hero__category-parent-item-right">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
 
-        </ul>
-        <!-- </ng-container> -->
-    </div>
-    
-   
+            <ul class="hero__category-children-list">
+                <li class="hero__category-children-item" *ngFor="let childItem of parentCategory.childCategory">
+                    <span>{{childItem.brandName}}</span>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>

@@ -33,8 +33,11 @@ export class CategoryMainComponent implements OnInit {
     dots: false,
     navSpeed: 1000,
     responsive: {
-      740: {
-        items: 5
+      360: {
+        items: 2
+      },
+      730: {
+        items: 3
       },
       940: {
         items: 6
