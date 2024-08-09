@@ -13,7 +13,7 @@
             font-weight: 600;
             text-transform: capitalize;
             border-bottom: 1px solid #ccc;
-            min-width: 800px;
+            width: 800px;
             padding: 1.6rem 0.4rem 0.4rem;
 
             &::after {
@@ -62,6 +62,19 @@
                     color: #fff;
                     border: 1px solid #d91605;
                 }
+            }
+        }
+    }
+}
+
+// Responsive
+// Mobile < 740px
+@media only screen and (max-width: 46.1875em) {
+    .all-accessories {
+        &-title {
+            span {
+                width: 350px;
+                padding: 0.4rem;
             }
         }
     }

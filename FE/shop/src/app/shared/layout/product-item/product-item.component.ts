@@ -39,6 +39,9 @@ export class ProductItemComponent implements AfterViewInit, OnDestroy {
     dots: false,
     navSpeed: 1000,
     responsive: {
+      360: {
+        items: 2
+      },
       740: {
         items: 3
       },

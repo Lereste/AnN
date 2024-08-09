@@ -15,7 +15,7 @@
             font-weight: 600;
             text-transform: capitalize;
             border-bottom: 1px solid #ccc;
-            min-width: 800px;
+            width: 800px;
             padding: 1.6rem 0.4rem 0.4rem;
 
             &::after {
@@ -53,6 +53,32 @@
                 object-fit: contain;
                 // background-color: transparent;
                 transform-style: preserve-3d;
+            }
+        }
+    }
+}
+
+// Responsive
+// Mobile < 740px
+@media only screen and (max-width: 46.1875em) {
+    .category-brand {
+        &-title {
+            // display: none;
+
+            span {
+                width: 350px;
+                padding: 0.4rem;
+            }
+        }
+
+        &-content {
+            &-image {
+                
+                width: 150px;
+                height: 60px;
+
+                margin: 0.4rem auto;
+
             }
         }
     }
