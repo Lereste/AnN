@@ -131,8 +131,8 @@
     }
 }
 
-// Mobile < 740px
-@media only screen and (max-width: 46.1875em) {
+// Mobile < 768px
+@media only screen and (max-width: 768px) {
     .sale-products {
         &-title {
             span {
@@ -159,11 +159,11 @@
                 .prev, .next {
                     top: 8%
                 }
-    
+
                 .prev {
                     right: 12%;
                 }
-        
+
                 .next {
                     right: 3%;
                 }

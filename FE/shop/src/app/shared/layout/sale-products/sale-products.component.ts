@@ -105,19 +105,22 @@ export class SaleProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const today = new Date(); // Get today's date
-    const dayOfWeek = today.getDay(); // Get the current day of the week
-    const daysUntilMonday = 8 - dayOfWeek; // Calculate how many days until Monday
-    let nextMonday;
-
-    if (dayOfWeek === 0) { // If today is Sunday
-      nextMonday = today;
-    } else {
-      nextMonday = new Date(today.getTime() + daysUntilMonday * 24 * 60 * 60 * 1000); // Add those days to today's date
-    }
-
-    this.countDown(nextMonday.toLocaleDateString());
+    this.countDown(this.getNextMonday());
   }
+
+  getNextMonday() {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+
+    // Calculate how many days to add to get to the next Monday
+    const daysUntilMonday = (8 - dayOfWeek) % 7 || 7;
+
+    // Create a new Date object for the next Monday
+    const nextMonday = new Date(today);
+    nextMonday.setDate(today.getDate() + daysUntilMonday);
+
+    return nextMonday.toLocaleDateString();
+}
 
   outputEvent(event: any) {
     this.owlCar = event
