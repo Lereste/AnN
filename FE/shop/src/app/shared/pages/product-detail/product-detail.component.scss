@@ -73,7 +73,9 @@
             .productDetail-wrapper {
                @include flex-space-between;
                padding: 0 1.2rem;
+               // width: 34rem;
                margin-bottom: 1.6rem;
+               // margin: 0 auto;
 
                .productDetail-quantity {
                   @include flex-center;
@@ -224,6 +226,7 @@
 
    &-describe {
       padding: 0 4rem;
+      margin: 1.6rem 0;
 
       &-button {
          margin: 2rem 0;
@@ -285,15 +288,17 @@
    }
 }
 
-// Mobile <740px
-@media only screen and (max-width: 46.1875em) {
+// Mobile < 768px
+@media only screen and (max-width: 768px) {
    .productDetail {
+      margin: 4rem auto 0;
+
       h3 {
          display: none;
       }
 
       &-content {
-         padding: 0 0.4rem;
+         padding: 0 0.8rem;
          flex-direction: column;
 
          &-left,
@@ -305,41 +310,51 @@
 
             .productDetail-content-right-container {
                padding: 0;
+               margin: 0;
 
                .productDetail-name {
                   margin: 1.2rem 0;
                }
 
                .productDetail-wrapper {
+                  @include flex-space-between;
                   padding: 0 0.4rem;
+                  width: 34.6rem;
+                  margin: 0 auto 1.6rem;
 
                   .productDetail-quantity {
-                     max-width: 16rem;
-
-                     &-decrease,
-                     &-increase {
-                        width: 8rem;
+                      &-count {
+                        width: 5.2rem;
                      }
                   }
 
                   // choose 2nd wrapper
                   ~ div.productDetail-wrapper {
                      flex-direction: column;
+                  padding: 0 0.4rem;
+                  width: 100%;
 
                      .productDetail-buy {
                         margin-bottom: 1.6rem;
                         // width: 40rem;
                         button {
-                           width: 36rem;
+                           width: 34rem;
                            height: 4.8rem;
                         }
                      }
 
                      .productDetail-call {
                         button {
-                           width: 36rem;
+                           width: 34rem;
                            height: 4.8rem;
                         }
+                     }
+                  }
+
+                  .productDetail-addCart {
+                     button {
+                        width: 18rem;
+                        // margin: 0 2rem;
                      }
                   }
                }
@@ -348,12 +363,29 @@
       }
 
       &-describe {
-         padding: 0 0.4rem;
+         padding: 0 0.8rem;
 
          &-button {
             @include flex-space-between;
-            margin: 2rem 0;
-         }
+
+            button {
+               margin: 0;
+
+               width: 10.8rem;
+               height: 6rem;
+
+               &:nth-child(2) {
+                  margin: 0 0.4rem;
+               }
+            }
+
+            .active {
+               // font-weight: normal;
+               padding: 0.4rem;
+            }
+            
+         }  
+            
 
          &-description,
          &-specifications,
@@ -369,8 +401,8 @@
 
                img {
                   margin-top: 2rem;
-                  width: 36rem;
-                  height: 36rem;
+                  width: 100%;
+                  height: 100%;
                }
             }
          }

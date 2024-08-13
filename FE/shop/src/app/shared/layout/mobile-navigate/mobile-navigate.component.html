@@ -1,0 +1,37 @@
+<section class="mobile-navigate">
+    <div class="mobile-navigate-container">
+        <button class="mobile-navigate-item home" (click)="goToHomePage()">
+            <i class="fa-solid fa-house"></i>
+            <span>Trang Chủ</span>
+        </button>
+
+        <button class="mobile-navigate-item categories" (click)="showCategory()">
+            <i class="fa-solid fa-bars"></i>
+            <span>Danh Mục</span>
+        </button>
+
+        <button class="mobile-navigate-item search" (click)="showSearch()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Tìm Kiếm</span>
+        </button>
+
+        <button class="mobile-navigate-item article" (click)="showArticle()">
+            <i class="fa-regular fa-newspaper"></i>
+            <span>Bài Viết</span>
+        </button>
+
+        <button class="mobile-navigate-item cart" (click)="showCart()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Giỏ Hàng</span>
+        </button>
+
+    </div>
+
+    <div *ngIf="isCategory">
+            <app-category-mobile></app-category-mobile>
+    </div>
+
+    <div *ngIf="isSearch">
+        <app-search></app-search>
+    </div>
+</section>

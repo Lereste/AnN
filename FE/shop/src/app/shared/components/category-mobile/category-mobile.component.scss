@@ -1,51 +1,81 @@
-.category__mobile {
-  height: 44rem; // default 46rem
+@import "../../../../styles.scss";
+
+.mobile__category {
+  position: fixed;
+  z-index: 11;
+  width: 100%;
+  top: 0;
+  bottom: 4rem;
+  left: 0;
+  overflow: auto;
+
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.5px);
+  -webkit-backdrop-filter: blur(9.3px);
 
   &-container {
-    padding: 0.8rem;
-  }
+    h3 {
+      margin: 0.8rem 0 1.2rem 0;
+      color: #141010;
+      font-size: 2rem;
+      padding: 0.8rem;
+    }
 
-  background: #f5f5f5;
-  border-radius: 0.4rem;
-  border: 1px solid #ccc;
-}
+    .mobile__category-parent-list {
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
-.mobile__category-list {
-  padding: 0.4rem;
-  cursor: pointer;
-}
+      .mobile__category-parent-item {
+        padding: 0.6rem;
 
-.mobile__category-parent-item {
-  padding: 0.6rem 0;
-  i {
-    font-size: 1.2rem;
-    margin-right: 0.4rem;
-  }
+        border-bottom: 1px solid #141010;
+        width: 100%;
+        text-align: left;
 
-}
+        &-content {
+          display: flex;
+          align-items: center;
 
-.mobile__category-children-list{
-  padding-left: 2rem;
+          img {
+            width: 2rem;
+            height: 2rem;
+          }
 
+          span {
+            color: #141010;
+            display: flex;
+            align-items: flex-end;
+            margin: 0 0.4rem;
+          }
 
-  .mobile__category-children-item{
-    &:hover {
-      background-color: #ccc;
+          i.fa-chevron-right {
+            font-size: 1.3rem;
+          }
+        }
+
+        &.active .mobile__category-parent-item-content {
+          font-weight: bold;
+        }
+
+        &.active .mobile__category-children-list {
+          display: block;
+        }
+
+        .mobile__category-children-list {
+          display: none;
+          margin: 0.8rem 0;
+          padding-left: 2rem;
+          color: #141010;
+
+          .mobile__category-children-item {
+            padding: 0.3rem 0;
+          }
+        }
+      }
     }
   }
-}
-
-ul li {
-  cursor: pointer;
-}
-.active {
-  color: orangered;
-}
-.active ul {
-  display: block !important;
-}
-
-.inactive {
-  color: black;
-  padding: 0.4rem 0;
 }

@@ -1,5 +1,11 @@
-<div class="search__container">
-    <div class="search__input">
-        <input type="text" [placeholder]="textElement" (input)="onClick($event)">
+<section class="search animate__animated animate__fadeInUp">
+    <div class="search__container">
+        <div class="search__container-title">
+            <span>Tìm Kiếm Sản Phẩm</span>
+        </div>
+
+        <div class="search__container-input">
+            <input type="text" [placeholder]="textElement" (input)="onInputText($event)">
+        </div>
     </div>
-</div>
+</section>

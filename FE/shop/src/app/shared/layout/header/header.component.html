@@ -2,14 +2,20 @@
     <nav class="nav">
         <div class="nav__container">
             <div class="nav__top">
-                <div class="nav__top-ship">
-                  <span class="nav__top-ship-pc">Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>. Áp dụng cho khu vực nội thành HCM.</span>
-                  <span class="nav__top-ship-mobile">Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>.</span>
+                <div class="nav__top-content">
+                    <span class="nav__top-content-pc">Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>. Áp
+                        dụng cho khu vực nội thành HCM.</span>
+                    <!-- <span class="nav__top-ship-mobile">Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>.</span> -->
+
+                    <button class="nav__top-content-mobile" (click)="goToHome()">
+                        <span>Logo Shop</span>
+                    </button>
                 </div>
+
                 <div class="nav__top-phone">
-                    <a href="tel:01234915251">
+                    <a href="tel:01234.56789">
                         <i class="fa-solid fa-phone"></i>
-                        <span>01234915251</span>
+                        <span>01234.56789</span>
                     </a>
                 </div>
             </div>
@@ -18,7 +24,7 @@
                 <div class="nav__content-wrapper">
                     <div class="nav__content-left">
                         <div class="nav__content-logo">
-                            <button class="nav__content-button">
+                            <button class="nav__content-button" (click)="goToHome()">
                                 <span>Logo</span>
                             </button>
                         </div>

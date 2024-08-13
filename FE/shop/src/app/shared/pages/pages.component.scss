@@ -16,7 +16,7 @@
   width: 100%;
 
   &-advertising, &-contacts {
-    max-width: 18%;
+    width: 18%;
   }
 
   &-home {
@@ -26,6 +26,10 @@
 
 .pages__footer {
   width: 100%;
+}
+
+.page__mobile-navigate {
+  display: none;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -49,5 +53,9 @@
   }
   .pages__content-advertising, .pages__content-contacts {
     display: none;
+  }
+
+  .page__mobile-navigate {
+    display: block;
   }
 }

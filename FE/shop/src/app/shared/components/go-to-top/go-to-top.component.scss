@@ -1,11 +1,8 @@
 button {
-  // background: black;
-  // color: white;
-  // padding: 20px;
   border: none;
   cursor: pointer;
   border-radius: 0.8rem;
-  z-index: 1999;
+  z-index: 4;
 
   .goto-top {
     i {
@@ -15,23 +12,26 @@ button {
       background-color: #dc2f2f;
       padding: 0.6rem 1rem;
       text-align: center;
-  
-      &:hover {
-        background-color: #212529;
-      }
-  
+
       transition: 0.3s;
       animation: bounce 3s ease-in-out infinite;
+      
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: #212529;
+        }
+      }
     }
   }
 }
+
 
 .scroll-to-top {
   position: fixed;
   bottom: 40px;
   right: 40px;
   opacity: 0;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .show-scroll {
@@ -50,7 +50,9 @@ button {
   }
 }
 
-@media only screen and (max-width: 46.1875em) {
+
+// Responsive for mobile device
+@media only screen and (max-width: 740px) {
   button {
     .goto-top i {
       font-size: 1.4rem;
@@ -58,7 +60,9 @@ button {
   }
 
   .scroll-to-top {
-    bottom: 6rem;
-    right: 2.8rem;
+    bottom: 7.2rem;
+    right: 2.4rem;
   }
 }
+
+// 

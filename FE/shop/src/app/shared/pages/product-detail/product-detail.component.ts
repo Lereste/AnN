@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Products } from '../../layout/product-item/product-item.component';
 import { CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
@@ -19,7 +19,7 @@ enum DESCRIBE_TYPE {
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, AfterViewInit {
   saleProducts: Products[] = [];
   cloneSaleProducts: Products[] = [];
   currentProductDetailItem: Products | undefined;
@@ -148,6 +148,13 @@ export class ProductDetailComponent implements OnInit {
     // console.log('currentProductDetailItem', this.currentProductDetailItem);
   }
 
+  ngAfterViewInit() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    })
+  }
+
   onSelectedQuantity(event: any) {
     // Limit value between 1 and 99
     if (parseInt(event.target.value) < parseInt(event.target.min)) {
@@ -202,7 +209,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onCallToBuy(): void {
-    console.log('Calling to buy...');
+    console.log('Calling to admin...');
   }
 
   // 

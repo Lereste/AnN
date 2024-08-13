@@ -3,7 +3,7 @@
 
 .nav {
   position: fixed;
-  z-index: 1999;
+  z-index: 6;
   width: 100%;
   // background: transparent;
   // backdrop-filter: blur(10px);
@@ -15,7 +15,7 @@
       @include flex-space-around;
       font-size: 1.6rem;
 
-      &-ship {
+      &-content {
         &-mobile {
           display: none;
         }
@@ -118,29 +118,34 @@
       .nav__top {
         // width: 100%;
         // display: block;
-        text-align: center;
-        height: 3.6rem;
-        line-height: 1;
         @include flex-space-between;
-        padding: 0.8rem 0.4rem;
+        height: 3.2rem;
+        text-align: center;
+        line-height: 1;
+        padding: 0.8rem;
+        background-color: #141010;
+        border-bottom: 1px solid #fff;
 
 
-
-        &-ship {
+        &-content {
           // margin: 0.2rem 0.4rem;
-          width: 16rem;
 
           &-pc {
             display: none;
           }
 
           &-mobile {
+            height: 3rem;
             display: block;
+            border: none;
+            background-color: transparent;
+            padding: 0.4rem 0.8rem;
+            color: #fff;
           }
 
           span {
-            text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            // text-align: left;
             // min-width: 0;
             // width: 100vw;
           }
@@ -163,24 +168,8 @@
       }
 
       .nav__content {
-
-        padding: 0;
-        margin: 0;
-        .nav__content-mid {
-          display: none;
-        }
-
-        .nav__content-right {
-          .contact, .cart {
-            display: none;
-          }
-
-          .search {
-            margin: 0;
-
-            // component search
-          }
-        }
+        display: none;
+       
       }
     }
   }
