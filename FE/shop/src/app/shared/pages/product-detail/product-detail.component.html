@@ -92,6 +92,7 @@
         </div>
     </div>
 
+    <!-- Handle toggle buttons Describe -->
     <div class="productDetail-describe">
         <div class="productDetail-describe-button">
             <button [class.active]="selectedDescribe === DESCRIBE_TYPE.DESCRIPTION" (click)="toggleDescription()">Mô tả sản phẩm</button>
@@ -101,11 +102,12 @@
 
         <div [ngSwitch]="selectedDescribe">
             <ng-template ngSwitchDefault>
+                <!-- Default: DESCRIPTION -->
                 <div class="productDetail-describe-description">
                     <ul class="productDetail-describe-left">
                         <li class="productDetail-describe-left-item">
                             <p>Sản phẩm tuyệt vời!</p>
-                            <p>Thích thì mua, không thích cũng mua</p>
+                            <p>Thích thì mua, không thích cũng mua.</p>
                         </li>
                     </ul>
                     
@@ -115,6 +117,7 @@
                 </div>
             </ng-template>
 
+            <!-- Case: DESCRIPTION -->
             <div *ngSwitchCase="DESCRIBE_TYPE.SPECIFICATION" class="productDetail-describe-specifications">
                     <ul class="productDetail-describe-left">
                         <li class="productDetail-describe-left-item">Thông số đẳng cấp!</li>
@@ -124,6 +127,7 @@
                     </div>
             </div>
 
+            <!-- Case: VIDEO -->
             <div *ngSwitchCase="DESCRIBE_TYPE.VIDEO" class="productDetail-describe-video">
                 <ul class="productDetail-describe-left">
                     <li class="productDetail-describe-left-item">Đang cập nhật Video...</li>

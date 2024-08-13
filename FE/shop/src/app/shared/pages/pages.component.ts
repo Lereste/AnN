@@ -5,6 +5,7 @@ import { QuickContactsComponent } from '../layout/quick-contacts/quick-contacts.
 import { GoToTopComponent } from '../components/go-to-top/go-to-top.component';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../layout/footer/footer.component';
+import { MobileNavigateComponent } from '../layout/mobile-navigate/mobile-navigate.component';
 
 @Component({
   selector: 'app-pages',
@@ -15,6 +16,7 @@ import { FooterComponent } from '../layout/footer/footer.component';
     QuickContactsComponent,
     GoToTopComponent,
     FooterComponent,
+    MobileNavigateComponent,
     RouterOutlet
   ],
   templateUrl: './pages.component.html',

@@ -37,13 +37,16 @@
         display: flex;
         align-items: center;
 
-        > div:first-child {
+        &-left {
             color: #d91605;
             font-weight: bold;
             margin-right: 0.4rem;
         }
 
-        div:nth-of-type(n + 2) {
+        &-day,
+        &-hour,
+        &-minute,
+        &-second {
             background-color: #393737;
             color: #fff;
             margin: 0 0.4rem;
@@ -145,35 +148,41 @@
             margin-top: 0.4rem;
             padding: 7rem 0 0.8rem;
 
-
             .sale-products-time {
                 // @include flex-center;
                 &-left {
                     margin-left: 0.4rem;
-                    width: 2.8rem;
-                    font-size: 1.6rem;
+                    width: 6.2 rem;
+                    font-size: 1.5rem;
                 }
             }
 
             .button-area {
-                .prev, .next {
-                    top: 8%
+                .prev,
+                .next {
+                    top: 4%;
                 }
 
                 .prev {
-                    right: 12%;
+                    right: 4.8rem;
                 }
 
                 .next {
-                    right: 3%;
+                    right: 1.2rem;
                 }
             }
         }
 
         &-time {
-            div:nth-of-type(n + 2) {
+            &-day,
+            &-hour,
+            &-minute,
+            &-second {
+                padding: 0;
+                margin: 0 0.2rem;
+                width: 4rem;
                 &::after {
-                    top: 3rem;
+                    top: 2.2rem;
                 }
             }
         }

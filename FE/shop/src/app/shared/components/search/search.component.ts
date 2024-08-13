@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { timer } from "rxjs";
+import 'animate.css'
 
 @Component({
     selector: "app-search",
@@ -13,7 +14,7 @@ export class SearchComponent {
     textElement: string = "";
 
     @Input() wordArray: string[] = [
-        "Bạn đang muốn tìm gì?   ",
+        "Bạn đang muốn tìm gì?",
         "Đàn guitar...",
         "Đàn ukulele...",
         "Đàn piano...",
@@ -22,7 +23,7 @@ export class SearchComponent {
     // @Input() fontSize = "20px";
     // @Input() blinkWidth = "2px";
     @Input() typingSpeedMilliseconds = 120;
-    @Input() deleteSpeedMilliseconds = 100;
+    @Input() deleteSpeedMilliseconds = 90;
 
     private idx = 0;
 
@@ -40,7 +41,7 @@ export class SearchComponent {
         
     }
 
-    onClick(event: any): void {
+    onInputText(event: any): void {
         console.log('clicked', event.target.value.length);
         // timer(500).subscribe(() => {
         //     // your code here
@@ -55,40 +56,6 @@ export class SearchComponent {
             
         }
     }
-
-    // private initVariables(): void {
-    //     this.renderer.setStyle(
-    //         this.textElement.nativeElement,
-    //         "color",
-    //         this.textColor
-    //     );
-    //     this.renderer.setStyle(
-    //         this.textElement.nativeElement,
-    //         "font-size",
-    //         this.fontSize
-    //     );
-    //     this.renderer.setStyle(
-    //         this.textElement.nativeElement,
-    //         "padding",
-    //         "0.1em"
-    //     );
-
-    //     this.renderer.setStyle(
-    //         this.blinkElement.nativeElement,
-    //         "border-right-width",
-    //         this.blinkWidth
-    //     );
-    //     this.renderer.setStyle(
-    //         this.blinkElement.nativeElement,
-    //         "border-right-color",
-    //         this.textColor
-    //     );
-    //     this.renderer.setStyle(
-    //         this.blinkElement.nativeElement,
-    //         "font-size",
-    //         this.fontSize
-    //     );
-    // }
 
     private typingEffect(): void {
         const word = this.wordArray[this.idx].split("");

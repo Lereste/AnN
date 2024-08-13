@@ -40,6 +40,7 @@
             img {
                 width: 95%;
                 height: 95%;
+                cursor: pointer;
                 //         transition: all 0.3s ease-in-out;
             }
         }
@@ -59,7 +60,7 @@
             }
         }
 
-        &-detail {
+        &-zoom {
             position: absolute;
             right: 3%;
             top: 3%;
@@ -184,6 +185,76 @@
     }
 }
 
+.zoom {
+    @include flex-center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    cursor: pointer;
+
+    &-content {
+        @include flex-space-between;
+        position: relative;
+
+
+        width: 50%;
+        height: 20rem;
+
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 1);
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+            rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+        // backdrop-filter: blur(9.5px);
+        // -webkit-backdrop-filter: blur(9.3px);
+        border-radius: 0.4rem;
+
+        &-image {
+            @include flex-center;
+            width: 40%;
+            padding: 1.6rem;
+
+            img {
+                width: 14rem;
+                background: transparent;
+            }
+        }
+
+        &-detail {
+            display: flex;
+            align-items: start;
+            flex-direction: column;
+            width: 60%;
+            padding: 1.6rem;
+
+            p {
+                padding: 0.4rem 0;
+
+                &:nth-child(2) {
+                    border-top: 1px solid #ccc;
+                    border-bottom: 1px solid #ccc;
+
+                }
+            }
+        }
+
+        &-hint {
+            position: absolute;
+            bottom: 2px;
+            left: 0; right: 0;
+            @include flex-center;
+
+            span {
+                color:#dc2f2f;
+                font-style: italic;
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
 
 @media only screen and (min-width: 1024px) and (max-width: 1920px) {
     .product-item {
@@ -198,28 +269,25 @@
             }
         }
     }
-
 }
 
-@media only screen and (max-width: 46.1875em) {
+@media only screen and (max-width: 768px) {
     .product-item {
         &-content {
-            height: 320px;
-            width: 175px;
+            height: 280px;
+            width: 165px;
 
             &-image {
-                @include flex-center;
-                margin: 0.4rem auto;
-                padding: 0.8rem 0;
-    
-                width: 170px;
-                height: 170px;
-    
-                img {
-                    width: 95%;
-                    height: 95%;
-                    //         transition: all 0.3s ease-in-out;
-                }
+                // @include flex-center;
+                // margin: 0.4rem auto;
+                // padding: 0.8rem 0;
+
+                width: 160px;
+                height: 160px;
+            }
+
+            &-zoom {
+                display: none;
             }
         }
     }

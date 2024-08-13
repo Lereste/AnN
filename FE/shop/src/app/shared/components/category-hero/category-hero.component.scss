@@ -17,7 +17,7 @@
 
 .hero__category-parent-list {
     cursor: pointer;
-    z-index: 10000;
+    z-index: 100;
 
     .hero__category-parent-item {
         @include flex-space-between;
@@ -61,7 +61,7 @@
                 height: 44rem; // default 46rem
                 position: absolute;
                 top: 90px;
-                left: 30.41%;
+                left: calc(30.8% - 8px); // (18% của ads bên trái + 12.8% của category-hero) - 8px padding = vừa khít 
             }
 
             .hero__category-children-item {

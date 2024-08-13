@@ -230,19 +230,19 @@ main {
 //   }
 // }
 
-@media only screen and (max-width: 46.1875em) {
+@media only screen and (max-width: 768px) {
   main {
     width: 100%;
     position: absolute;
     // display: none;
     left: 0;
     top: 0;
-    margin: 8.6rem 0 0;
+    margin: 3.2rem 0 0;
   }
 
   .item {
-    width: 5rem;
-    height: 8rem;
+    width: 4.4rem;
+    height: 7.2rem;
 
     &:nth-child(1),
     &:nth-child(2) {
@@ -260,13 +260,13 @@ main {
       left: 45%;
     }
     &:nth-child(4) {
-      left: calc(45% + 54px);
+      left: calc(45% + 48px);
     }
     &:nth-child(5) {
-      left: calc(45% + 108px);
+      left: calc(45% + 96px);
     }
     &:nth-child(6) {
-      left: calc(45% + 162px);
+      left: calc(45% + 144px);
       opacity: 0;
     }
 
@@ -287,8 +287,8 @@ main {
 
   .nav {
     position: absolute;
-    left: 88.8%;
-    display: flex;
+    left: 88%;
+    width: 8rem;
 
     .prev,
     .next {

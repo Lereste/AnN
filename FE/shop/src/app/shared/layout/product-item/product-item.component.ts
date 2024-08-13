@@ -26,11 +26,12 @@ export interface Products {
 })
 export class ProductItemComponent implements AfterViewInit, OnDestroy {
   customOptions: OwlOptions = {
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 1500,
     lazyLoad: true,
     autoplayTimeout: 3000,
     autoplayHoverPause: true,
+    autoplayMouseleaveTimeout: 1000,
     margin: 20,
     autoWidth: false,
     loop: true,
@@ -55,7 +56,10 @@ export class ProductItemComponent implements AfterViewInit, OnDestroy {
     nav: false
   }
 
-  newProductItem: any;
+  newProductItem!: Products;
+
+  isZoom: boolean = false;
+  zoomProductItem!: Products;
 
   @ViewChild('owlCar') owlCar: CarouselComponent | undefined;
   @Output() newItemEvent = new EventEmitter<CarouselComponent>();
@@ -90,6 +94,18 @@ export class ProductItemComponent implements AfterViewInit, OnDestroy {
     console.log('aaaaaaaa', this.newProductItem);
 
     this.router.navigate(['product-detail/' + this.newProductItem.productSlug])
+  }
+
+  zoomFullProductImage(productItem: Products): void {
+    this.isZoom = !this.isZoom;
+
+    this.zoomProductItem = productItem;
+    console.log('zoomProductItem', this.zoomProductItem);
+    
+  }
+
+  closeImage(): void {
+    this.isZoom = false;
   }
 
   ngOnDestroy(): void {

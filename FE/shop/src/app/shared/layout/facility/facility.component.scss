@@ -111,7 +111,7 @@
     .facility {
         &__container {
             &-item {
-                width: 26rem;
+                width: 24rem;
             }
         }
     }
@@ -119,7 +119,7 @@
 
 // Responsive
 // Mobile < 740px
-@media only screen and (max-width: 46.1875em) {
+@media only screen and (max-width: 740px) {
     .facility {
         &-title {
             span {
@@ -132,7 +132,7 @@
             justify-content: space-around;
 
             &-item {
-                max-width: 18rem;
+                max-width: 17rem;
                 margin: 0.8rem 0;
             }
 
