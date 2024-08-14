@@ -1,21 +1,12 @@
-import { NgFor, NgIf, NgOptimizedImage, provideImageKitLoader } from '@angular/common';
+import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { Subscription } from 'rxjs';
-import slugify from 'slugify';
+import { CartItem } from 'src/app/core/models/cart/cart.model';
+import { Products } from 'src/app/core/models/product/product.model';
+import { CartService } from 'src/app/core/service/cart-service/cart.service';
+// import slugify from 'slugify';
 import urlSlug from 'url-slug'
-
-export interface Products {
-  id: number;
-  imageSrc: string;
-  imageAlt: string;
-  productName: string;
-  productDescription?: string;
-  productDefaultPrice: string;
-  productSalePrice?: string;
-  productSlug?: string;
-}
 
 @Component({
   selector: 'app-product-item',
@@ -26,7 +17,7 @@ export interface Products {
 })
 export class ProductItemComponent implements AfterViewInit, OnDestroy {
   customOptions: OwlOptions = {
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 1500,
     lazyLoad: true,
     autoplayTimeout: 3000,
@@ -65,7 +56,7 @@ export class ProductItemComponent implements AfterViewInit, OnDestroy {
   @Output() newItemEvent = new EventEmitter<CarouselComponent>();
   @Input() productList: Products[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private cartService: CartService,) {
     if (window.innerWidth < 1920) {
       console.log('margin = 8');
       this.customOptions.margin = 8;
@@ -77,26 +68,14 @@ export class ProductItemComponent implements AfterViewInit, OnDestroy {
     this.newItemEvent.emit(this.owlCar);
   }
 
-  viewProductDetail(productItem: Products): void {
-    // console.log('productItem', productItem);
+  goToProductDetailPage(productItem: Products): void {
+    const newProduct = this.convertToProductSlug(productItem);
+    console.log('newProduct', newProduct);
 
-    this.newProductItem = Object.assign({
-      // productSlug: slugify(productItem.productName, {lower: true, trim: true}),
-      productSlug: urlSlug(productItem.productName, {
-        dictionary: {
-          'đ': 'd',
-          'Đ': 'D'
-        }
-      }),
-      ...productItem
-    })
-
-    console.log('aaaaaaaa', this.newProductItem);
-
-    this.router.navigate(['product-detail/' + this.newProductItem.productSlug])
+    this.router.navigate(['chi-tiet-san-pham/' + newProduct.productSlug])
   }
 
-  zoomFullProductImage(productItem: Products): void {
+  previewProductInformation(productItem: Products): void {
     this.isZoom = !this.isZoom;
 
     this.zoomProductItem = productItem;
@@ -106,6 +85,36 @@ export class ProductItemComponent implements AfterViewInit, OnDestroy {
 
   closeImage(): void {
     this.isZoom = false;
+  }
+
+  addProductToCart(productItem: Products): void {
+    const newProduct = this.convertToProductSlug(productItem);
+
+    const cartItem: CartItem = {
+      productSlug: newProduct.productSlug as string,
+      quantity: 1,
+    }
+
+    console.log('cartItem', cartItem);
+
+    /*
+      Note: Ở đây khi bấm add product vào cart, nó chỉ lấy 1 sản phẩm, còn add nhiều lần thì nó cũng lấy chỉ 1 sản phẩm để hiển thị.
+      Khi vào tới trang giỏ hàng thì nó mới hiển thị đầy đủ số lượng sản phẩm ra
+    */
+    this.cartService.setCartItem(cartItem);
+  }
+
+  convertToProductSlug(productItem: Products) {
+    return this.newProductItem = Object.assign({
+      // productSlug: slugify(productItem.productName, {lower: true, trim: true}),
+      productSlug: urlSlug(productItem.productName, {
+        dictionary: {
+          'đ': 'd',
+          'Đ': 'D'
+        }
+      }),
+      ...productItem
+    })
   }
 
   ngOnDestroy(): void {

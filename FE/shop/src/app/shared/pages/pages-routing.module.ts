@@ -13,11 +13,23 @@ export const routes: Routes = [
                 loadChildren: () => import('./home/home.module').then((module) => module.HomeModule)
             },
             {
-                path: 'contact',
+                path: 'tat-ca-san-pham',
+                loadChildren: () => import('./all-products/all-products-routing.module').then((route) => route.ALL_PRODUCTS_ROUTES)
+            },
+            {
+                path: 'tat-ca-bai-viet',
+                loadChildren: () => import('./all-articles/all-articles-routing.module').then((route) => route.ALL_ARTICLES_ROUTES)
+            },
+            {
+                path: 'lien-he',
                 loadChildren: () => import('./contact/contact-routing.module').then((route) => route.CONTACT_ROUTES)
             },
             {
-                path: "product-detail/:productSlug",
+                path: 'gio-hang',
+                loadChildren: () => import('./cart/cart-routing.module').then((route) => route.CartRoutingModule)
+            },
+            {
+                path: "chi-tiet-san-pham/:productSlug",
                 loadChildren: () => import('./product-detail/product-detail-routing.module').then((route) => route.PRODUCT_DETAIL_ROUTES)
             },
             {

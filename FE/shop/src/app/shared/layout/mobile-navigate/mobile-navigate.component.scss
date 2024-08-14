@@ -2,7 +2,7 @@
 
 .mobile-navigate {
     position: fixed;
-    z-index: 5;
+    z-index: 6;
     width: 100%;
     left: 0;
     bottom: 0;
@@ -10,7 +10,7 @@
 
     .mobile-navigate-container {
         @include flex-space-between;
-        height: 4rem;
+        height: 4.4rem;
         background-color: #141010;
         // border: 1px solid #252325;
         overflow: hidden;
@@ -18,10 +18,15 @@
         .mobile-navigate-item {
             @include flex-center;
             flex-direction: column;
-            height: 3.8rem;
+            height: 4.4rem;
             width: 10rem;
             background-color: #141010;
-            border: 1px solid #fff;
+            
+            // border: 1px solid #fff;
+            border-top: 1px solid #fff;
+            border-right: .5px solid #fff;
+            border-left: .5px solid #fff;
+            
             // width: 40px;
             transform: 0.3s;
             color: #fff;

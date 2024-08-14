@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Products } from '../../layout/product-item/product-item.component';
 import { CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
+import { Products } from 'src/app/core/models/product/product.model';
 import urlSlug from 'url-slug'
 
 enum DESCRIBE_TYPE {
