@@ -6,6 +6,7 @@ import { GoToTopComponent } from '../components/go-to-top/go-to-top.component';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { MobileNavigateComponent } from '../layout/mobile-navigate/mobile-navigate.component';
+import { CartService } from 'src/app/core/service/cart-service/cart.service';
 
 @Component({
   selector: 'app-pages',
@@ -22,4 +23,10 @@ import { MobileNavigateComponent } from '../layout/mobile-navigate/mobile-naviga
   templateUrl: './pages.component.html',
   styleUrl: './pages.component.scss',
 })
-export class PagesComponent {}
+export class PagesComponent {
+  constructor(
+    cartService: CartService,
+  ) {
+    cartService.initCartLocalStorage();
+  }
+}

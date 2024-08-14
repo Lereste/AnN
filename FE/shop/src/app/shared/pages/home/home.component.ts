@@ -5,8 +5,8 @@ import { LatestProductsComponent } from '../../layout/latest-products/latest-pro
 import { GoToTopComponent } from '../../components/go-to-top/go-to-top.component';
 import { CategoryMainComponent } from '../../layout/category-brand/category-brand.component';
 import { SaleProductsComponent } from '../../layout/sale-products/sale-products.component';
-import { AllProductsComponent } from '../../layout/all-products/all-products.component';
-import { AllAccessoriesComponent } from '../../layout/all-accessories/all-accessories.component';
+import { ProductsTypeComponent } from '../../layout/products-type/products-type.component';
+import { AccessoriesTypeComponent } from '../../layout/accessories-type/accessories-type.component';
 import { FacilityComponent } from '../../layout/facility/facility.component';
 
 @Component({
@@ -17,8 +17,8 @@ import { FacilityComponent } from '../../layout/facility/facility.component';
     LatestProductsComponent, 
     SaleProductsComponent,
     CategoryMainComponent, 
-    AllProductsComponent,
-    AllAccessoriesComponent,
+    ProductsTypeComponent,
+    AccessoriesTypeComponent,
     FacilityComponent,
     FooterComponent, 
     GoToTopComponent

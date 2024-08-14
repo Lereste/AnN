@@ -1,7 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { ProductItemComponent, Products } from '../product-item/product-item.component';
+import { ProductItemComponent } from '../product-item/product-item.component';
+import { Products } from 'src/app/core/models/product/product.model';
 
 @Component({
   selector: 'app-sale-products',
