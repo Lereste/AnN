@@ -4,14 +4,14 @@
             <ng-template carouselSlide [id]="productItem.id.toString()">
                 <div class="product-item-content">
                     <div class="product-item-content-image">
-                        <img [src]="productItem.imageSrc" [alt]="productItem.imageAlt" (click)="viewProductDetail(productItem)">
+                        <img [src]="productItem.imageSrc" [alt]="productItem.imageAlt" (click)="goToProductDetailPage(productItem)">
                     </div>
                     <div class="product-item-content-name">
                         <span>{{ productItem.productName }}</span>
                     </div>
 
                     <div class="product-item-content-zoom">
-                        <button (click)="zoomFullProductImage(productItem)">
+                        <button (click)="previewProductInformation(productItem)">
                             <i class="fa-regular fa-eye"></i>
                         </button>
                     </div>
@@ -28,7 +28,9 @@
                         </div>
 
                         <div class="product-item-content-addCart">
-                            <button><i class="fa-solid fa-cart-plus"></i></button>
+                            <button (click)="addProductToCart(productItem)">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

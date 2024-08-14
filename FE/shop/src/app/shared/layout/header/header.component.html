@@ -37,13 +37,13 @@
                                     <span>Trang Chủ</span>
                                 </button>
                             </li>
-                            <li class="nav__content-item">
-                                <button class="nav__content-button">
+                            <li class="nav__content-item" >
+                                <button class="nav__content-button" (click)="goToAllProducts()">
                                     <span>Sản Phẩm</span>
                                 </button>
                             </li>
                             <li class="nav__content-item">
-                                <button class="nav__content-button">
+                                <button class="nav__content-button" (click)="goToAllArticles()">
                                     <span>Bài Viết</span>
                                 </button>
                             </li>
@@ -65,13 +65,17 @@
                                 </button>
                             </li>
                             <li class="nav__content-item cart">
-                                <button class="nav__content-button">
+                                <button class="nav__content-button" (click)="goToCart()">
                                     <!-- <img
                                         src="../../../../assets/image/cart.png"
                                         alt=""
                                     /> -->
                                     <span>Giỏ Hàng</span>
                                 </button>
+
+                                <div class="cart-count">
+                                    <span>{{cartCount}}</span>
+                                </div>
                             </li>
                             <!-- <li class="nav__content-item">
                                 <button class="nav__content-button" (click)="goToLogin()">

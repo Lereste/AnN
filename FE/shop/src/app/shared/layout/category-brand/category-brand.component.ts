@@ -90,7 +90,7 @@ export class CategoryMainComponent implements OnInit {
       {
         id: 8,
         brandName: "Boston",
-        image: "assets/image/brands/boston.png"
+        image: "assets/image/brands/Boston.png"
       },
       {
         id: 9,
