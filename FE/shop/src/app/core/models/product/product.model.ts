@@ -4,7 +4,7 @@ export class Products {
     imageAlt?: string;
     productName!: string;
     productDescription?: string;
-    productDefaultPrice!: string;
-    productSalePrice?: string;
+    productDefaultPrice!: number;
+    productSalePrice?: number;
     productSlug?: string;
   }

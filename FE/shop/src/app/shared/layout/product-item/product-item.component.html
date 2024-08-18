@@ -1,63 +1,79 @@
 <section class="product-item">
-    <owl-carousel-o [options]="customOptions" #owlCar>
-        <ng-container *ngFor="let productItem of productList">
-            <ng-template carouselSlide [id]="productItem.id.toString()">
-                <div class="product-item-content">
-                    <div class="product-item-content-image">
-                        <img [src]="productItem.imageSrc" [alt]="productItem.imageAlt" (click)="goToProductDetailPage(productItem)">
-                    </div>
-                    <div class="product-item-content-name">
-                        <span>{{ productItem.productName }}</span>
-                    </div>
+  <owl-carousel-o [options]="customOptions" #owlCar>
+    <ng-container *ngFor="let productItem of productList; let idx = index">
+      <ng-template carouselSlide [id]="productItem.id.toString()">
+        <div class="product-item-content">
+          <div class="product-item-content-image">
+            <img
+              [src]="productItem.imageSrc"
+              [alt]="productItem.imageAlt"
+              (click)="goToProductDetailPage(productItem)"
+            />
+          </div>
+          <div class="product-item-content-name">
+            <span>{{ productItem.productName }}</span>
+          </div>
 
-                    <div class="product-item-content-zoom">
-                        <button (click)="previewProductInformation(productItem)">
-                            <i class="fa-regular fa-eye"></i>
-                        </button>
-                    </div>
+          <div class="product-item-content-zoom">
+            <button (click)="previewProductInformation(productItem)">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
 
-                    <div class="product-item-content-price-wrapper">
-                        <div class="product-item-content-price">
-                            <!-- <div class="sale-price">
+          <div class="product-item-content-price-wrapper">
+            <div class="product-item-content-price">
+              <!-- <div class="sale-price">
                                     <span>{{productItem.productDefaultPrice}}đ</span>
                                 </div> -->
-                            <div class="default-price">
-                                <span>{{productItem.productDefaultPrice}}đ</span>
-                                <img src="../../../../../assets/image/gif/fire.gif" alt="">
-                            </div>
-                        </div>
-
-                        <div class="product-item-content-addCart">
-                            <button (click)="addProductToCart(productItem)">
-                                <i class="fa-solid fa-cart-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </ng-container>
-    </owl-carousel-o>
-
-    <ng-container *ngIf="isZoom">
-        <div class="zoom" (click)="closeImage()">
-            <div class="zoom-content">
-                <div class="zoom-content-image">
-                    <img [src]="zoomProductItem.imageSrc" [alt]="zoomProductItem.imageSrc">
-                </div>
-
-                <div class="zoom-content-detail">
-                    <p><strong>Tên: </strong>{{zoomProductItem.productName}}</p>
-                    <p><strong>Mô tả: </strong>{{zoomProductItem.productDescription}}</p>
-                    <p><strong>Giá: </strong>{{zoomProductItem.productDefaultPrice}}</p>
-                </div>
-
-                <div class="zoom-content-hint">
-                    <span>Nhấn vào bất kỳ đâu trong khu vực này để đóng.</span>
-                </div>
+              <div class="default-price">
+                <span>{{ productItem.productDefaultPrice }}đ</span>
+                <img src="../../../../../assets/image/gif/fire.gif" alt="" />
+              </div>
             </div>
 
-            
+            <div class="product-item-content-addCart">
+              <button (click)="addProductToCart(productItem)">
+                <i class="fa-solid fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
+      </ng-template>
     </ng-container>
+  </owl-carousel-o>
+
+  <ng-container *ngIf="isZoom">
+    <div class="zoom" (click)="closeImage()">
+      <div class="zoom-content">
+        <div class="zoom-content-image">
+          <img
+            [src]="zoomProductItem.imageSrc"
+            [alt]="zoomProductItem.imageSrc"
+          />
+        </div>
+
+        <div class="zoom-content-detail">
+          <p><strong>Tên: </strong>{{ zoomProductItem.productName }}</p>
+          <p>
+            <strong>Mô tả: </strong>{{ zoomProductItem.productDescription }}
+          </p>
+          <p><strong>Giá: </strong>{{ zoomProductItem.productDefaultPrice }}</p>
+        </div>
+
+        <div class="zoom-content-hint">
+          <span>Nhấn vào bất kỳ đâu trong khu vực này để đóng.</span>
+        </div>
+      </div>
+    </div>
+
+
+  </ng-container>
+
+
+  <!-- Toastify -->
 </section>
+
+<lib-toastify-toast-container
+  [position]="'top-right'"
+></lib-toastify-toast-container>
 
