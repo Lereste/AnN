@@ -29,7 +29,7 @@
                             <i class="fa-solid fa-minus"></i>
                         </button>
 
-                        <input class="productDetail-quantity-count" type="number" min="1" max="99"
+                        <input class="productDetail-quantity-count" type="number" [min]="1" [max]="99"
                             [(ngModel)]="currentInputValue" (keydown)="onValidate($event)" (blur)="onValidate($event)"
                             (keyup)="onSelectedQuantity($event)">
 

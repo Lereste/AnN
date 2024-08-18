@@ -4,7 +4,7 @@ import { CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@an
 import { FormsModule, NgModel } from '@angular/forms';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { Products } from 'src/app/core/models/product/product.model';
-import urlSlug from 'url-slug'
+import urlSlug from 'url-slug';
 
 enum DESCRIBE_TYPE {
   DESCRIPTION = 'description',
@@ -49,8 +49,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
         productName: 'Đàn Guitar Acoustic Martin 000Jr-10',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "	14.600.000",
-        productSalePrice: "13.990.000"
+        productDefaultPrice: 14600000,
+        productSalePrice: 13990000
       },
       {
         id: 2,
@@ -60,8 +60,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
         productName: 'Đàn Organ Casio Casiotone CT-S100',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "	3.370.000",
-        productSalePrice: "3.270.000"
+        productDefaultPrice: 3370000,
+        productSalePrice: 3270000
 
       },
       {
@@ -72,8 +72,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
         productName: 'Đàn ukulele Kala KA-ZCT-T Tenor',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "2.000.000",
-        productSalePrice: "1.890.000"
+        productDefaultPrice: 2000000,
+        productSalePrice: 1890000
       },
       {
         id: 4,
@@ -83,8 +83,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
         productName: 'Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "	1.199.000",
-        productSalePrice: "	1.099.000"
+        productDefaultPrice: 1199000,
+        productSalePrice: 1099000
       },
       {
         id: 5,
@@ -94,8 +94,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
         productName: 'Đàn Violin Amati-1969 VF750 Vân Thật Size 4/4',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "6.000.000",
-        productSalePrice: "5.790.000"
+        productDefaultPrice: 6000000,
+        productSalePrice: 5790000
       },
       {
         id: 6,
@@ -105,8 +105,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
         productName: 'Trống Cajon Echoslap VC201-MEX (Thái Lan)',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "2.400.000",
-        productSalePrice: "2.050.000"
+        productDefaultPrice: 2400000,
+        productSalePrice: 2050000
       },
       {
         id: 7,
@@ -116,8 +116,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
         productName: 'Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "7.700.000",
-        productSalePrice: "7.450.000"
+        productDefaultPrice: 7700000,
+        productSalePrice: 7450000
       },
     ];
 

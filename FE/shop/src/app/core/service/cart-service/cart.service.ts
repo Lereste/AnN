@@ -43,8 +43,6 @@ export class CartService {
   setCartItem(cartItem: CartItem, isUpdateItemQuantity?: boolean): void {
     const cart = this.getCart();
 
-    console.log('cart', cart);
-    
     const cartItemExist = cart.items?.find((item) => item.productSlug === cartItem.productSlug);
 
     if (!cartItemExist) {
@@ -68,8 +66,8 @@ export class CartService {
 
   deleteCartItem(productSlug: string) {
     const cart = this.getCart();
-    const filterdCart = cart.items.filter(item => item.productSlug !== productSlug);
 
+    const filterdCart = cart.items.filter(item => item.productSlug !== productSlug);
     cart.items = filterdCart;
 
     const cartJsonString = JSON.stringify(cart);
