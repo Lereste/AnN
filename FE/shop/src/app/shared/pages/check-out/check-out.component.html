@@ -1,0 +1,271 @@
+<section class="checkout-container">
+    <div class="checkout">
+
+        <div class="checkout-back-to-cart">
+            <button (click)="onBackCart()">
+                <i class="fa-solid fa-arrow-left-long"></i>
+                <span>Xem lại giỏ hàng</span>
+            </button>
+        </div>
+
+        <div class="checkout-content">
+            <div class="checkout-content-title">
+                <span>Thông tin đặt hàng</span>
+            </div>
+
+            <div class="checkout-content-wrapper">
+                <div class="checkout-content-wrapper-left">
+                    <form [formGroup]="checkoutFormGroup" (ngSubmit)="onCheckoutForm()">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 p-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Họ và Tên</mat-label>
+                                    <input matInput placeholder="Nhập vào tên của bạn" formControlName="name">
+                                    <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>face</mat-icon>
+
+                                    @if (checkoutFormGroup.controls['name'].hasError('required')) {
+                                    <mat-error>Vui lòng
+                                        nhập vào tên người nhận hàng.</mat-error>
+                                    }
+
+                                    <!-- <mat-error *ngIf="checkoutFormGroup.controls['name'].hasError('required')">Vui lòng
+                                        nhập vào tên người nhận hàng.</mat-error> -->
+
+                                    <mat-error
+                                        *ngIf="!checkoutFormGroup.controls['name'].hasError('required') && checkoutFormGroup.controls['name'].hasError('maxlength')">Tên
+                                        người nhận không được dài hơn 40 ký tự.</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-3 p-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="Placeholder" type="email" formControlName="email">
+                                    <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>email</mat-icon>
+                                    <mat-error
+                                        *ngIf="!checkoutFormGroup.controls['email'].hasError('required') && checkoutFormGroup.controls['email'].hasError('email')">Địa
+                                        chỉ Email không hợp lệ, vui lòng nhập lại.</mat-error>
+                                    <mat-error *ngIf="checkoutFormGroup.controls['email'].hasError('required')">Vui lòng
+                                        nhập vào địa chỉ email.</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-3 p-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Số điện thoại di động</mat-label>
+                                    <input matInput placeholder="Placeholder" formControlName="phone">
+                                    <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>phone</mat-icon>
+
+                                    <mat-error *ngIf="checkoutFormGroup.controls['phone'].hasError('required')">Vui
+                                        lòng nhập vào số điện thoại liên hệ.</mat-error>
+                                    <mat-error
+                                        *ngIf="!checkoutFormGroup.controls['phone'].hasError('required') && checkoutFormGroup.controls['phone'].hasError('maxlength')">Số
+                                        điện thoại không hợp lệ.</mat-error>
+                                    <mat-error
+                                        *ngIf="!checkoutFormGroup.controls['phone'].hasError('required') && !checkoutFormGroup.controls['phone'].hasError('minLength')">Số
+                                        điện thoại không hợp lệ.</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <!-- Begin: Tỉnh/thành và quận/huyện -->
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-3 p-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Chọn tỉnh/thành</mat-label>
+                                    <mat-select required formControlName="city" #singleSelect>
+                                        <mat-option style="font-size: 1.4rem;">
+                                            <ngx-mat-select-search [formControl]="citiesFilterCtrl"
+                                                placeholderLabel="Tìm kiếm tên Tỉnh/Thành..."
+                                                noEntriesFoundLabel="Vui lòng nhập đúng tên Tỉnh/Thành"></ngx-mat-select-search>
+                                        </mat-option>
+
+                                        <mat-option style="font-size: 1.4rem;"
+                                            *ngFor="let city of filteredCities | async" [value]="city"
+                                            (click)="getCurrentDistrict()">
+                                            <span>{{city.name_with_type}}</span>
+                                        </mat-option>
+                                    </mat-select>
+
+                                    <!-- <mat-hint>{{}}</mat-hint> -->
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-3 p-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Chọn quận/huyện</mat-label>
+                                    <mat-select required formControlName="district" #singleSelect>
+                                        <mat-option style="font-size: 1.4rem;" *ngFor="let district of currentDistrict"
+                                            [value]="district" (click)="getCurrentWard()">
+                                            <span>{{district.name_with_type}}</span>
+                                        </mat-option>
+                                    </mat-select>
+
+                                    <!-- <mat-hint>Hint</mat-hint> -->
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- End: Tỉnh/thành và quận/huyện -->
+
+                        <!-- Begin: Xã/phường và địa chỉ -->
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-3 p-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Chọn xã/phường</mat-label>
+                                    <mat-select required formControlName="ward" #singleSelect>
+                                        <mat-option style="font-size: 1.4rem;" *ngFor="let ward of currentWard"
+                                            [value]="ward">
+                                            <span>{{ward.name_with_type}}</span>
+                                        </mat-option>
+                                    </mat-select>
+
+                                    <!-- <mat-hint>Hint</mat-hint> -->
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-3 p-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Nhập vào địa chỉ</mat-label>
+                                    <input matInput placeholder="Placeholder" formControlName="address" required>
+                                    <mat-error *ngIf="checkoutFormGroup.controls['address'].hasError('required')">Vui
+                                        lòng
+                                        nhập vào địa chỉ giao hàng.</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- End: Xã/phường và địa chỉ -->
+
+                        <!-- Note -->
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3 p-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Ghi chú đơn hàng (tuỳ chọn)</mat-label>
+                                    <textarea matInput
+                                        placeholder="Ví dụ: Thời gian giao hàng hoặc địa chỉ giao hàng chi tiết."></textarea>
+                                    <!-- <mat-hint>Hint</mat-hint> -->
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="checkout-payment-method">
+                        <span class="checkout-payment-method-title">Phương thức thanh toán</span>
+
+                        <div class="checkout-payment-method-list">
+                            <div class="checkout-payment-method-button">
+                                <button [class.active]="selectedPaymentMethod === PAYMENT_METHOD_TYPE.TRANSFER"
+                                    (click)="toggleTransfer()">Chuyển khoản</button>
+
+                                <button [class.active]="selectedPaymentMethod === PAYMENT_METHOD_TYPE.DIRECT"
+                                    (click)="toggleDirect()">Trực tiếp</button>
+
+                                <button [class.active]="selectedPaymentMethod === PAYMENT_METHOD_TYPE.INSTALLMENT"
+                                    (click)="toggleInstallment()">Trả góp</button>
+                            </div>
+
+                            <div [ngSwitch]="selectedPaymentMethod">
+                                <ng-template ngSwitchDefault>
+                                    <div class="checkout-payment-method-transfer animate__animated animate__fadeInDown">
+                                        <h3>Thông tin chuyển khoản: </h3>
+
+                                        <div class="checkout-payment-method-transfer-content">
+                                            <div class="transfer-left">
+                                                <p>&#8226; Ngân hàng: <strong>Vietcombank</strong></p>
+                                                <p>&#8226; Số tài khoản: <strong>053100 254 6833</strong></p>
+                                                <p>&#8226; Tên người nhận: <strong>Hồ Hoàng Hảo</strong></p>
+                                            </div>
+
+                                            <div class="transfer-right">
+                                                <p>&#8226; Hoặc quét mã QR bên dưới: </p>
+                                                <img src="../../../../assets/image/payment/Vietcombank-qr.jpg" alt="">
+                                            </div>
+                                        </div>
+
+                                        <p>&#8658; Sau khi thanh toán thành công, chúng tôi sẽ chủ động liên hệ xác nhận và
+                                            sắp xếp thời gian giao hàng đến bạn nhanh nhất có thể.</p>
+                                    </div>
+                                </ng-template>
+
+                                <div *ngSwitchCase="PAYMENT_METHOD_TYPE.DIRECT">
+                                    <div class="animate__animated animate__fadeInDown mt-2">
+                                        <p>Vui lòng đến cửa hàng gần nhất của chúng tôi để thanh toán.</p>
+                                    </div>
+                                </div>
+
+                                <div *ngSwitchCase="PAYMENT_METHOD_TYPE.INSTALLMENT">
+                                    <div class="animate__animated animate__fadeInDown mt-2">
+                                        <p>Vui lòng liên hệ chúng tôi để biết thêm cách thức trả góp.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <li class="checkout-payment-method-item">
+                                    <div class="payment-method-item-title">
+
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </div>
+
+                                    <div class="payment-method-item-detail">
+                                        <span>test 1</span>
+                                    </div>
+                                </li> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-content-wrapper-right">
+                    <div class="cart">
+                        <div class="cart-container">
+                            <mat-table [dataSource]="cartDataSource" class="mat-elevation-z8">
+                                <ng-container matColumnDef="product">
+                                    <mat-header-cell *matHeaderCellDef>Sản Phẩm</mat-header-cell>
+                                    <mat-cell *matCellDef="let element">
+                                        <div class="cart-order-item-product">
+                                            <img [src]="element.product.imageSrc" alt="" />
+                                            <span> {{ element.product.productName }} </span>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="quantity">
+                                    <mat-header-cell *matHeaderCellDef>Số Lượng</mat-header-cell>
+                                    <mat-cell *matCellDef="let element">
+                                        <div class="cart-order-item-quantity">
+                                            <span> {{ element.quantity }} </span>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="price">
+                                    <mat-header-cell *matHeaderCellDef>Thành Tiền</mat-header-cell>
+                                    <mat-cell *matCellDef="let element">
+                                        <div class="cart-order-item-price">
+                                            <span> {{ element.product.productSalePrice * element.quantity | currency :
+                                                "VND" : true}} </span>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                            </mat-table>
+
+                            <div class="cart-order-item-total">
+                                <p>Tổng giá trị đơn hàng: <span> {{totalPrice | currency : "VND" : true}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-order-payment">
+                        <div class="checkout-order-payment-button">
+                            <button (click)="onCheckoutForm()">Đặt Hàng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

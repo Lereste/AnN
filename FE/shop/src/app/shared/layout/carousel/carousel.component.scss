@@ -141,7 +141,7 @@ main {
   }
 }
 
-.nav {
+.carousel__nav {
   position: absolute;
   bottom: 2rem;
   left: 8%;
@@ -149,8 +149,8 @@ main {
   z-index: 5;
   user-select: none;
 
-  .prev,
-  .next {
+  &-prev,
+  &-next {
     // transform: translate(-50%, -50%);
     border: none;
     font-size: 3.2rem;
@@ -285,14 +285,14 @@ main {
     }
   }
 
-  .nav {
+  .carousel__nav {
     position: absolute;
-    left: 88%;
-    width: 8rem;
+    left: 87%;
+    width: 10rem;
 
-    .prev,
-    .next {
-      font-size: 3rem;
+    &-prev,
+    &-next {
+      font-size: 3.6rem;
       background-color: transparent;
       opacity: 0.8;
       color: #fff;

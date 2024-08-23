@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Products } from 'src/app/core/models/product/product.model';
@@ -19,6 +19,7 @@ import {
 import { CommonModule, Location, NgIf } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
+import { CartOrderSummaryComponent } from '../../layout/cart-order-summary/cart-order-summary.component';
 
 @Component({
   selector: 'app-cart',
@@ -29,11 +30,12 @@ import { AngularToastifyModule, ToastService } from 'angular-toastify';
     CommonModule,
     FormsModule,
     AngularToastifyModule,
+    CartOrderSummaryComponent
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = [
     'product',
     'price',
@@ -49,7 +51,7 @@ export class CartComponent implements OnInit {
 
   unSubscribe$: Subject<unknown> = new Subject();
 
-  cartCount: number = 0;
+  // cartCount: number = 0;
   cartItemsDetailed: CartItemDetailed[] = [];
   currentChangedProductSlug: string = '';
   isEmptyCart: boolean = false;
@@ -165,11 +167,18 @@ export class CartComponent implements OnInit {
     // element.product.productDefaultPrice * element.quantity
   }
 
+  ngAfterViewInit() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    })
+  }
+
   onBackToHome(): void {
     this.location.back();
   }
 
-  private _checkIsEmptyCart(): void  {
+  private _checkIsEmptyCart(): void {
     const cart = this.cartService.getCart();
     if (cart.items.length < 1) {
       this.isEmptyCart = true;
@@ -187,22 +196,28 @@ export class CartComponent implements OnInit {
     //   console.log('a');
 
     // }
-    console.log('event.target.value 1', event.target.value);
+    // console.log('event.target.value 1', event.target.value as number);
 
     this.inputEvent$.next(event);
+    console.log('1===', event.target.value);
+
     let item: CartItem = {
       productSlug: cartItem.product.productSlug as string,
-      quantity: event.target.value,
+      quantity: Number(event.target.value),
     };
+
+    console.log('item', item);
+    
+
     this.cartService.setCartItem(item, true);
 
     // Get product item quantity after 100ms when use have already input the value
     this.inputEvent$
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((inputEvent: any) => {
-        console.log('event.target.value 2', event.target.value);
+        // console.log('event.target.value 2', event.target.value);
 
-        item.quantity = event.target.value;
+        item.quantity = Number(event.target.value);
         this.cartService.setCartItem(item, true);
       });
 
@@ -212,15 +227,19 @@ export class CartComponent implements OnInit {
   private _getCartDetailList(): void {
     this.cartService.cart$
       .pipe(takeUntil(this.unSubscribe$))
-      .subscribe((respCart) => {
-        this.cartCount = respCart.items.length ?? 0;
+      .subscribe((cartResponse) => {
+        // this.cartCount = respCart.items.length ?? 0;
 
-        respCart.items.forEach((cartItem) => {
+        cartResponse.items.forEach((cartItem) => {
+          // chỗ này sẽ đổi thành call api getProductBySlug
+          // VD: this.ordersService.getProductBySlug(cartItem.productSlug).subscribe(response => {
           this.cloneCartProducts.forEach((productItem) => {
             if (productItem.productSlug === cartItem.productSlug) {
+              // productItem sẽ là respone trả về của api
               this.currentCartDetailItem = productItem;
             }
           });
+          // =========================
 
           const productIndex = this.cartItemsDetailed?.findIndex(
             (e) => e.product.productSlug === cartItem.productSlug
@@ -243,7 +262,7 @@ export class CartComponent implements OnInit {
 
     this.cartDataSource = this.cartItemsDetailed;
 
-    console.log(this.cartDataSource);
+    // console.log(this.cartDataSource);
   }
 
   onValidateKeydown(event: any) {
@@ -253,24 +272,6 @@ export class CartComponent implements OnInit {
       event.stopPropagation();
       event.preventDefault();
     }
-  }
-
-  onValidateBlur(event: any, cartItem: CartItemDetailed): void {
-    if (this.isEmpty(event.target.value)) {
-      // If user delete quantity (quantity is empty), set 1 is the default value
-      event.target.value = event.target.min;
-      console.log('event.target.value', event.target.value);
-
-      const item: CartItem = {
-        productSlug: cartItem.product.productSlug as string,
-        quantity: event.target.value,
-      };
-      this.cartService.setCartItem(item, true);
-    }
-  }
-
-  isEmpty(str: string) {
-    return !str.trim().length;
   }
 
   onSelectedQuantity(event: any): void {
@@ -283,11 +284,32 @@ export class CartComponent implements OnInit {
     }
   }
 
+  onValidateBlur(event: any, cartItem: CartItemDetailed): void {
+
+    if (this.isValid(event.target.value)) {
+      // If user delete quantity (quantity is empty), set 1 is the default value
+      event.target.value = event.target.min;
+
+      const item: CartItem = {
+        productSlug: cartItem.product.productSlug as string,
+        quantity: Number(event.target.value),
+      };
+      this.cartService.setCartItem(item, true);
+    }
+  }
+
+  isValid(value: string): boolean {
+    return !value.trim().length || value === "0";
+  }
+
   getTotalPriceItem(productIndex: number) {
     const cart = this.cartService.getCart();
     const quantity = cart.items[productIndex]?.quantity;
     const price =
       this.cartItemsDetailed[productIndex]?.product.productDefaultPrice;
+
+    // console.log('quantity', quantity);
+    // console.log('price', price);
 
     return price * quantity;
   }
@@ -312,5 +334,10 @@ export class CartComponent implements OnInit {
     this._checkIsEmptyCart();
     this.toastService.success('Đã xóa tất cả sản phẩm trong giỏ hàng.');
 
+  }
+
+  ngOnDestroy(): void {
+      console.log('cart destroy');
+      
   }
 }

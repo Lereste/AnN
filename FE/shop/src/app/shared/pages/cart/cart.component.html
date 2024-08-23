@@ -18,82 +18,88 @@
         </div>
       </div>
 
-      <div class="cart-products-content" *ngIf="!isEmptyCart">
-        <table mat-table [dataSource]="cartDataSource" class="mat-elevation-z8">
-          <!--- Note that these columns can be defined in any order.
-                          The actual rendered columns are set as a property on the row definition" -->
-
-          <!-- Position Column -->
-          <!-- <ng-container matColumnDef="position">
-                      <th mat-header-cell *matHeaderCellDef> Thứ tự </th>
-                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                    </ng-container> -->
-
-          <!-- product Column -->
-          <ng-container matColumnDef="product">
-            <th mat-header-cell *matHeaderCellDef>Sản Phẩm</th>
-            <td mat-cell *matCellDef="let element">
-              <div class="cart-products-item-product">
-                <img [src]="element.product.imageSrc" alt="" />
-                <span> {{ element.product.productName }} </span>
-              </div>
-            </td>
-          </ng-container>
-
-          <!-- price Column -->
-          <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef>Đơn Giá</th>
-            <td mat-cell *matCellDef="let element">
-              {{
-                element.product.productDefaultPrice | currency : "VND" : true
-              }}
-            </td>
-          </ng-container>
-
-          <!-- quantity Column -->
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef>Số Lượng</th>
-            <td mat-cell *matCellDef="let element; let idx = index">
-              <input
-                mode="decimal"
-                type="number"
-                min="1"
-                max="99"
-                [value]="element.quantity"
-                (keydown)="onValidateKeydown($event)"
-                (blur)="onValidateBlur($event, element)"
-                (keyup)="onSelectedQuantity($event)"
-                (input)="updateCartItemQuantity($event, element, idx)"
-              />
-            </td>
-          </ng-container>
-
-          <!-- total Column -->
-          <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef>Thành Tiền</th>
-            <td mat-cell *matCellDef="let element; let idx = index">
-              <span class="cart-products-item-total">
-                {{ getTotalPriceItem(idx) | currency : "VND" : true }}
-              </span>
-            </td>
-          </ng-container>
-
-          <!-- action -->
-          <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>Thao Tác</th>
-            <td mat-cell *matCellDef="let element">
-              <button
-                class="cart-products-item-delete"
-                (click)="deleteCartItem(element)"
-              >
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row [hidden]="isEmptyCart" *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
+      <div class="cart-products-container" >
+        <div class="cart-order-list" *ngIf="!isEmptyCart">
+          <mat-table [dataSource]="cartDataSource" class="mat-elevation-z8">
+            <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+  
+            <!-- Position Column -->
+            <!-- <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef> Thứ tự </th>
+                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                      </ng-container> -->
+  
+            <!-- product Column -->
+            <ng-container matColumnDef="product">
+              <mat-header-cell *matHeaderCellDef>Sản Phẩm</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <div class="cart-order-item-product">
+                  <img [src]="element.product.imageSrc" alt="" />
+                  <span> {{ element.product.productName }} </span>
+                </div>
+              </mat-cell>
+            </ng-container>
+  
+            <!-- price Column -->
+            <ng-container matColumnDef="price">
+              <mat-header-cell *matHeaderCellDef>Đơn Giá</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{
+                  element.product.productSalePrice | currency : "VND" : true
+                }}
+              </mat-cell>
+            </ng-container>
+  
+            <!-- quantity Column -->
+            <ng-container matColumnDef="quantity">
+              <mat-header-cell *matHeaderCellDef>Số Lượng</mat-header-cell>
+              <mat-cell *matCellDef="let element; let idx = index">
+                <input
+                  mode="decimal"
+                  type="number"
+                  min="1"
+                  max="99"
+                  [value]="element.quantity"
+                  (keydown)="onValidateKeydown($event)"
+                  (blur)="onValidateBlur($event, element)"
+                  (keyup)="onSelectedQuantity($event)"
+                  (input)="updateCartItemQuantity($event, element, idx)"
+                />
+              </mat-cell>
+            </ng-container>
+  
+            <!-- total Column -->
+            <ng-container matColumnDef="total">
+              <mat-header-cell *matHeaderCellDef>Thành Tiền</mat-header-cell>
+              <mat-cell *matCellDef="let element; let idx = index">
+                <span class="cart-order-item-total">
+                  {{ getTotalPriceItem(idx) | currency : "VND" : true }}
+                </span>
+              </mat-cell>
+            </ng-container>
+  
+            <!-- action -->
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Thao Tác</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button
+                  class="cart-order-item-delete"
+                  (click)="deleteCartItem(element)"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </mat-cell>
+            </ng-container>
+  
+            <mat-header-row [hidden]="isEmptyCart" *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </div>
+  
+        <div class="cart-order-summary">
+          <app-cart-order-summary></app-cart-order-summary>
+        </div>
       </div>
     </div>
   </div>

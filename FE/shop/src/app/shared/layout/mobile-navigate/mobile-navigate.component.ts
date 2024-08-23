@@ -4,11 +4,12 @@ import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchComponent } from '../../components/search/search.component';
 import 'animate.css'
+import { CartComponent } from '../../pages/cart/cart.component';
 
 @Component({
   selector: 'app-mobile-navigate',
   standalone: true,
-  imports: [NgIf, CategoryMobileComponent, SearchComponent],
+  imports: [NgIf, CategoryMobileComponent, SearchComponent, CartComponent],
   templateUrl: './mobile-navigate.component.html',
   styleUrl: './mobile-navigate.component.scss'
 })
@@ -19,7 +20,7 @@ export class MobileNavigateComponent implements OnInit, AfterViewInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-   
+
   }
 
   ngAfterViewInit(): void {
@@ -50,10 +51,10 @@ export class MobileNavigateComponent implements OnInit, AfterViewInit {
   }
 
   showArticle(): void {
-    
+
   }
 
   showCart(): void {
-    
+    this.router.navigate(['gio-hang']);
   }
 }

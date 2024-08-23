@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { Page404Component } from "../../authentication/page404/page404.component";
 import { PagesComponent } from "./pages.component";
+import { HttpClientModule } from "@angular/common/http";
 
 export const routes: Routes = [
     {
@@ -26,7 +27,11 @@ export const routes: Routes = [
             },
             {
                 path: 'gio-hang',
-                loadChildren: () => import('./cart/cart-routing.module').then((route) => route.CartRoutingModule)
+                loadChildren: () => import('./cart/cart-routing.module').then((route) => route.CART_ROUTES)
+            },
+            {
+                path: 'thanh-toan-gio-hang',
+                loadChildren: () => import('./check-out/check-out-routing.module').then((route) => route.CHECK_OUT_ROUTES)
             },
             {
                 path: "chi-tiet-san-pham/:productSlug",

@@ -1,14 +1,15 @@
 @import "./../../../../styles.scss";
 // @import "@app/app.component.scss";
 
-.nav {
+.header__nav {
   position: fixed;
   z-index: 6;
   width: 100%;
   // background: transparent;
   // backdrop-filter: blur(10px);
 
-  &__container {
+  &-container {
+
     .nav__top {
       background-color: #e3e3e3;
       height: 3rem;
@@ -132,7 +133,7 @@
 // Mobile <768px
 @media only screen and (max-width: 768px) {
   header {
-    nav {
+    .header__nav {
       // position: fixed;
       // display: none;
 
