@@ -18,13 +18,16 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "resolveJsonModule": true,
     "lib": [
       "ES2022",
       "dom"
     ],
     "baseUrl": "./",
     "paths": {
-      "tslib" : ["path/to/node_modules/tslib/tslib.d.ts"],
+      "tslib": [
+        "path/to/node_modules/tslib/tslib.d.ts"
+      ],
       // "@angular/*": [
       //   "./node_modules/@angular/*"
       // ],

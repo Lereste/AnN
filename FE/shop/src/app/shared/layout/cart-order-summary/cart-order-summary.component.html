@@ -1,0 +1,34 @@
+<section class="order">
+    <div class="order-summary">
+        <div class="order-summary-title">
+            <span>Thông tin giỏ hàng</span>
+        </div>
+    
+        <div class="order-summary-total-quantity">
+            <span>Tổng số lượng sản phẩm: </span>
+            <span>{{totalQuantity}}</span>
+        </div>
+    
+        <div class="order-summary-ship">
+            <span>Phí vận chuyển: </span>
+
+                <span *ngIf="totalPrice && totalPrice > 2000000; else feeShip">Miễn phí</span>
+
+            <ng-template #feeShip>
+                <span>30.000đ</span>
+            </ng-template>
+            
+        </div>
+    
+        <div class="order-summary-total-price">
+            <span>Tổng số tiền: </span>
+            <span>{{totalPrice | currency : "VND" : true}}</span>
+        </div>
+    
+        <div class="order-summary-checkout">
+            <button (click)="goToCheckOut()">
+                <span>Thanh Toán Giỏ Hàng</span>
+            </button>
+        </div>
+    </div>
+</section>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
-import { ProductItemComponent, Products } from '../product-item/product-item.component';
+import { ProductItemComponent } from '../product-item/product-item.component';
+import { Products } from 'src/app/core/models/product/product.model';
 
 export enum PRODUCT_TYPE {
   GUITAR = 'GUITAR',
@@ -34,7 +35,7 @@ export class AllProductsComponent {
         productName: 'Đàn Guitar Acoustic Martin 000Jr-10',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "14.600.000",
+        productDefaultPrice: 14600000,
         // productSalePrice: "13.990.000"
       },
       {
@@ -45,7 +46,7 @@ export class AllProductsComponent {
         productName: 'Đàn Guitar Cordoba C1M-CE',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "7.940.000",
+        productDefaultPrice: 7940000,
         // productSalePrice: "3.270.000"
 
       },
@@ -57,7 +58,7 @@ export class AllProductsComponent {
         productName: 'Đàn Guitar Kapok-ld-14',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "2.190.000",
+        productDefaultPrice: 2190000,
         // productSalePrice: "1.890.000"
       },
       {
@@ -68,7 +69,7 @@ export class AllProductsComponent {
         productName: 'Đàn Guitar Tanglewood TWBB SFCE',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "	6.240.000",
+        productDefaultPrice: 6240000,
         // productSalePrice: "	1.099.000"
       },
       {
@@ -79,7 +80,7 @@ export class AllProductsComponent {
         productName: 'Đàn Guitar Suzuki SDG-6NL',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "3.450.000",
+        productDefaultPrice: 3450000,
         // productSalePrice: "5.790.000"
       },
       {
@@ -90,7 +91,7 @@ export class AllProductsComponent {
         productName: 'Đàn Guitar Kapok-D-118AC',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "2.720.000",
+        productDefaultPrice: 2720000,
         // productSalePrice: "2.950.000"
       },
       {
@@ -101,7 +102,7 @@ export class AllProductsComponent {
         productName: 'Đàn Guitar Tanglewood twcr dce crossroads',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "4.150.000",
+        productDefaultPrice: 4150000,
         // productSalePrice: "3.150.000"
       },
     ];
@@ -115,7 +116,7 @@ export class AllProductsComponent {
         productName: 'Đàn Piano Điện Bora BX5 – 88 Phím',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "	6.490.000",
+        productDefaultPrice: 6490000,
         // productSalePrice: "13.990.000"
       },
       {
@@ -126,7 +127,7 @@ export class AllProductsComponent {
         productName: 'Alesis 88 key Virtue WSB Đàn Piano Điện',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "11.750.000",
+        productDefaultPrice: 11750000,
         // productSalePrice: "3.270.000"
 
       },
@@ -138,7 +139,7 @@ export class AllProductsComponent {
         productName: 'Đàn Piano Điện Alesis Concert',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "7.290.000",
+        productDefaultPrice: 7290000,
         // productSalePrice: "1.890.000"
       },
       {
@@ -149,7 +150,7 @@ export class AllProductsComponent {
         productName: 'Đàn Piano Điện Yamaha P-S500 Black / White',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "	39.200.000",
+        productDefaultPrice: 39200000,
         // productSalePrice: "	1.099.000"
       },
       {
@@ -160,7 +161,7 @@ export class AllProductsComponent {
         productName: 'Đàn Piano Điện Roland FP-10',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "15.450.000",
+        productDefaultPrice: 15450000,
         // productSalePrice: "5.790.000"
       },
       {
@@ -171,7 +172,7 @@ export class AllProductsComponent {
         productName: 'Đàn Piano Điện Yamaha P-125AWH + LP1',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "18.490.000",
+        productDefaultPrice: 18490000,
         // productSalePrice: "2.950.000"
       },
       {
@@ -182,7 +183,7 @@ export class AllProductsComponent {
         productName: 'Đàn Piano Cơ Kawai K-400',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "149.500.000",
+        productDefaultPrice: 149500000,
         // productSalePrice: "3.150.000"
       },
     ];
@@ -196,7 +197,7 @@ export class AllProductsComponent {
         productName: 'Đàn Organ Casio CTK-3400',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "	4.190.000",
+        productDefaultPrice: 4190000,
         // productSalePrice: "13.990.000"
       },
       {
@@ -207,7 +208,7 @@ export class AllProductsComponent {
         productName: 'Đàn Organ Kurtzman K300S',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "5.150.000",
+        productDefaultPrice: 5150000,
         // productSalePrice: "3.270.000"
 
       },
@@ -219,7 +220,7 @@ export class AllProductsComponent {
         productName: 'Đàn Organ Roland EX10 – 61 KEY',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "5.950.000",
+        productDefaultPrice: 5950000,
         // productSalePrice: "1.890.000"
       },
       {
@@ -230,7 +231,7 @@ export class AllProductsComponent {
         productName: 'Đàn Organ Casio CT-X3000',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "	7.190.000",
+        productDefaultPrice: 7190000,
         // productSalePrice: "	1.099.000"
       },
       {
@@ -241,7 +242,7 @@ export class AllProductsComponent {
         productName: 'Đàn Organ Kurtzman K360 – Keyboard',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "7.390.000",
+        productDefaultPrice: 7390000,
         // productSalePrice: "5.790.000"
       },
       {
@@ -252,7 +253,7 @@ export class AllProductsComponent {
         productName: 'Đàn Organ Roland BK3',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "14.290.000",
+        productDefaultPrice: 14290000,
         // productSalePrice: "2.950.000"
       },
       {
@@ -263,7 +264,7 @@ export class AllProductsComponent {
         productName: 'Đàn Organ Kurtzman SV800',
         productDescription:
           'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: "16.500.000",
+        productDefaultPrice: 16500000,
         // productSalePrice: "3.150.000"
       },
     ];
