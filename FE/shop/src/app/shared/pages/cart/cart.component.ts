@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Products } from 'src/app/core/models/product/product.model';
@@ -16,7 +16,7 @@ import {
   CartItem,
   CartItemDetailed,
 } from 'src/app/core/models/cart/cart.model';
-import { CommonModule, Location, NgIf } from '@angular/common';
+import { CommonModule, Location, NgIf, isPlatformBrowser } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
 import { CartOrderSummaryComponent } from '../../layout/cart-order-summary/cart-order-summary.component';
@@ -57,13 +57,15 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
   isEmptyCart: boolean = false;
 
   private inputEvent$ = new Subject<number>();
+  private readonly platformId = inject(PLATFORM_ID);
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private cartService: CartService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.cartProducts = [
       {
@@ -168,11 +170,17 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant'
-    })
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      })
+    }
   }
+
+  ngAfterContentChecked() {
+    this.changeDetectorRef.detectChanges();
+ }
 
   onBackToHome(): void {
     this.location.back();
@@ -180,6 +188,8 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _checkIsEmptyCart(): void {
     const cart = this.cartService.getCart();
+    if (!cart) return;
+
     if (cart.items.length < 1) {
       this.isEmptyCart = true;
     } else {
@@ -207,7 +217,7 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
     };
 
     console.log('item', item);
-    
+
 
     this.cartService.setCartItem(item, true);
 
@@ -228,8 +238,9 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cartService.cart$
       .pipe(takeUntil(this.unSubscribe$))
       .subscribe((cartResponse) => {
-        // this.cartCount = respCart.items.length ?? 0;
+        if (!cartResponse) return;
 
+        // this.cartCount = respCart.items.length ?? 0;
         cartResponse.items.forEach((cartItem) => {
           // chỗ này sẽ đổi thành call api getProductBySlug
           // VD: this.ordersService.getProductBySlug(cartItem.productSlug).subscribe(response => {
@@ -338,6 +349,6 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
       console.log('cart destroy');
-      
+
   }
 }

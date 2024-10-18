@@ -17,17 +17,16 @@
 
 <main>
   <ng-container *ngIf="imagesDataInput.length > 0" >
-    <img src="" alt="">
-    <ul class='slider' #slider #autoplay>
-      <li class='item' *ngFor="let image of imagesDataInput; let idx = index"
-        [ngStyle]="{'background-image': 'url(' + image.imageSrc + ')'}">
-        <div class='content'>
+    <!-- <img src="" alt=""> -->
+    <div class='slider' #slider #autoplay>
+      <img class='item' *ngFor="let image of imagesDataInput; let idx = index"
+        [src]="image.imageSrc" [alt]="image.imageAlt" width="959" height="400" decoding="sync" loading="eager">
+        <!-- <div class='content'>
           <h2 class='title'>{{image.content.title}}</h2>
           <p class='description'>{{image.content.description}}</p>
           <button class="buy">Mua Ngay</button>
-        </div>
-      </li>
-    </ul>
+        </div> -->
+    </div>
 
     <div *ngIf="indicators" class="carousel-dot-container" >
       <span *ngFor="let image of imagesDataInput; let idx = index" class="dot"
@@ -35,10 +34,11 @@
     </div>
 
     <div class='carousel__nav'>
-      <button class='carousel__nav-prev' name="arrow-back-outline" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (click)="onPrevClick()">
+      <button class='carousel__nav-prev' aria-label="prev" name="arrow-back-outline" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (click)="onPrevClick()">
         <i class="fa-regular fa-circle-left"></i>
       </button>
-      <button class='carousel__nav-next' name="arrow-forward-outline" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (click)="onNextClick()">
+
+      <button class='carousel__nav-next' aria-label="next" name="arrow-forward-outline" (mouseover)="onMouseOver()" (mouseleave)="onMouseLeave()" (click)="onNextClick()">
         <i class="fa-regular fa-circle-right"></i>
       </button>
     </div>

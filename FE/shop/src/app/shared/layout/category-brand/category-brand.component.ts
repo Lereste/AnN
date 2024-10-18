@@ -1,5 +1,5 @@
-import { IMAGE_LOADER, ImageLoaderConfig, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { IMAGE_LOADER, ImageLoaderConfig, NgFor, NgIf, NgOptimizedImage, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 interface Category {
@@ -48,6 +48,8 @@ export class CategoryMainComponent implements OnInit {
     },
     nav: false
   }
+
+  private readonly platformId = inject(PLATFORM_ID);
 
   constructor() {
     this.categoryBrand = [
@@ -106,7 +108,7 @@ export class CategoryMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (window.innerWidth < 1700) {
+    if (isPlatformBrowser(this.platformId) && window.innerWidth < 1700) {
       this.customOptions.margin = 21;
     }
   }

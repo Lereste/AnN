@@ -15,7 +15,7 @@
           </div>
 
           <div class="product-item-content-zoom">
-            <button (click)="previewProductInformation(productItem)">
+            <button aria-label="zoom-item" (click)="previewProductInformation(productItem)">
               <i class="fa-regular fa-eye"></i>
             </button>
           </div>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="product-item-content-addCart">
-              <button (click)="addProductToCart(productItem)">
+              <button aria-label="add-product-to-cart" (click)="addProductToCart(productItem)">
                 <i class="fa-solid fa-cart-plus"></i>
               </button>
             </div>

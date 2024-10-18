@@ -30,6 +30,7 @@ main {
   border-radius: 20px;
   box-shadow: 0 20px 30px rgba(255, 255, 255, 0.3) inset;
   transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+  // aspect-ratio: 1 / 1; /* ⏹ a perfect square */
 
   &:nth-child(1),
   &:nth-child(2) {
@@ -45,17 +46,20 @@ main {
 
   &:nth-child(3) {
     left: 65%;
+    object-fit: cover;
   }
   &:nth-child(4) {
     left: calc(65% + 90px);
+    object-fit: cover;
   }
   &:nth-child(5) {
     left: calc(65% + 180px);
-  }
-  &:nth-child(6) {
-    left: calc(65% + 270px);
     opacity: 0;
   }
+  // &:nth-child(6) {
+  //   left: calc(65% + 270px);
+  //   opacity: 0;
+  // }
 }
 
 .content {
@@ -238,6 +242,9 @@ main {
     left: 0;
     top: 0;
     margin-top: 3.6rem;
+
+    // height: 40rem;
+
   }
 
   .item {
@@ -254,6 +261,7 @@ main {
       border-radius: 0;
       box-shadow: none;
       opacity: 1;
+      object-fit: fill;
     }
 
     &:nth-child(3) {

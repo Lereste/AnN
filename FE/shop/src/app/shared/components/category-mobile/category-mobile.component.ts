@@ -1,7 +1,7 @@
 import { NgFor, NgClass, NgIf } from '@angular/common';
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FooterComponent } from '../../layout/footer/footer.component';
-import 'animate.css'
+// import 'animate.css'
 
 interface categoryDataModel {
   parentName: string;

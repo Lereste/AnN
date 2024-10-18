@@ -46,7 +46,7 @@
               <mat-header-cell *matHeaderCellDef>Đơn Giá</mat-header-cell>
               <mat-cell *matCellDef="let element">
                 {{
-                  element.product.productSalePrice | currency : "VND" : true
+                  element.product.productSalePrice | currency : "VND" : 'symbol'
                 }}
               </mat-cell>
             </ng-container>
@@ -74,7 +74,7 @@
               <mat-header-cell *matHeaderCellDef>Thành Tiền</mat-header-cell>
               <mat-cell *matCellDef="let element; let idx = index">
                 <span class="cart-order-item-total">
-                  {{ getTotalPriceItem(idx) | currency : "VND" : true }}
+                  {{ getTotalPriceItem(idx) | currency : "VND" : 'symbol' }}
                 </span>
               </mat-cell>
             </ng-container>

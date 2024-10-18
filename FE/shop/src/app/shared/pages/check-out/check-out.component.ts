@@ -270,6 +270,8 @@ export class CheckOutComponent implements OnInit, AfterViewInit {
     this.cartService.cart$.pipe(takeUntil(this.unSubcribe$)).subscribe((cartResponse: Cart) => {
       let _totalPrice = 0;
 
+      if(!cartResponse) return;
+
       cartResponse.items.forEach((cartItem: CartItem) => {
         // chỗ này sẽ đổi thành call api getProductBySlug
         // VD: this.ordersService.getProductBySlug(cartItem.productSlug).subscribe(response => {

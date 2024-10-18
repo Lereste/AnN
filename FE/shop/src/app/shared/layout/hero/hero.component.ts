@@ -30,7 +30,7 @@ export class HeroComponent implements OnInit {
     {
       id: 1,
       imageSrc:
-        'assets/image/carousel/piano.jpg',
+        'assets/image/carousel/sale.png',
       imageAlt: 'Piano background',
       content: {
         title: 'Đàn Piano',
@@ -41,18 +41,18 @@ export class HeroComponent implements OnInit {
     {
       id: 2,
       imageSrc:
-        'assets/image/carousel/organ.jpg',
-      imageAlt: 'Đàn Organ',
+        'assets/image/carousel/suachuamaygiat.jpg',
+      imageAlt: 'Sữa chữa máy giặt, tủ lạnh, máy lạnh',
       content: {
-        title: 'Đàn Organ',
+        title: 'Sữa chữa, tủ lạnh, máy lạnh ',
         description:
-          'Còn gì tuyệt vời hơn khi biết chơi đàn Organ?',
+          'Uy tín, tận tâm, trách nhiệm',
       },
     },
     {
       id: 3,
       imageSrc:
-        'assets/image/carousel/guitar.jpg',
+        'assets/image/carousel/sale.png',
       imageAlt: 'Đàn Guitar',
       content: {
         title: 'Đàn Guitar',
@@ -63,7 +63,7 @@ export class HeroComponent implements OnInit {
     {
       id: 4,
       imageSrc:
-        'assets/image/carousel/ukulele.jpg',
+        'assets/image/carousel/suachuamaygiat.jpg',
       imageAlt: 'Đàn Ukulele',
       content: {
         title: 'Đàn Ukulele',
@@ -74,7 +74,7 @@ export class HeroComponent implements OnInit {
     {
       id: 5,
       imageSrc:
-        'assets/image/carousel/kalimba.jpg',
+        'assets/image/carousel/sale.png',
       imageAlt: 'Đàn Kalimba',
       content: {
         title: 'Đàn Kalimba',
@@ -82,17 +82,17 @@ export class HeroComponent implements OnInit {
           'Còn gì tuyệt vời hơn khi biết chơi đàn Kalimba?',
       },
     },
-    {
-      id: 6,
-      imageSrc:
-        'assets/image/carousel/violin.jpg',
-      imageAlt: 'Đàn Violin',
-      content: {
-        title: 'Đàn Violin',
-        description:
-          'Còn gì tuyệt vời hơn khi biết chơi đàn Violin?',
-      },
-    },
+    // {
+    //   id: 6,
+    //   imageSrc:
+    //     'assets/image/carousel/sale.png',
+    //   imageAlt: 'Đàn Violin',
+    //   content: {
+    //     title: 'Đàn Violin',
+    //     description:
+    //       'Còn gì tuyệt vời hơn khi biết chơi đàn Violin?',
+    //   },
+    // },
   ];
 
 

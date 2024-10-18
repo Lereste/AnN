@@ -32,12 +32,12 @@
 
         <!-- Button Prev / Next -->
         <div class="button-area">
-            <button type="button" class="prev" (mouseover)="stopAutoplay()" (mouseleave)="startAutoplay()"
+            <button type="button" aria-label="prev" class="prev" (mouseover)="stopAutoplay()" (mouseleave)="startAutoplay()"
                 (click)="onPrev()">
                 <i class="fa-regular fa-circle-left"></i>
             </button>
 
-            <button type="button" class="next" (mouseover)="stopAutoplay()" (mouseleave)="startAutoplay()"
+            <button type="button" aria-label="next" class="next" (mouseover)="stopAutoplay()" (mouseleave)="startAutoplay()"
                 (click)="onNext()">
                 <i class="fa-regular fa-circle-right"></i>
             </button>
