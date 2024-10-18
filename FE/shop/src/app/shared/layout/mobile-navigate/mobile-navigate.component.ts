@@ -3,7 +3,7 @@ import { CategoryMobileComponent } from '../../components/category-mobile/catego
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchComponent } from '../../components/search/search.component';
-import 'animate.css'
+// import 'animate.css'
 import { CartComponent } from '../../pages/cart/cart.component';
 
 @Component({

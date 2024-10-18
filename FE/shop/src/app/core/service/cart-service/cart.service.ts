@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Cart, CartItem } from '../../models/cart/cart.model';
+import { isPlatformBrowser } from '@angular/common';
 // import { Cart, CartItem } from '../models/cart';
 
 export const CART_KEY = 'cart';
@@ -10,6 +11,8 @@ export const CART_KEY = 'cart';
 })
 export class CartService {
   cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
+  private readonly platformId = inject(PLATFORM_ID);
+  private cart!: Cart;
 
   constructor() { }
 
@@ -21,7 +24,9 @@ export class CartService {
         items: []
       }
 
-      localStorage.setItem(CART_KEY, JSON.stringify(intialCart));
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem(CART_KEY, JSON.stringify(intialCart));
+      }
     }
   }
 
@@ -35,9 +40,13 @@ export class CartService {
   }
 
   getCart(): Cart {
-    const cartJsonString: string = localStorage.getItem(CART_KEY) as string;
-    const cart: Cart = JSON.parse(cartJsonString);
-    return cart;
+    if (isPlatformBrowser(this.platformId)) {
+      const cartJsonString: string = localStorage.getItem(CART_KEY) as string;
+      this.cart = JSON.parse(cartJsonString);
+      this.cart$.next(this.cart);
+    }
+    
+    return this.cart;
   }
 
   setCartItem(cartItem: CartItem, isUpdateItemQuantity?: boolean): void {

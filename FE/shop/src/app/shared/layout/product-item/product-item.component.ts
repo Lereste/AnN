@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { NgFor, NgIf, NgOptimizedImage, isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -7,7 +7,9 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  PLATFORM_ID,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
@@ -73,6 +75,8 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   zoomProductItem!: Products;
 
   hasExisted: boolean = true;
+  private readonly platformId = inject(PLATFORM_ID);
+
 
   @ViewChild('owlCar') owlCar: CarouselComponent | undefined;
   @Output() newItemEvent = new EventEmitter<CarouselComponent>();
@@ -83,7 +87,8 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     private cartService: CartService,
     private toastService: ToastService
   ) {
-    if (window.innerWidth < 1920) {
+
+    if (isPlatformBrowser(this.platformId) && window.innerWidth < 1920) {
       console.log('margin = 8');
       this.customOptions.margin = 8;
     }

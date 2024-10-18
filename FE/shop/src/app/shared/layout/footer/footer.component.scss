@@ -45,6 +45,16 @@
                     }
                 }
             }
+
+            .title {
+                text-transform: uppercase;
+                font-size: 1.8rem;
+                border-left: 0.4rem solid #c71d22;
+                padding: 0.4rem 0.8rem;
+                margin-bottom: 0.4rem;
+                font-weight: 600;
+                list-style-type: none;
+            }
         }
 
         &-support,
@@ -54,14 +64,6 @@
         &-cert {
             max-height: 20rem;
 
-
-            h4 {
-                text-transform: uppercase;
-                font-size: 1.8rem;
-                border-left: 0.4rem solid #c71d22;
-                padding: 0.4rem 0.8rem;
-                margin-bottom: 0.4rem;
-            }
 
             li {
                 list-style: none;

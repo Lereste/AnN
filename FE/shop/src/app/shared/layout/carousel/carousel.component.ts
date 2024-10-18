@@ -1,4 +1,4 @@
-import { CommonModule, NgFor, NgStyle } from '@angular/common';
+import { CommonModule, NgFor, NgOptimizedImage, NgStyle } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -8,6 +8,7 @@ import {
   Renderer2,
   ViewChild,
   ViewEncapsulation,
+  afterNextRender,
 } from '@angular/core';
 
 interface carouselImage {
@@ -32,13 +33,21 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   @Input() indicators = true;
   @Input() controls = true;
   @Input() isAutoSlide = true;
-  @Input() slideTimer: number = 6000;
+  @Input() slideTimer: number = 6000; // default value
   setInterval: any;
 
   @ViewChild('autoplay') autoplay!: ElementRef<any>;
   @ViewChild('slider') slider!: ElementRef<any>;
 
   selectedIndex = 0;
+
+  private sliderNativeElement: any
+
+  constructor() {
+    afterNextRender(() => {
+      this.sliderNativeElement = this.slider.nativeElement;
+    });
+  }
 
   ngOnInit(): void {
     this.autoSlideImage(this.isAutoSlide);
@@ -89,11 +98,13 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       this.selectedIndex--;
     }
 
-    const currentItem =
-      this.slider.nativeElement.children[
-        this.slider.nativeElement.children.length - 1
-      ];
-    this.slider.nativeElement?.prepend(currentItem);
+    if (this.sliderNativeElement) {
+      const currentItem =
+        this.sliderNativeElement.children[
+          this.sliderNativeElement.children.length - 1
+        ];
+      this.sliderNativeElement?.prepend(currentItem);
+    }
   }
 
   onNextClick(): void {
@@ -103,8 +114,10 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       this.selectedIndex++;
     }
 
-    const childrenList = this.slider.nativeElement.children;
-    this.slider.nativeElement?.append(childrenList[0]);
+    if (this.sliderNativeElement) {
+      const childrenList = this.sliderNativeElement.children;
+      this.sliderNativeElement?.append(childrenList[0]);
+    }
   }
 
   onMouseOver(){
