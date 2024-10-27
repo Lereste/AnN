@@ -49,6 +49,8 @@ export class SwiperComponent implements OnInit, AfterViewInit {
       prevEl: '.swiper-button-prev',
     },
     parallax: true,
+    slidesPerView: 3,
+    width: 300,
   };
 
   ngOnInit(): void {}

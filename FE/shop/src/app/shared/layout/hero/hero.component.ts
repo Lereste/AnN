@@ -15,7 +15,7 @@ import { CategoryMobileComponent } from '../../components/category-mobile/catego
   selector: 'app-hero',
   standalone: true,
   imports: [
-    // SwiperComponent,
+    SwiperComponent,
     CarouselComponent,
     CategoryHeroComponent,
     CategoryMobileComponent,
@@ -30,18 +30,18 @@ export class HeroComponent implements OnInit {
     {
       id: 1,
       imageSrc:
-        'assets/image/carousel/sale.png',
-      imageAlt: 'Piano background',
+        'assets/image/carousel/dien-lanh/dienlanhhoaian.png',
+      imageAlt: 'Điện lạnh Hoài Ân',
       content: {
-        title: 'Đàn Piano',
+        title: 'Điện lạnh Hoài Ân',
         description:
-          'Còn gì tuyệt vời hơn khi biết chơi đàn Piano?',
+          'Điện lạnh Hoài Ân',
       },
     },
     {
       id: 2,
       imageSrc:
-        'assets/image/carousel/suachuamaygiat.jpg',
+        'assets/image/carousel/dien-lanh/suachuamaygiat.jpg',
       imageAlt: 'Sữa chữa máy giặt, tủ lạnh, máy lạnh',
       content: {
         title: 'Sữa chữa, tủ lạnh, máy lạnh ',
@@ -52,7 +52,7 @@ export class HeroComponent implements OnInit {
     {
       id: 3,
       imageSrc:
-        'assets/image/carousel/sale.png',
+        'assets/image/carousel/dien-lanh/sale.png',
       imageAlt: 'Đàn Guitar',
       content: {
         title: 'Đàn Guitar',
@@ -63,36 +63,36 @@ export class HeroComponent implements OnInit {
     {
       id: 4,
       imageSrc:
-        'assets/image/carousel/suachuamaygiat.jpg',
-      imageAlt: 'Đàn Ukulele',
+        'assets/image/carousel/dien-lanh/dienlanhhoaian.png',
+      imageAlt: 'Điện lạnh Hoài Ân',
       content: {
-        title: 'Đàn Ukulele',
+        title: 'Điện lạnh Hoài Ân',
         description:
-          'Còn gì tuyệt vời hơn khi biết chơi đàn Ukulele?',
+          'Điện lạnh Hoài Ân',
       },
     },
     {
       id: 5,
       imageSrc:
-        'assets/image/carousel/sale.png',
-      imageAlt: 'Đàn Kalimba',
+        'assets/image/carousel/dien-lanh/suachuamaygiat.jpg',
+      imageAlt: 'Sữa chữa máy giặt, tủ lạnh, máy lạnh',
       content: {
-        title: 'Đàn Kalimba',
+        title: 'Sữa chữa, tủ lạnh, máy lạnh ',
         description:
-          'Còn gì tuyệt vời hơn khi biết chơi đàn Kalimba?',
+          'Uy tín, tận tâm, trách nhiệm',
       },
     },
-    // {
-    //   id: 6,
-    //   imageSrc:
-    //     'assets/image/carousel/sale.png',
-    //   imageAlt: 'Đàn Violin',
-    //   content: {
-    //     title: 'Đàn Violin',
-    //     description:
-    //       'Còn gì tuyệt vời hơn khi biết chơi đàn Violin?',
-    //   },
-    // },
+    {
+      id: 6,
+      imageSrc:
+        'assets/image/carousel/dien-lanh/sale.png',
+      imageAlt: 'Đàn Guitar',
+      content: {
+        title: 'Đàn Guitar',
+        description:
+          'Còn gì tuyệt vời hơn khi biết chơi đàn Guitar?',
+      },
+    },
   ];
 
 

@@ -10,19 +10,14 @@ main {
   //     box-shadow: 0 4px 12px #dce1e1;
 
   height: 44rem;
-  img {
-    // object-fit: contain;
-    // background-size: cover;
-    // width: 100%;
-  }
 }
 
 .item {
-  width: 80px;
-  height: 120px;
+  width: 60px;
+  height: 100px;
   list-style-type: none;
   position: absolute;
-  top: 65%;
+  top: 80%;
   transform: translateY(-50%);
   z-index: 1;
   background-position: center;
@@ -45,21 +40,21 @@ main {
   }
 
   &:nth-child(3) {
-    left: 65%;
+    left: 2%;
     object-fit: cover;
   }
   &:nth-child(4) {
-    left: calc(65% + 90px);
+    left: calc(2% + 90px);
     object-fit: cover;
   }
   &:nth-child(5) {
-    left: calc(65% + 180px);
+    left: calc(2% + 180px);
+    object-fit: cover;
+  }
+  &:nth-child(6) {
+    left: calc(2% + 270px);
     opacity: 0;
   }
-  // &:nth-child(6) {
-  //   left: calc(65% + 270px);
-  //   opacity: 0;
-  // }
 }
 
 .content {
@@ -148,7 +143,7 @@ main {
 .carousel__nav {
   position: absolute;
   bottom: 2rem;
-  left: 8%;
+  right: 8%;
   transform: translateX(-50%);
   z-index: 5;
   user-select: none;
@@ -241,9 +236,8 @@ main {
     // display: none;
     left: 0;
     top: 0;
-    margin-top: 3.6rem;
-
-    // height: 40rem;
+    margin-top: 4.4rem;
+    height: 36rem;
 
   }
 
@@ -265,16 +259,16 @@ main {
     }
 
     &:nth-child(3) {
-      left: 45%;
+      left: 2%;
     }
     &:nth-child(4) {
-      left: calc(45% + 48px);
+      left: calc(2% + 48px);
     }
     &:nth-child(5) {
-      left: calc(45% + 96px);
+      left: calc(2% + 96px);
     }
     &:nth-child(6) {
-      left: calc(45% + 144px);
+      left: calc(2% + 144px);
       opacity: 0;
     }
 
