@@ -1,4 +1,4 @@
-<swiper-container swiperDirective #swiperElementRef [config]="customSwiperOptions" autoplay>
+<swiper-container swiperDirective #swiperElementRef [config]="customSwiperOptions" autoplay [autoHeight]="true">
   <swiper-slide *ngFor="let item of swiperSlideContents">
     <img [src]="item.url" alt="">
   </swiper-slide>
@@ -20,5 +20,5 @@
   [scrollbar]="false"
   autoplay="true"
   [autoplay]="{ delay: 2000, disableOnInteraction: false, pauseOnMouseEnter: true, }"
-  [allowTouchMove]="true"
- -->
+  [allowTouchMove]="true" -->
+

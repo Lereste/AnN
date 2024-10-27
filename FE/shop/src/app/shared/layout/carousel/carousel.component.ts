@@ -1,14 +1,16 @@
-import { CommonModule, NgFor, NgOptimizedImage, NgStyle } from '@angular/common';
+import { CommonModule, isPlatformBrowser, NgFor, NgOptimizedImage, NgStyle } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
   Input,
   OnInit,
+  PLATFORM_ID,
   Renderer2,
   ViewChild,
   ViewEncapsulation,
   afterNextRender,
+  inject,
 } from '@angular/core';
 
 interface carouselImage {
@@ -42,19 +44,23 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   selectedIndex = 0;
 
   private sliderNativeElement: any
+  private readonly platformId = inject(PLATFORM_ID);
 
   constructor() {
     afterNextRender(() => {
       this.sliderNativeElement = this.slider.nativeElement;
+      this.autoSlideImage(this.isAutoSlide);
     });
   }
 
   ngOnInit(): void {
-    this.autoSlideImage(this.isAutoSlide);
   }
 
   ngAfterViewInit() {
-    this.loadEvent();
+    if (isPlatformBrowser(this.platformId)) {
+
+      this.loadEvent();
+    }
   }
 
   loadEvent() {

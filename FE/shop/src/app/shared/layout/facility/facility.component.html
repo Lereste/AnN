@@ -1,51 +1,22 @@
 <section class="facility">
-    <div class="facility-title">
-        <span>Dịch Vụ</span>
-    </div>
+  <div class="facility-top">
+    <span class="facility-top-heading">Dịch Vụ Sửa Chữa - Vệ Sinh</span>
+    <span class="facility-top-title">Điện lạnh Hoài Ân</span>
+    <span class="facility-top-desc"
+      >Cung cấp dịch vụ sửa chữa, bảo hành, bảo dưỡng thiết bị. Chúng tôi cam kết mang đến cho khách hàng sự dịch vụ của sự tận tâm, uy tín và chất lượng.</span
+    >
+  </div>
 
-    <div class="facility__container" data-aos="fade-up" data-aos-duration="1200">
-        <div class="facility__container-item">
-            <div class="facility-icon">
-                <i class="fa-solid fa-user-shield"></i>
-            </div>
-
-            <div class="facility-desc">
-                <p>Mua Hàng An Toàn</p>
-                <p>Đổi trả sản phẩm trong vòng 7 ngày, bất kể lỗi gì</p>
-            </div>
+  <div class="facility-middle">
+    <ul class="facility-middle-list">
+      <li class="facility-middle-item" *ngFor="let item of repairService">
+        <div class="facility-middle-item-content">
+          <img  [src]="item.imageSrc" alt="" />
+          <span class="facility-middle-item-title">{{ item.title }}</span>
         </div>
+      </li>
+    </ul>
+  </div>
 
-        <div class="facility__container-item">
-            <div class="facility-icon">
-                <i class="fa-solid fa-truck-fast"></i>
-            </div>
 
-            <div class="facility-desc">
-                <p>Miễn Phí Vận Chuyển</p>
-                <p>Áp dụng cho đơn hàng từ <strong>2</strong> triệu, khu vực nội thành Tp.HCM</p>
-            </div>
-        </div>
-
-        <div class="facility__container-item">
-            <div class="facility-icon">
-                <i class="fa-regular fa-handshake"></i>
-            </div>
-
-            <div class="facility-desc">
-                <p>Bảo Hành Lâu Dài</p>
-                <p>Bảo hành 12 tháng cho tất cả sản phẩm được bán ra</p>
-            </div>
-        </div>
-
-        <div class="facility__container-item">
-            <div class="facility-icon">
-                <i class="fa-solid fa-headphones"></i>
-            </div>
-
-            <div class="facility-desc">
-                <p>Hỗ trợ 24/7</p>
-                <p>Tư vấn và hỗ trợ khách hàng trong quá trình sử dụng</p>
-            </div>
-        </div>
-    </div>
 </section>

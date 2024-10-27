@@ -10,6 +10,9 @@ import { FacilityComponent } from '../../layout/facility/facility.component';
 import { HeroComponent } from '../../layout/hero/hero.component';
 import { SeoService } from 'src/app/core/service/seo/seo.service';
 import { environment } from 'src/app/environments/environment';
+import { ServiceProcessComponent } from '../../layout/service-process/service-process.component';
+import { SalesCommitmentComponent } from '../../layout/sales-commitment/sales-commitment.component';
+import { SwiperComponent } from '../../components/swiper/swiper.component';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +24,10 @@ import { environment } from 'src/app/environments/environment';
     CategoryMainComponent,
     ProductsTypeComponent,
     AccessoriesTypeComponent,
+    SalesCommitmentComponent,
     FacilityComponent,
+    ServiceProcessComponent,
+    SwiperComponent,
     FooterComponent,
     GoToTopComponent
   ],

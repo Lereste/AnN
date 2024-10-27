@@ -1,91 +1,90 @@
 <header class="header">
-    <nav class="header__nav">
-        <div class="header__nav-container">
-            <div class="nav__top">
-                <div class="nav__top-content">
-                    <span class="nav__top-content-pc">Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>. Áp
-                        dụng cho khu vực nội thành HCM.</span>
-                    <!-- <span class="nav__top-ship-mobile">Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>.</span> -->
+  <nav class="header__nav">
+    <div class="header__nav-container">
+      <div class="nav__top">
+        <div class="nav__top-content">
+          <span class="nav__top-content-pc">Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>. Áp dụng cho khu vực nội thành HCM.</span>
+          <!-- <span class="nav__top-ship-mobile">Miễn phí vận chuyển với đơn hàng từ <strong>2 triệu</strong>.</span> -->
 
-                    <button class="nav__top-content-mobile" (click)="goToHome()">
-                        <span>Logo Shop</span>
-                    </button>
-                </div>
+          <button class="nav__top-content-mobile" (click)="goToHome()">
+            <span class="text-animation">Điện lạnh Hoài Ân</span>
+          </button>
+        </div>
 
-                <div class="nav__top-phone">
-                    <a href="tel:01234.56789">
-                        <i class="fa-solid fa-phone"></i>
-                        <span>01234.56789</span>
-                    </a>
-                </div>
+        <div class="nav__top-phone">
+          <a href="tel:0978888727">
+            <i class="fa-solid fa-phone"></i>
+            <span>097.8888.727</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="nav__content">
+        <div class="nav__content-wrapper">
+          <div class="nav__content-left">
+            <div class="nav__content-logo">
+              <button class="nav__content-button" (click)="goToHome()">
+                <!-- <img class="nav__content-button-logo" src="assets/image/logo/hoai-an-logo.png" alt=""> -->
+                <span class="nav__content-button-home text-animation">Điện lạnh Hoài Ân</span>
+              </button>
             </div>
+          </div>
 
-            <div class="nav__content">
-                <div class="nav__content-wrapper">
-                    <div class="nav__content-left">
-                        <div class="nav__content-logo">
-                            <button class="nav__content-button" (click)="goToHome()">
-                                <span>Logo</span>
-                            </button>
-                        </div>
-                    </div>
+          <div class="nav__content-mid">
+            <ul class="nav__content-list">
+              <li class="nav__content-item">
+                <button class="nav__content-button" (click)="goToHome()">
+                  <span>Trang Chủ</span>
+                </button>
+              </li>
+              <li class="nav__content-item">
+                <button class="nav__content-button" (click)="goToAllProducts()">
+                  <span>Sản Phẩm</span>
+                </button>
+              </li>
+              <li class="nav__content-item">
+                <button class="nav__content-button" (click)="goToAllArticles()">
+                  <span>Bài Viết</span>
+                </button>
+              </li>
+            </ul>
+          </div>
 
-                    <div class="nav__content-mid">
-                        <ul class="nav__content-list">
-                            <li class="nav__content-item">
-                                <button class="nav__content-button" (click)="goToHome()">
-                                    <span>Trang Chủ</span>
-                                </button>
-                            </li>
-                            <li class="nav__content-item" >
-                                <button class="nav__content-button" (click)="goToAllProducts()">
-                                    <span>Sản Phẩm</span>
-                                </button>
-                            </li>
-                            <li class="nav__content-item">
-                                <button class="nav__content-button" (click)="goToAllArticles()">
-                                    <span>Bài Viết</span>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="nav__content-right">
-                        <ul class="nav__content-list">
-                            <li class="nav__content-item search">
-                                <app-search></app-search>
-                            </li>
-                            <li class="nav__content-item contact">
-                                <button class="nav__content-button " (click)="goToContact()">
-                                    <!-- <img
+          <div class="nav__content-right">
+            <ul class="nav__content-list">
+              <li class="nav__content-item search">
+                <app-search></app-search>
+              </li>
+              <li class="nav__content-item contact">
+                <button class="nav__content-button" (click)="goToContact()">
+                  <!-- <img
                                         src="../../../../assets/image/icons/phone.png"
                                         alt=""
                                     /> -->
-                                    <span>Liên Hệ</span>
-                                </button>
-                            </li>
-                            <li class="nav__content-item cart">
-                                <button class="nav__content-button" (click)="goToCart()">
-                                    <!-- <img
+                  <span>Liên Hệ</span>
+                </button>
+              </li>
+              <li class="nav__content-item cart">
+                <button class="nav__content-button" (click)="goToCart()">
+                  <!-- <img
                                         src="../../../../assets/image/cart.png"
                                         alt=""
                                     /> -->
-                                    <span>Giỏ Hàng</span>
-                                    <div class="cart-count">
-                                        <span>{{cartCount}}</span>
-                                    </div>
-                                </button>
-
-                            </li>
-                            <!-- <li class="nav__content-item">
+                  <span>Giỏ Hàng</span>
+                  <div class="cart-count">
+                    <span>{{ cartCount }}</span>
+                  </div>
+                </button>
+              </li>
+              <!-- <li class="nav__content-item">
                                 <button class="nav__content-button" (click)="goToLogin()">
                                     <span>Đăng Nhập</span>
                                 </button>
                             </li> -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
 </header>
