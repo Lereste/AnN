@@ -136,8 +136,23 @@
   }
 
   &__container {
+    justify-content: space-around;
+
     &-item {
-      width: 24rem;
+      max-width: 17rem;
+      margin: 0.8rem 0;
+    }
+
+    .facility-desc {
+      p:first-child {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin: 0.8rem 0;
+      }
+
+      p:last-child {
+        font-size: 1.4rem;
+      }
     }
   }
  }
