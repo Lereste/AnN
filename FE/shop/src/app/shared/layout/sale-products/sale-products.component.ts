@@ -1,5 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { Products } from 'src/app/core/models/product/product.model';
@@ -21,6 +21,9 @@ export class SaleProductsComponent implements OnInit {
   hours: number = 0;
   minutes: number = 0;
   seconds: number = 0;
+  private readonly platformId = inject(PLATFORM_ID);
+  nextMonday!: any;
+  private cdr = inject(ChangeDetectorRef); // Inject ChangeDetectorRef
 
   constructor() {
     this.saleProducts = [
@@ -103,10 +106,15 @@ export class SaleProductsComponent implements OnInit {
         productSalePrice: 7450000
       },
     ];
+
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('nextmonday', this.getNextMonday())
+      this.nextMonday = localStorage.getItem('nextmonday')
+    }
   }
 
   ngOnInit(): void {
-    this.countDown(this.getNextMonday());
+    this.countDown(this.nextMonday);
   }
 
   getNextMonday() {
@@ -159,6 +167,8 @@ export class SaleProductsComponent implements OnInit {
       if (remainingTime <= 0) {
         clearInterval(initialInterval);
       }
+
+      this.cdr.detectChanges(); // Trigger change detection manually
     }, 1000);
   }
 }

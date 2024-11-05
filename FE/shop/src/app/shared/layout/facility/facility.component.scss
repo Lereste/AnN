@@ -223,12 +223,13 @@
             // border: 1px solid #ccc;
             // width: 100%;
 
-            width: 18rem;
-            height: 18rem;
+            width: 16rem;
+            height: 16rem;
             font-size: 1.3rem;
 
             img {
-              // width: 32rem;
+            padding: 0.8rem;
+            // width: 32rem;
               width: 18rem;
               object-fit: contain;
               // background: transparent;
