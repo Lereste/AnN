@@ -6,7 +6,7 @@ import { CategoryMainComponent } from '../../layout/category-brand/category-bran
 import { SaleProductsComponent } from '../../layout/sale-products/sale-products.component';
 import { ProductsTypeComponent } from '../../layout/products-type/products-type.component';
 import { AccessoriesTypeComponent } from '../../layout/accessories-type/accessories-type.component';
-import { FacilityComponent } from '../../layout/facility/facility.component';
+import { ServiceSalesComponent } from '../../layout/service-sales/service-sales.component';
 import { HeroComponent } from '../../layout/hero/hero.component';
 import { SeoService } from 'src/app/core/service/seo/seo.service';
 import { environment } from 'src/app/environments/environment';
@@ -25,7 +25,7 @@ import { SwiperComponent } from '../../components/swiper/swiper.component';
     ProductsTypeComponent,
     AccessoriesTypeComponent,
     SalesCommitmentComponent,
-    FacilityComponent,
+    ServiceSalesComponent,
     ServiceProcessComponent,
     SwiperComponent,
     FooterComponent,
