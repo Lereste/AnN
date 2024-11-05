@@ -30,7 +30,7 @@ export class HeroComponent implements OnInit {
     {
       id: 1,
       imageSrc:
-        'assets/image/carousel/dien-lanh/dienlanhhoaian.png',
+        'assets/image/carousel/dien-lanh/dienlanhhoaian-banner.png',
       imageAlt: 'Điện lạnh Hoài Ân',
       content: {
         title: 'Điện lạnh Hoài Ân',
@@ -63,7 +63,7 @@ export class HeroComponent implements OnInit {
     {
       id: 4,
       imageSrc:
-        'assets/image/carousel/dien-lanh/dienlanhhoaian.png',
+        'assets/image/carousel/dien-lanh/dienlanhhoaian-banner.png',
       imageAlt: 'Điện lạnh Hoài Ân',
       content: {
         title: 'Điện lạnh Hoài Ân',

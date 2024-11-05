@@ -2,13 +2,13 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-facility',
+  selector: 'app-service-sales',
   standalone: true,
   imports: [NgFor],
-  templateUrl: './facility.component.html',
-  styleUrl: './facility.component.scss',
+  templateUrl: './service-sales.component.html',
+  styleUrl: './service-sales.component.scss',
 })
-export class FacilityComponent {
+export class ServiceSalesComponent {
   repairService = [
     { title: 'Sửa chữa - vệ sinh máy lạnh', imageSrc: 'assets/image/facility/sua-may-lanh.png' },
     { title: 'Tháo - lắp máy lạnh', imageSrc: 'assets/image/facility/thao-lap-may-lanh.jpg' },
