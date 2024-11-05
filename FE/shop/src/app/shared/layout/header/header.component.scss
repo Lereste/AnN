@@ -27,7 +27,7 @@
             margin-right: 0.4rem;
           }
 
-          color: #881616;
+          color: #d91605;
           font-weight: bold;
         }
       }
@@ -166,7 +166,7 @@
         // width: 100%;
         // display: block;
         @include flex-space-between;
-        height: 4.4rem;
+        height: 3.6rem;
         text-align: center;
         line-height: 1;
         padding: 0.8rem;
@@ -188,7 +188,7 @@
             color: #fff;
 
             > span {
-              font-size: 1.8rem;
+              font-size: 1.5rem;
             }
           }
 

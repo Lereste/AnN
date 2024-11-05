@@ -1,6 +1,8 @@
 import { CommonModule, isPlatformBrowser, NgFor, NgOptimizedImage, NgStyle } from '@angular/common';
 import {
+  AfterViewChecked,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -30,7 +32,7 @@ interface carouselImage {
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
-export class CarouselComponent implements OnInit, AfterViewInit {
+export class CarouselComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() imagesDataInput: carouselImage[] = [];
   @Input() indicators = true;
   @Input() controls = true;
@@ -43,24 +45,26 @@ export class CarouselComponent implements OnInit, AfterViewInit {
 
   selectedIndex = 0;
 
-  private sliderNativeElement: any
+  private sliderNativeElement: any;
   private readonly platformId = inject(PLATFORM_ID);
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     afterNextRender(() => {
       this.sliderNativeElement = this.slider.nativeElement;
       this.autoSlideImage(this.isAutoSlide);
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-
       this.loadEvent();
     }
+  }
+
+  ngAfterViewChecked() {
+    // this.cdr.detectChanges();
   }
 
   loadEvent() {
@@ -86,6 +90,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   selectImage(index: number): void {
     this.selectedIndex = index;
 
+    this.cdr.detectChanges();
+
     // this.imagesDataInput.find((item:any, idx) => {
 
     //   if (this.selectedIndex === idx) {
@@ -105,10 +111,7 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     }
 
     if (this.sliderNativeElement) {
-      const currentItem =
-        this.sliderNativeElement.children[
-          this.sliderNativeElement.children.length - 1
-        ];
+      const currentItem = this.sliderNativeElement.children[this.sliderNativeElement.children.length - 1];
       this.sliderNativeElement?.prepend(currentItem);
     }
   }
@@ -126,8 +129,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onMouseOver(){
-      this.autoSlideImage((this.isAutoSlide = false));
+  onMouseOver() {
+    this.autoSlideImage((this.isAutoSlide = false));
   }
 
   onMouseLeave() {
