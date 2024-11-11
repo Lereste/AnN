@@ -1,0 +1,49 @@
+{
+  "name": "shopdienmay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set NODE_ENV=development&& nodemon src/server.ts"
+  },
+  "author": "Lereste",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.7.7",
+    "axios": "^1.7.7",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "sharp": "^0.33.5",
+    "typescript": "^5.6.3",
+    "url-slug": "^4.0.1",
+    "validator": "^13.12.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/express": "^5.0.0",
+    "@types/express-fileupload": "^1.5.1",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/multer": "^1.4.12",
+    "@types/nodemailer": "^6.4.16",
+    "@types/sharp": "^0.32.0",
+    "@types/validator": "^13.12.2",
+    "process": "^0.11.10",
+    "tslib": "^2.8.0"
+  }
+}

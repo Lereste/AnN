@@ -1,0 +1,4 @@
+[build]
+  base = "shopdienmay"
+  command = "npm install && npm run build && set NODE_ENV=production&& nodemon src/server.ts"
+  functions = "functions"
