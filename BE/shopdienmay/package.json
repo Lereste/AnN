@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=development&& nodemon src/server.ts",
-    "build:prod": "npm install && npm run build && set NODE_ENV=production&& nodemon src/server.ts"
+    "build:prod": "npm run build && set NODE_ENV=production&& nodemon src/server.ts"
   },
   "author": "Lereste",
   "license": "ISC",
