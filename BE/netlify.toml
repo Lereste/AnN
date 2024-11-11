@@ -1,4 +1,4 @@
 [build]
   base = "shopdienmay"
-  command = "npm run build:prod"
+  command = "npm install && npm run build"
   functions = "functions"
