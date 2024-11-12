@@ -1,5 +1,5 @@
 {
     "version": 2,
-    "builds": [{ "src": "src/server.ts", "use": "@vercel/node" }],
+    "builds": [{ "src": "shopdienmay/src/server.ts", "use": "@vercel/node" }],
     "rewrites": [{ "source": "/(.*)", "destination": "/" }]
   }
