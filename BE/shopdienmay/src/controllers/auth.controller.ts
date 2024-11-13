@@ -1,4 +1,3 @@
-import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 import { JWT_SECRET } from "../config";
@@ -6,6 +5,7 @@ import UserModel from "../models/user.model";
 import AppError from "../utils/appError";
 import { catchAsync } from "../utils/catchAsync";
 import AuthService from "../services/auth.service";
+import { NextFunction, Request, Response } from "express";
 import { AuthRequest } from "../interfaces/request.interface";
 import { sendEmailAsync } from "../utils/email";
 import * as crypto from "crypto";

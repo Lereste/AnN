@@ -12,7 +12,7 @@ class UserController {
     // }
     // public createNewUser = this.factoryService.createOne(UserModel, this.createMessage);
 
-
+    public getAllUsers = this.factoryService.getAll(UserModel)
 }
 
 export default UserController;
