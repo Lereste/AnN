@@ -22,6 +22,11 @@ class UserRouter {
         //======= Protect all routes under =======
         this.router.use(this.authController.protect); 
         this.router.patch(this.path + 'updateMyPassword', this.authController.updatePassword);
+    
+        //======= sa
+        this.router.use(this.authController.restrictTo('admin') as any);
+        this.router.get(this.path, this.userController.getAllUsers)
+
     }
 }
 
