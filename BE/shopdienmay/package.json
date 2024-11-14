@@ -6,7 +6,8 @@
   "pre-commit": [
     "ts.check",
     "build",
-    "add-build"
+    "add-build",
+    "build:prod"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
