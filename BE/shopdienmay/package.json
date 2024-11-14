@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=development&& nodemon src/server.ts",
     "start:prod": "set NODE_ENV=production&& nodemon src/server.ts",
+    "ts.check": "tsc --project tsconfig.json",
+    "build": "rimraf dist && tsc",
+    "add-build": "git add dist",
     "build:dev": "set NODE_ENV=development&& webpack --config webpack.config.dev.js --mode development",
     "build:prod": "set NODE_ENV=production&& webpack --config webpack.config.prod.js --mode production"
   },

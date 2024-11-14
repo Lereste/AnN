@@ -16,12 +16,13 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "moduleResolution": "node",
-        "baseUrl": "./",
+        "baseUrl": "/",
         "allowSyntheticDefaultImports": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "resolveJsonModule": true,
         "paths": {
+            "*": ["node_modules/*", "src/types/*"],
             "src/*": [
                 "src/*"
             ],
