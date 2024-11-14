@@ -16,7 +16,7 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "moduleResolution": "node",
-        "baseUrl": "/",
+        "baseUrl": "./",
         "allowSyntheticDefaultImports": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
