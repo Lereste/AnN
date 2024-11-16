@@ -19,7 +19,7 @@ class ProductRouter {
         this.router.patch(this.path + ':id', uploadImages, resizeTourimageList, this.productController.updateProductById);
         this.router.delete(this.path + ':id', this.productController.delelteProductById)
 
-        // this.router.get(this.path, this.authController.protect, this.productController.getAllProducts)
+        this.router.get(this.path, this.authController.protect, this.productController.getAllProducts)
         this.router.post(this.path, uploadImages, resizeTourimageList, this.productController.createNewProduct)
         
     }
