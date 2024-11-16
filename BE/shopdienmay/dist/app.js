@@ -24,14 +24,18 @@ class App {
         this._server = http.createServer(this._app);
     }
     _connectToMongooseDatabase() {
-        if (this._env !== "production") {
+        if (this._env === "development") {
             (0, mongoose_1.set)("debug", true);
+            mongoose_1.default
+                .connect(databases_1.DB_CONNECTION_LOCAL.URL, databases_1.DB_CONNECTION_LOCAL.OPTIONS)
+                .then((con) => {
+                console.log("Local DB connection successfully !!!");
+            });
         }
         mongoose_1.default
-            .connect(databases_1.DB_CONNECTION.URL, databases_1.DB_CONNECTION.OPTIONS)
+            .connect(databases_1.DB_CONNECTION_CLOUD.URL, databases_1.DB_CONNECTION_CLOUD.OPTIONS)
             .then((con) => {
-            // console.log(con.connection);
-            console.log("DB connection successfully !!!");
+            console.log("Cloud DB connection successfully !!!");
         });
     }
     _initializeMiddlewares() {
@@ -47,9 +51,16 @@ class App {
         });
     }
     listenServer() {
-        this._server.listen(config_1.APP_PORT, () => {
-            console.log(`🚀 Server is running on port 👉 ${config_1.APP_PORT} 👈`);
-        });
+        if (this._env === "development") {
+            this._server.listen(config_1.APP_PORT_LOCAL, () => {
+                console.log(`🚀 Server is running on port 👉 ${config_1.APP_PORT_LOCAL} 👈`);
+            });
+        }
+        else {
+            this._server.listen(config_1.APP_PORT_CLOUD, () => {
+                console.log(`🚀 Server is running on port 👉 ${config_1.APP_PORT_CLOUD} 👈`);
+            });
+        }
     }
 }
 exports.App = App;
