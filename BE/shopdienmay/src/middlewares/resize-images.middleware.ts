@@ -20,7 +20,7 @@ const resizeImageList = catchAsync(
                 .resize(2000, 1333)
                 .toFormat("jpeg")
                 .jpeg({ quality: 90 })
-                .toFile(`public/img/products/${request.body.image}`);
+                .toFile(`assets/images/products/${request.body.image}`);
         }
 
         if (requestFiles.imageList) {
@@ -40,7 +40,7 @@ const resizeImageList = catchAsync(
                         .resize(2000, 1333)
                         .toFormat("jpeg")
                         .jpeg({ quality: 90 })
-                        .toFile(`public/img/products/${fileName}`);
+                        .toFile(`assets/images/products/${fileName}`);
 
                     request.body.imageList.push(fileName);
                 })

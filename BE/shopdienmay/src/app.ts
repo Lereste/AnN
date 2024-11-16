@@ -51,7 +51,7 @@ export class App {
   }
 
   private _initializeMiddlewares(): void {
-    this._app.use(express.static(path.join(__dirname, "public")));
+    this._app.use(express.static(path.join(__dirname, "assets")));
     this._app.use(helmet()); // Set security HTTP headers
     this._app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
     this._app.use(express.json());
