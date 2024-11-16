@@ -20,7 +20,7 @@ class UserRouter {
         this.router.patch(this.path + 'resetPassword/:token', this.authController.resetPassword)
 
         //======= Protect all routes under =======
-        this.router.use(this.authController.protect); 
+        // this.router.use(this.authController.protect); 
         this.router.patch(this.path + 'updateMyPassword', this.authController.updatePassword);
     
         //======= sa
