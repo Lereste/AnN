@@ -7,7 +7,7 @@ module.exports = {
     entry: './src/server.ts',
     output: {
         filename: 'server.js',
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, './webpack-build-dev'),
         clean: {
             dry: true, // hiển thị những file sẽ xoá thay vì xoá nó
             // keep: /\.css/
