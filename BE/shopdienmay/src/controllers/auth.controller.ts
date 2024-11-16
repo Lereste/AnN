@@ -128,14 +128,14 @@ class AuthController {
         }
 
         // token and cookies
-        if (!token) {
-            return next(
-                new AppError(
-                    "You are not logged in! Please log in to get access",
-                    401
-                )
-            );
-        }
+        // if (!token) {
+        //     return next(
+        //         new AppError(
+        //             "You are not logged in! Please log in to get access",
+        //             401
+        //         )
+        //     );
+        // }
 
         // 2) Verification token
         // const decoded = await promisify(jwt.verify)(token, JWT_SECRET);
