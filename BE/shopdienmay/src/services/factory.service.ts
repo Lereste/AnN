@@ -42,7 +42,7 @@ class FactoryService {
             });
         });
 
-    public getOne = (Model: any, message?: string, populateOptions?: Object) =>
+    public getOne = (Model: any, populateOptions?: Object) =>
         catchAsync(async (request: Request, response: Response, next: NextFunction) => {
             // Model.findOne({ _id: request.params.id})
             // const getOneDocument = await Model.findById(request.params.id).populate('reviews');
@@ -60,7 +60,6 @@ class FactoryService {
 
             response.status(200).json({
                 status: "success",
-                message,
                 currentDocumentName: `${getOneDocument.name}`,
                 data: {
                     data: getOneDocument,
