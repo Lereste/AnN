@@ -31,11 +31,11 @@ export class App {
       mongoose.connect(DB_CONNECTION_LOCAL.URL, DB_CONNECTION_LOCAL.OPTIONS).then((con) => {
         console.log('Local DB connection successfully !!!')
       })
+    } else {
+      mongoose.connect(DB_CONNECTION_CLOUD.URL, DB_CONNECTION_CLOUD.OPTIONS).then((con) => {
+        console.log('Cloud DB connection successfully !!!')
+      })
     }
-
-    mongoose.connect(DB_CONNECTION_CLOUD.URL, DB_CONNECTION_CLOUD.OPTIONS).then((con) => {
-      console.log('Cloud DB connection successfully !!!')
-    })
   }
 
   private _initializeMiddlewares(): void {

@@ -10,9 +10,11 @@ export const DB_CONNECTION_LOCAL = {
 };
 
 const _replaceMongoCredentials = (connectionString: string, userName: string, password: string) => {
+  if (!connectionString) return null;
+  
   return connectionString
-      .replace("<MONGO_CLOUD_USERNAME>", userName)
-      .replace("<MONGO_CLOUD_PASWORD>", password);
+  .replace("<MONGO_CLOUD_USERNAME>", userName)
+  .replace("<MONGO_CLOUD_PASWORD>", password);
 }
 const mongoCloudDatabase = _replaceMongoCredentials(MONGO_CLOUD_DATABASE, MONGO_CLOUD_USERNAME, MONGO_CLOUD_PASWORD);
 
