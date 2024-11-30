@@ -5,7 +5,7 @@ class CategoryController {
     private factoryService = new FactoryService();
     private createMessage: string = "Created Category Successfully!"
     private getOneMessage: string = "Created Category Successfully!"
-    private updatedMessage: string = "Created Category Successfully!"
+    private updatedMessage: string = "Updated Category Successfully!"
     private deleteddMessage: string = "Deleted Category Successfully!"
 
     // public createUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -14,8 +14,8 @@ class CategoryController {
     public createNewCategory = this.factoryService.createOne(CategoryModel, this.createMessage);
     public getCategoryById = this.factoryService.getOne(CategoryModel, { path: 'products' })
     public getAllCategories = this.factoryService.getAll(CategoryModel)
-    // public updateProductById = this.factoryService.updateOne(ProductModel, this.updatedMessage);
-    // public delelteProductById = this.factoryService.deleteOne(ProductModel, this.deleteddMessage);
+    public updateCategoryById = this.factoryService.updateOne(CategoryModel, this.updatedMessage);
+    public delelteCategoryById = this.factoryService.deleteOne(CategoryModel, this.deleteddMessage);
 }
 
 export default CategoryController;

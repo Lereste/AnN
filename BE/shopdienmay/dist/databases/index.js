@@ -7,10 +7,12 @@ exports.DB_CONNECTION_LOCAL = {
     OPTIONS: {
         // useNewUrlParser: true,
         // useUnifiedTopology: true,
-        dbName: 'ecommerce'
+        dbName: 'shopdienmay-localdatabase'
     },
 };
 const _replaceMongoCredentials = (connectionString, userName, password) => {
+    if (!connectionString)
+        return null;
     return connectionString
         .replace("<MONGO_CLOUD_USERNAME>", userName)
         .replace("<MONGO_CLOUD_PASWORD>", password);

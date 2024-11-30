@@ -4,6 +4,8 @@ const tslib_1 = require("tslib");
 const express_1 = require("express");
 const user_controller_1 = tslib_1.__importDefault(require("../controllers/user.controller"));
 const auth_controller_1 = tslib_1.__importDefault(require("../controllers/auth.controller"));
+const upload_images_middleware_1 = require("../middlewares/upload-images.middleware");
+const resize_images_middleware_1 = tslib_1.__importDefault(require("../middlewares/resize-images.middleware"));
 class UserRouter {
     constructor() {
         this.path = '/api/v1/users/';
@@ -18,10 +20,10 @@ class UserRouter {
         this.router.get(this.path + 'logout', this.authController.logOut);
         this.router.post(this.path + 'forgotPassword', this.authController.forgotPassword);
         this.router.patch(this.path + 'resetPassword/:token', this.authController.resetPassword);
-        //======= Protect all routes under =======
-        this.router.use(this.authController.protect);
+        this.router.use(this.authController.protect); //======= Protect all routes under =======
         this.router.patch(this.path + 'updateMyPassword', this.authController.updatePassword);
-        //======= sa
+        this.router.patch(this.path + 'updateMe', upload_images_middleware_1.uploadImages, resize_images_middleware_1.default, this.userController.updateAccount);
+        //======= 
         this.router.use(this.authController.restrictTo('admin'));
         this.router.get(this.path, this.userController.getAllUsers);
     }

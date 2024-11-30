@@ -4,7 +4,7 @@ import { IUser } from 'src/interfaces/user.interface'
 import convert from 'url-slug'
 import validator from 'validator'
 
-export interface IProductModel extends IProduct, Document {}
+export interface IProductModel extends IProduct, Document { }
 
 const ProductSchema: Schema = new Schema(
   {
@@ -24,7 +24,7 @@ const ProductSchema: Schema = new Schema(
     },
 
     imageList: [String],
-     categoryId: {
+    categoryId: {
       type: String,
       required: [true, 'A Product must have a Category Id'],
     },
@@ -84,6 +84,12 @@ ProductSchema.pre('save', function (next) {
   })
 
   next()
+})
+
+ProductSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'product',
+  localField: '_id'
 })
 
 const ProductModel = model<IProductModel>('Product', ProductSchema)

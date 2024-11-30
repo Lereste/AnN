@@ -4,5 +4,10 @@ import { Request as ExpressRequest } from 'express';
 export interface AuthRequest extends ExpressRequest {
     user: IUser;
     headers: { authorization: string };
-    cookies: { jwt: string }
+    cookies: { jwt: string };
+    files: any;
 };
+
+export interface ResizeImageRequest extends AuthRequest {
+    
+}

@@ -5,7 +5,7 @@ export const DB_CONNECTION_LOCAL = {
   OPTIONS: {
     // useNewUrlParser: true,
     // useUnifiedTopology: true,
-    dbName: 'ecommerce'
+    dbName: 'shopdienmay-localdatabase'
   },
 };
 
