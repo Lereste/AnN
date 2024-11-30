@@ -36,7 +36,7 @@ class FactoryService {
                 },
             });
         }));
-        this.getOne = (Model, message, populateOptions) => (0, catchAsync_1.catchAsync)((request, response, next) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+        this.getOne = (Model, populateOptions) => (0, catchAsync_1.catchAsync)((request, response, next) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             // Model.findOne({ _id: request.params.id})
             // const getOneDocument = await Model.findById(request.params.id).populate('reviews');
             let query = Model.findById(request.params.id);
@@ -49,7 +49,6 @@ class FactoryService {
             }
             response.status(200).json({
                 status: "success",
-                message,
                 currentDocumentName: `${getOneDocument.name}`,
                 data: {
                     data: getOneDocument,

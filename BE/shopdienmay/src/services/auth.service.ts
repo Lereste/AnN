@@ -109,8 +109,8 @@ class AuthService {
     }
 
     public changedPasswordAfter = function (JWTTimestamp: any, passwordChangedAt: any) {
-        console.log('JWTTimestamp', JWTTimestamp);
-        console.log('passwordChangedAt', passwordChangedAt);
+        // console.log('JWTTimestamp', JWTTimestamp);
+        // console.log('passwordChangedAt', passwordChangedAt);
         
         if (passwordChangedAt) {
             let millisTimestamp = passwordChangedAt.getTime();

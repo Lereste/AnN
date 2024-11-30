@@ -1,0 +1,50 @@
+# =================== USER ===================
+## POST - Sign Up: .../api/v1/users/signup
+{
+    "name": "Hồ Hoàng Hảo - admin",
+    "email": "hohoanghao1999@gmail.com",
+    "password": "admin1234",
+    "passwordConfirm": "admin1234"
+}
+
+## POST - Log In: .../api/v1/users/login
+{
+    "email": "hohoanghao1999@gmail.com",
+    "password": "admin1234"
+}
+
+## GET - Log Out: .../api/v1/users/logout
+
+## POST - For Got Password: .../api/v1/users/forgotPassword
+
+
+# =================== PRODUCT ===================
+## GET - All Products: .../api/v1/products
+
+## GET - Product By Id: .../api/v1/products/{productId}
+
+## POST - Create Product: .../api/v1/products
+=> Form-data
+{
+    "name": "Samsung s24 Ultra 5g",
+    "description": "King of Android",
+    "image": File (already have default),
+    "imageList": File[],
+    "categoryId": "67469596f6bccd83dcfca19c",
+    "price": 123435
+    "priceDiscount": 3123
+}
+
+## DELETE - Delete Product By Id: .../api/v1/products/{productId}
+
+## PATCH - Update Product By Id:.../api/v1/products/{productId}
+=> Form-data
+{
+    "name": "Samsung s24 Ultra 5g",
+    ...
+}
+
+# =================== Category ===================
+## GET - All Categories: .../api/v1/categories
+## GET - Products By Category Id: .../api/v1/categories/{categoryId}
+

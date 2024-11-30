@@ -10,5 +10,6 @@ export interface IUser extends Document{
     passwordChangedAt: Date,
     passwordResetToken: string,
     passwordResetExpires: Date,
+    id: string,
     // comparePassword?: any;
 }

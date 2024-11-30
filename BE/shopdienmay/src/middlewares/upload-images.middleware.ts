@@ -17,10 +17,14 @@ const upload = multer({
     fileFilter: multerFilter
 })
 
+// 1) upload.single('photo');
+
+// 2)
 export const uploadImages = upload.fields([
     // name is the key  in req.files
-    { name: 'image', maxCount: 1 },
-    { name: 'imageList', maxCount: 3 } 
+    { name: 'image', maxCount: 1 }, // product image
+    { name: 'imageList', maxCount: 3 }, // product imageList
+    { name: 'photo', maxCount: 1} // user photo
 ]);
 
 // export default uploadImages;

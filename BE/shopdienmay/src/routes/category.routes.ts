@@ -1,25 +1,30 @@
-import { Router } from "express";
-import ProductController from "../controllers/product.controller";
-import { uploadImages } from "../middlewares/upload-images.middleware"
-import resizeTourimageList from "../middlewares/resize-images.middleware";
-import AuthController from "../controllers/auth.controller";
-import CategoryController from "../controllers/category.controller";
+import { Router } from 'express';
+import ProductController from '../controllers/product.controller';
+import { uploadImages } from '../middlewares/upload-images.middleware';
+import resizeTourimageList from '../middlewares/resize-images.middleware';
+import AuthController from '../controllers/auth.controller';
+import CategoryController from '../controllers/category.controller';
 
 class CategoryRouter {
-    public path = '/api/v1/categories/';
-    public router = Router();
-    public categoryController = new CategoryController();
+  public path = '/api/v1/categories/';
+  public router = Router();
+  public categoryController = new CategoryController();
+  public authController = new AuthController();
 
-    constructor() {
-        this.initializeRoutes();
-    }
+  constructor() {
+    this.initializeRoutes();
+  }
 
-    initializeRoutes() {
-        this.router.post(this.path, this.categoryController.createNewCategory)
-        this.router.get(this.path , this.categoryController.getAllCategories)
-        
-        this.router.get(this.path + ':id', this.categoryController.getCategoryById)
-    }
+  initializeRoutes() {
+    this.router.get(this.path, this.categoryController.getAllCategories);
+    this.router.get(this.path + ':id', this.categoryController.getCategoryById);
+
+    this.router.use(this.authController.protect, this.authController.restrictTo('admin') as any); // Protect route
+
+    this.router.post(this.path, this.categoryController.createNewCategory);
+    this.router.patch(this.path + ':id', this.categoryController.updateCategoryById);
+    this.router.delete(this.path + ':id', this.categoryController.delelteCategoryById);
+  }
 }
 
 export default CategoryRouter;
