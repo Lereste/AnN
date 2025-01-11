@@ -20,6 +20,7 @@ import { CommonModule, Location, NgIf, isPlatformBrowser } from '@angular/common
 import { FormsModule, NgModel } from '@angular/forms';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
 import { CartOrderSummaryComponent } from '../../layout/cart-order-summary/cart-order-summary.component';
+import { ProductService } from 'src/app/core/service/product-service/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -43,16 +44,15 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
     'total',
     'action',
   ];
-  cartDataSource: any;
 
   cartProducts: Products[] = [];
-  cloneCartProducts: Products[] = [];
+  // cloneCartProducts: Products[] = [];
   currentCartDetailItem!: Products;
 
   unSubscribe$: Subject<unknown> = new Subject();
 
   // cartCount: number = 0;
-  cartItemsDetailed: CartItemDetailed[] = [];
+  cartDataSource: CartItemDetailed[] = [];
   currentChangedProductSlug: string = '';
   isEmptyCart: boolean = false;
 
@@ -65,111 +65,20 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
     private location: Location,
     private cartService: CartService,
     private toastService: ToastService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private productService: ProductService
   ) {
-    this.cartProducts = [
-      {
-        id: 1,
-        imageSrc:
-          'assets/image/products/guitar/Đàn Guitar Acoustic Martin 000Jr-10.jpg',
-        imageAlt: 'Đàn Guitar Acoustic Martin 000Jr-10',
-        productName: 'Đàn Guitar Acoustic Martin 000Jr-10',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 14600000,
-        productSalePrice: 13999000,
-      },
-      {
-        id: 2,
-        imageSrc:
-          'assets/image/products/organ/Đàn Organ Casio Casiotone CT-S100.jpg',
-        imageAlt: 'Đàn Organ Casio Casiotone CT-S100',
-        productName: 'Đàn Organ Casio Casiotone CT-S100',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 3370000,
-        productSalePrice: 3270000,
-      },
-      {
-        id: 3,
-        imageSrc:
-          'assets/image/products/ukulele/Đàn ukulele Kala KA-ZCT-T Tenor.jpg',
-        imageAlt: 'Đàn ukulele Kala KA-ZCT-T Tenor',
-        productName: 'Đàn ukulele Kala KA-ZCT-T Tenor',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 2000000,
-        productSalePrice: 1890000,
-      },
-      {
-        id: 4,
-        imageSrc:
-          'assets/image/products/kalima/Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ.jpg',
-        imageAlt: 'Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ',
-        productName: 'Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 1199000,
-        productSalePrice: 1099000,
-      },
-      {
-        id: 5,
-        imageSrc:
-          'assets/image/products/violin/Đàn Violin Amati-1969 VF750 Vân Thật Size 4.jpg',
-        imageAlt: 'Đàn Violin Amati-1969 VF750 Vân Thật Size 4/4',
-        productName: 'Đàn Violin Amati-1969 VF750 Vân Thật Size 4/4',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 6000000,
-        productSalePrice: 5790000,
-      },
-      {
-        id: 6,
-        imageSrc:
-          'assets/image/products/drum/Trống Cajon Echoslap VC201-MEX (Thái Lan).jpg',
-        imageAlt: 'Trống Cajon Echoslap VC201-MEX (Thái Lan)',
-        productName: 'Trống Cajon Echoslap VC201-MEX (Thái Lan)',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 2400000,
-        productSalePrice: 2050000,
-      },
-      {
-        id: 7,
-        imageSrc:
-          'assets/image/products/drum/Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5.jpg',
-        imageAlt: 'Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5',
-        productName: 'Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 7700000,
-        productSalePrice: 7450000,
-      },
-    ];
 
-    // Simulator already have api (with productSlug)
-    this.cartProducts.forEach((productItem) => {
-      let temp = Object.assign({
-        productSlug: urlSlug(productItem.productName, {
-          dictionary: {
-            đ: 'd',
-            Đ: 'D',
-          },
-        }),
-        ...productItem,
-      });
-      this.cloneCartProducts.push(temp);
-    });
   }
 
   ngOnInit(): void {
+    this._loadData();
     this._getCartDetailList();
     this._checkIsEmptyCart();
-
-    // element.product.productDefaultPrice * element.quantity
   }
 
   ngAfterViewInit() {
+    // Make scroll to top when navigate to this page
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo({
         top: 0,
@@ -180,10 +89,17 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterContentChecked() {
     this.changeDetectorRef.detectChanges();
- }
+  }
 
-  onBackToHome(): void {
-    this.location.back();
+  private _loadData(): void {
+    this.productService.getAllProducts().subscribe({
+      next: (response) => {
+        this.cartProducts = response.results.data;
+      },
+      error: (err) => {
+        console.error('Error loading products', err);
+      }
+    })
   }
 
   private _checkIsEmptyCart(): void {
@@ -196,6 +112,11 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isEmptyCart = false;
     }
   }
+
+  onBackToHome(): void {
+    this.location.back();
+  }
+
 
   updateCartItemQuantity(
     event: any,
@@ -212,7 +133,7 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('1===', event.target.value);
 
     let item: CartItem = {
-      productSlug: cartItem.product.productSlug as string,
+      productSlug: cartItem.product.slug as string,
       quantity: Number(event.target.value),
     };
 
@@ -221,7 +142,7 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.cartService.setCartItem(item, true);
 
-    // Get product item quantity after 100ms when use have already input the value
+    // Get product item quantity after 300ms when use have already input the value
     this.inputEvent$
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((inputEvent: any) => {
@@ -231,7 +152,7 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cartService.setCartItem(item, true);
       });
 
-    this.currentChangedProductSlug = cartItem.product.productSlug as string;
+    this.currentChangedProductSlug = cartItem.product.slug as string;
   }
 
   private _getCartDetailList(): void {
@@ -244,16 +165,18 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
         cartResponse.items.forEach((cartItem) => {
           // chỗ này sẽ đổi thành call api getProductBySlug
           // VD: this.ordersService.getProductBySlug(cartItem.productSlug).subscribe(response => {
-          this.cloneCartProducts.forEach((productItem) => {
-            if (productItem.productSlug === cartItem.productSlug) {
+          this.cartProducts.forEach((productItem) => {
+
+            if (productItem.slug === cartItem.productSlug) {
               // productItem sẽ là respone trả về của api
               this.currentCartDetailItem = productItem;
             }
           });
           // =========================
 
-          const productIndex = this.cartItemsDetailed?.findIndex(
-            (e) => e.product.productSlug === cartItem.productSlug
+
+          const productIndex = this.cartDataSource.findIndex(
+            (cart) => cart.product.slug === cartItem.productSlug
           );
 
           if (
@@ -261,19 +184,15 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
             this.currentChangedProductSlug === cartItem.productSlug
           ) {
             this.currentChangedProductSlug = '-1';
-            this.cartItemsDetailed[productIndex].quantity = cartItem.quantity;
+            this.cartDataSource[productIndex].quantity = cartItem.quantity;
           } else if (productIndex === -1) {
-            this.cartItemsDetailed.push({
+            this.cartDataSource.push({
               product: this.currentCartDetailItem,
               quantity: cartItem.quantity,
             });
           }
         });
       });
-
-    this.cartDataSource = this.cartItemsDetailed;
-
-    // console.log(this.cartDataSource);
   }
 
   onValidateKeydown(event: any) {
@@ -302,7 +221,7 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
       event.target.value = event.target.min;
 
       const item: CartItem = {
-        productSlug: cartItem.product.productSlug as string,
+        productSlug: cartItem.product.slug as string,
         quantity: Number(event.target.value),
       };
       this.cartService.setCartItem(item, true);
@@ -317,25 +236,21 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
     const cart = this.cartService.getCart();
     const quantity = cart.items[productIndex]?.quantity;
     const price =
-      this.cartItemsDetailed[productIndex]?.product.productDefaultPrice;
-
-    // console.log('quantity', quantity);
-    // console.log('price', price);
-
+      this.cartDataSource[productIndex]?.product.price;
     return price * quantity;
   }
 
   deleteCartItem(productItem: CartItemDetailed): void {
     console.log(productItem);
 
-    this.cartService.deleteCartItem(productItem.product.productSlug as string);
+    this.cartService.deleteCartItem(productItem.product.slug as string);
 
-    const updateCartItemsDetailed = this.cartItemsDetailed.filter(
+    const updateCartItemsDetailed = this.cartDataSource.filter(
       (productItem) => {
-        productItem.product.productSlug !== productItem.product.productSlug;
+        productItem.product.slug !== productItem.product.slug;
       }
     );
-    this.cartItemsDetailed = updateCartItemsDetailed;
+    this.cartDataSource = updateCartItemsDetailed;
 
     this._getCartDetailList();
   }
@@ -348,7 +263,6 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      console.log('cart destroy');
-
+    console.log('cart.component.ts destroy');
   }
 }

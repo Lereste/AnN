@@ -45,6 +45,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/lien-he']);
   }
 
+  goToAccount(): void {
+    this.router.navigate(['/tai-khoan']);
+  }
+
   goToCart(): void {
     this.router.navigate(['/gio-hang']);
   }

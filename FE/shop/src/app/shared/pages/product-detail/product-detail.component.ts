@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID, makeStateKey, TransferState, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, isPlatformBrowser } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { Products } from 'src/app/core/models/product/product.model';
 import urlSlug from 'url-slug';
+import { ProductService } from 'src/app/core/service/product-service/product.service';
 
 enum DESCRIBE_TYPE {
   DESCRIPTION = 'description',
@@ -22,137 +23,87 @@ enum DESCRIBE_TYPE {
 export class ProductDetailComponent implements OnInit, AfterViewInit {
   saleProducts: Products[] = [];
   cloneSaleProducts: Products[] = [];
-  currentProductDetailItem: Products | undefined;
+  currentProductDetailItem!: Products;
 
-  
+
   decreaseQuantity: number = 0;
   increaseQuantity: number = 0;
   currentInputValue: number = 1; // default quantity product is 1
 
   DESCRIBE_TYPE = DESCRIBE_TYPE;
   selectedDescribe: string = DESCRIBE_TYPE.DESCRIPTION;
+  SALE_PRODUCTS_KEY = makeStateKey<Products[]>('saleProducts');
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private productService: ProductService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private transferState: TransferState, // Inject TransferState,
+    private cdr: ChangeDetectorRef
   ) {
-    //   this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-    //     this.currentUrl = this.router.routerState.snapshot.url; // get currentURL after change
-    // });
-    this.saleProducts = [
-      {
-        id: 1,
-        imageSrc:
-          'assets/image/products/guitar/Đàn Guitar Acoustic Martin 000Jr-10.jpg',
-        imageAlt: 'Đàn Guitar Acoustic Martin 000Jr-10',
-        productName: 'Đàn Guitar Acoustic Martin 000Jr-10',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 14600000,
-        productSalePrice: 13990000
-      },
-      {
-        id: 2,
-        imageSrc:
-          'assets/image/products/organ/Đàn Organ Casio Casiotone CT-S100.jpg',
-        imageAlt: 'Đàn Organ Casio Casiotone CT-S100',
-        productName: 'Đàn Organ Casio Casiotone CT-S100',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 3370000,
-        productSalePrice: 3270000
 
-      },
-      {
-        id: 3,
-        imageSrc:
-          'assets/image/products/ukulele/Đàn ukulele Kala KA-ZCT-T Tenor.jpg',
-        imageAlt: 'Đàn ukulele Kala KA-ZCT-T Tenor',
-        productName: 'Đàn ukulele Kala KA-ZCT-T Tenor',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 2000000,
-        productSalePrice: 1890000
-      },
-      {
-        id: 4,
-        imageSrc:
-          'assets/image/products/kalima/Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ.jpg',
-        imageAlt: 'Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ',
-        productName: 'Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 1199000,
-        productSalePrice: 1099000
-      },
-      {
-        id: 5,
-        imageSrc:
-          'assets/image/products/violin/Đàn Violin Amati-1969 VF750 Vân Thật Size 4.jpg',
-        imageAlt: 'Đàn Violin Amati-1969 VF750 Vân Thật Size 4/4',
-        productName: 'Đàn Violin Amati-1969 VF750 Vân Thật Size 4/4',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 6000000,
-        productSalePrice: 5790000
-      },
-      {
-        id: 6,
-        imageSrc:
-          'assets/image/products/drum/Trống Cajon Echoslap VC201-MEX (Thái Lan).jpg',
-        imageAlt: 'Trống Cajon Echoslap VC201-MEX (Thái Lan)',
-        productName: 'Trống Cajon Echoslap VC201-MEX (Thái Lan)',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 2400000,
-        productSalePrice: 2050000
-      },
-      {
-        id: 7,
-        imageSrc:
-          'assets/image/products/drum/Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5.jpg',
-        imageAlt: 'Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5',
-        productName: 'Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 7700000,
-        productSalePrice: 7450000
-      },
-    ];
-
-    // Simulator already have api (with productSlug)
-    this.saleProducts.forEach(productItem => {
-      let temp = Object.assign({
-        productSlug: urlSlug(productItem.productName, {
-          dictionary: {
-            'đ': 'd',
-            'Đ': 'D'
-          }
-        }),
-        ...productItem
-      })
-      this.cloneSaleProducts.push(temp)
-    })
   }
 
   ngOnInit(): void {
-    console.log('Url slug: ', this.activatedRoute.snapshot.params['productSlug']);
+    if (isPlatformBrowser(this.platformId)) {
+      // Kiểm tra và lấy dữ liệu từ TransferState
+      const savedProducts = this.transferState.get(this.SALE_PRODUCTS_KEY, null);
 
-    this.cloneSaleProducts.forEach(productItem => {
-      if (productItem.productSlug === this.activatedRoute.snapshot.params['productSlug']) {
-        this.currentProductDetailItem = productItem
+      if (savedProducts) {
+        console.log('lereste: Chạy khi back ra home rồi vào lại detail')
+        this.saleProducts = savedProducts;  // Sử dụng dữ liệu đã có từ TransferState
+      } else {
+        console.log('lereste: Chạy khi vào detail')
+        this.loadData(); // Gọi API nếu không có dữ liệu
+      }
+
+    }
+    console.log('lereste: client')
+
+    // Nếu saleProducts đã có dữ liệu sau khi loadData
+    if (this.saleProducts && this.saleProducts.length > 0) {
+      this.setProductDetail();
+    }
+  }
+
+
+  ngAfterViewInit() {
+    // Make scroll to top when navigate to this page
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      })
+    }
+  }
+
+  loadData(): void {
+    this.productService.getAllProducts().subscribe({
+      next: (response) => {
+        this.saleProducts = response.results.data;
+        // Store the fetched data in TransferState to prevent another API call
+        this.transferState.set(this.SALE_PRODUCTS_KEY, this.saleProducts);
+        this.setProductDetail();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error loading products', err);
       }
     })
 
-    // console.log('currentProductDetailItem', this.currentProductDetailItem);
+    // this.productService.getProductById().
   }
 
-  ngAfterViewInit() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant'
-    })
+  setProductDetail(): void {
+    console.log('this.activatedRoute.snapshot.params', this.activatedRoute.snapshot.params['productSlug'])
+    // Lặp qua danh sách sản phẩm để tìm sản phẩm chi tiết
+    this.saleProducts.forEach(productItem => {
+      if (productItem.slug === this.activatedRoute.snapshot.params['productSlug']) {
+        this.currentProductDetailItem = productItem;
+      }
+    });
   }
 
   onSelectedQuantity(event: any) {
@@ -179,7 +130,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
 
     if (this.isEmpty(event.target.value)) {
       console.log('blur');
-      
+
       this.currentInputValue = 1;
     }
   }

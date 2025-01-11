@@ -3,21 +3,21 @@
 
     <div class="productDetail-content" *ngIf="currentProductDetailItem">
         <div class="productDetail-content-left">
-            <img [src]="currentProductDetailItem.imageSrc" alt="">
+            <img [src]="currentProductDetailItem.image" alt="">
         </div>
 
         <div class="productDetail-content-right">
             <div class="productDetail-content-right-container">
                 <div class="productDetail-name">
-                    <span>{{currentProductDetailItem.productName}}</span>
+                    <span>{{currentProductDetailItem.name}}</span>
                 </div>
 
                 <div class="productDetail-price">
-                    <span>{{currentProductDetailItem.productDefaultPrice}}đ</span>
+                    <span>{{currentProductDetailItem.price}}đ</span>
                 </div>
 
                 <div class="productDetail-description">
-                    <span>{{currentProductDetailItem.productDescription}}</span>
+                    <span>{{currentProductDetailItem.priceDiscount}}</span>
                 </div>
 
                 <hr>

@@ -35,8 +35,8 @@
               <mat-header-cell *matHeaderCellDef>Sản Phẩm</mat-header-cell>
               <mat-cell *matCellDef="let element">
                 <div class="cart-order-item-product">
-                  <img [src]="element.product.imageSrc" alt="" />
-                  <span> {{ element.product.productName }} </span>
+                  <img [src]="element.product.image" alt="" />
+                  <span> {{ element.product.name }} </span>
                 </div>
               </mat-cell>
             </ng-container>
@@ -46,7 +46,7 @@
               <mat-header-cell *matHeaderCellDef>Đơn Giá</mat-header-cell>
               <mat-cell *matCellDef="let element">
                 {{
-                  element.product.productSalePrice | currency : "VND" : 'symbol'
+                  element.product.priceDiscount | currency : "VND" : 'symbol'
                 }}
               </mat-cell>
             </ng-container>

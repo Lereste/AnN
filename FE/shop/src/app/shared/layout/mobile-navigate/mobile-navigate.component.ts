@@ -50,11 +50,11 @@ export class MobileNavigateComponent implements OnInit, AfterViewInit {
     this.isCategory = false;
   }
 
-  showArticle(): void {
-
+  goToAccount(): void {
+    this.router.navigate(['tai-khoan']);
   }
 
-  showCart(): void {
+  goToCart(): void {
     this.router.navigate(['gio-hang']);
   }
 }

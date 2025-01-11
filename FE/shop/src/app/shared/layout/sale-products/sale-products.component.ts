@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, HostListener, inject, OnIn
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { Products } from 'src/app/core/models/product/product.model';
+import { ProductService } from 'src/app/core/service/product-service/product.service';
 
 @Component({
   selector: 'app-sale-products',
@@ -25,88 +26,9 @@ export class SaleProductsComponent implements OnInit {
   nextMonday!: any;
   private cdr = inject(ChangeDetectorRef); // Inject ChangeDetectorRef
 
-  constructor() {
-    this.saleProducts = [
-      {
-        id: 1,
-        imageSrc:
-          'assets/image/products/guitar/Đàn Guitar Acoustic Martin 000Jr-10.jpg',
-        imageAlt: 'Đàn Guitar Acoustic Martin 000Jr-10',
-        productName: 'Đàn Guitar Acoustic Martin 000Jr-10',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 14600000,
-        productSalePrice: 13990000
-      },
-      {
-        id: 2,
-        imageSrc:
-          'assets/image/products/organ/Đàn Organ Casio Casiotone CT-S100.jpg',
-        imageAlt: 'Đàn Organ Casio Casiotone CT-S100',
-        productName: 'Đàn Organ Casio Casiotone CT-S100',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 3370000,
-        productSalePrice: 3270000
-
-      },
-      {
-        id: 3,
-        imageSrc:
-          'assets/image/products/ukulele/Đàn ukulele Kala KA-ZCT-T Tenor.jpg',
-        imageAlt: 'Đàn ukulele Kala KA-ZCT-T Tenor',
-        productName: 'Đàn ukulele Kala KA-ZCT-T Tenor',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 2000000,
-        productSalePrice: 1890000
-      },
-      {
-        id: 4,
-        imageSrc:
-          'assets/image/products/kalima/Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ.jpg',
-        imageAlt: 'Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ',
-        productName: 'Đàn Kalimba Gecko 17 Phím K17SD Gỗ Đàn Hương Đỏ',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 1199000,
-        productSalePrice: 1099000
-      },
-      {
-        id: 5,
-        imageSrc:
-          'assets/image/products/violin/Đàn Violin Amati-1969 VF750 Vân Thật Size 4.jpg',
-        imageAlt: 'Đàn Violin Amati-1969 VF750 Vân Thật Size 4/4',
-        productName: 'Đàn Violin Amati-1969 VF750 Vân Thật Size 4/4',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 6000000,
-        productSalePrice: 5790000
-      },
-      {
-        id: 6,
-        imageSrc:
-          'assets/image/products/drum/Trống Cajon Echoslap VC201-MEX (Thái Lan).jpg',
-        imageAlt: 'Trống Cajon Echoslap VC201-MEX (Thái Lan)',
-        productName: 'Trống Cajon Echoslap VC201-MEX (Thái Lan)',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 2400000,
-        productSalePrice: 2050000
-      },
-      {
-        id: 7,
-        imageSrc:
-          'assets/image/products/drum/Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5.jpg',
-        imageAlt: 'Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5',
-        productName: 'Bộ Trống Cơ Yamaha Jazz Drum TMD-YCR5',
-        productDescription:
-          'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.',
-        productDefaultPrice: 7700000,
-        productSalePrice: 7450000
-      },
-    ];
-
+  constructor(
+    private productService: ProductService
+  ) {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('nextmonday', this.getNextMonday())
       this.nextMonday = localStorage.getItem('nextmonday')
@@ -115,6 +37,19 @@ export class SaleProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.countDown(this.nextMonday);
+
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.productService.getAllProducts().subscribe({
+      next: (response) => {
+        this.saleProducts = response.results.data;
+      },
+      error: (err) => {
+        console.error('Error loading products', err);
+      }
+    })
   }
 
   getNextMonday() {
@@ -129,7 +64,7 @@ export class SaleProductsComponent implements OnInit {
     nextMonday.setDate(today.getDate() + daysUntilMonday);
 
     return nextMonday.toLocaleDateString();
-}
+  }
 
   outputEvent(event: any) {
     this.owlCar = event

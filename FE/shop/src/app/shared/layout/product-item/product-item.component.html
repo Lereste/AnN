@@ -1,17 +1,17 @@
 <section class="product-item">
   <owl-carousel-o [options]="customOptions" #owlCar>
     <ng-container *ngFor="let productItem of productList; let idx = index">
-      <ng-template carouselSlide [id]="productItem.id.toString()">
+      <ng-template carouselSlide [id]="idx.toString()">
         <div class="product-item-content">
           <div class="product-item-content-image">
             <img
-              [src]="productItem.imageSrc"
-              [alt]="productItem.imageAlt"
+              [src]="productItem.image"
+              [alt]="productItem.name"
               (click)="goToProductDetailPage(productItem)"
             />
           </div>
           <div class="product-item-content-name">
-            <span>{{ productItem.productName }}</span>
+            <span>{{ productItem.name }}</span>
           </div>
 
           <div class="product-item-content-zoom">
@@ -26,7 +26,7 @@
                                     <span>{{productItem.productDefaultPrice}}đ</span>
                                 </div> -->
               <div class="default-price">
-                <span>{{ productItem.productDefaultPrice }}đ</span>
+                <span>{{ productItem.price }}đ</span>
                 <img src="../../../../../assets/image/gif/fire.gif" alt="" />
               </div>
             </div>
@@ -47,17 +47,17 @@
       <div class="zoom-content">
         <div class="zoom-content-image">
           <img
-            [src]="zoomProductItem.imageSrc"
-            [alt]="zoomProductItem.imageSrc"
+            [src]="zoomProductItem.image"
+            [alt]="zoomProductItem.image"
           />
         </div>
 
         <div class="zoom-content-detail">
-          <p><strong>Tên: </strong>{{ zoomProductItem.productName }}</p>
+          <p><strong>Tên: </strong>{{ zoomProductItem.name }}</p>
           <p>
-            <strong>Mô tả: </strong>{{ zoomProductItem.productDescription }}
+            <strong>Mô tả: </strong>{{ zoomProductItem.description }}
           </p>
-          <p><strong>Giá: </strong>{{ zoomProductItem.productDefaultPrice }}</p>
+          <p><strong>Giá: </strong>{{ zoomProductItem.description }}</p>
         </div>
 
         <div class="zoom-content-hint">

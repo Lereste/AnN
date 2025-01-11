@@ -1,0 +1,19 @@
+
+@import "../../../styles.scss";
+
+.account {
+  margin: 10rem auto 0;
+
+  &-container {
+    padding: 2rem 0;
+    
+    .account-welcome {
+        @include flex-center;
+        margin-bottom: 4rem;
+    }
+
+    .account-login {
+        @include flex-center;
+    }
+  }
+}

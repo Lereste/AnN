@@ -1,10 +1,10 @@
 export class Products {
-    id!: number;
-    imageSrc!: string;
-    imageAlt?: string;
-    productName!: string;
-    productDescription?: string;
-    productDefaultPrice!: number;
-    productSalePrice?: number;
-    productSlug?: string;
+    // id?: number;
+    name?: string;
+    image?: string;
+    imageList?: string;
+    description?: string;
+    price!: number;
+    priceDiscount?: number;
+    slug?: string;
   }
