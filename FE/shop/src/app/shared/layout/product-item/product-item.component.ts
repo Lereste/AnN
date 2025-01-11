@@ -21,6 +21,7 @@ import {
 import { CartItem } from 'src/app/core/models/cart/cart.model';
 import { Products } from 'src/app/core/models/product/product.model';
 import { CartService } from 'src/app/core/service/cart-service/cart.service';
+import { ProductService } from 'src/app/core/service/product-service/product.service';
 // import slugify from 'slugify';
 import urlSlug from 'url-slug';
 
@@ -77,6 +78,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   hasExisted: boolean = true;
   private readonly platformId = inject(PLATFORM_ID);
 
+  // productList: Products[] = [];
 
   @ViewChild('owlCar') owlCar: CarouselComponent | undefined;
   @Output() newItemEvent = new EventEmitter<CarouselComponent>();
@@ -85,28 +87,26 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {
 
     if (isPlatformBrowser(this.platformId) && window.innerWidth < 1920) {
-      console.log('margin = 8');
+      // console.log('margin = 8');
       this.customOptions.margin = 8;
     }
   }
 
   ngOnInit(): void {
-
   }
 
   ngAfterViewInit(): void {
     this.newItemEvent.emit(this.owlCar);
   }
 
-  goToProductDetailPage(productItem: Products): void {
-    const newProduct = this.convertToProductSlug(productItem);
-    console.log('newProduct', newProduct);
+ 
 
-    this.router.navigate(['chi-tiet-san-pham/' + newProduct.productSlug]);
+  goToProductDetailPage(productItem: Products): void {
+    this.router.navigate(['chi-tiet-san-pham/' + productItem.slug]);
   }
 
   previewProductInformation(productItem: Products): void {
@@ -121,10 +121,10 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addProductToCart(productItem: Products): void {
-    const newProduct = this.convertToProductSlug(productItem);
+    const newProduct = productItem;
 
     const cartItem: CartItem = {
-      productSlug: newProduct.productSlug as string,
+      productSlug: newProduct.slug as string,
       quantity: 1,
     };
 
@@ -155,18 +155,18 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  convertToProductSlug(productItem: Products) {
-    return (this.newProductItem = Object.assign({
-      // productSlug: slugify(productItem.productName, {lower: true, trim: true}),
-      productSlug: urlSlug(productItem.productName, {
-        dictionary: {
-          đ: 'd',
-          Đ: 'D',
-        },
-      }),
-      ...productItem,
-    }));
-  }
+  // convertToProductSlug(productItem: Products) {
+  //   return (this.newProductItem = Object.assign({
+  //     // productSlug: slugify(productItem.productName, {lower: true, trim: true}),
+  //     productSlug: urlSlug(productItem.productName, {
+  //       dictionary: {
+  //         đ: 'd',
+  //         Đ: 'D',
+  //       },
+  //     }),
+  //     ...productItem,
+  //   }));
+  // }
 
   ngOnDestroy(): void {
     console.log('product item destroy');

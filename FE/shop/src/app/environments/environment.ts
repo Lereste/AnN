@@ -7,6 +7,7 @@ export const environment = {
     fontawesome: 'Font Awesome 6.6.0',
   },
 
-  production: true,
-  apiUrl: 'https://shopnhaccu.vercel.app/api/',
+  production: false,
+  // apiUrl: 'https://shopnhaccu.vercel.app/api/',
+  apiUrl: 'http://127.0.0.1:1234/api/v1',
 };

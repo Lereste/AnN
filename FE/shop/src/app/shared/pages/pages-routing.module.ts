@@ -37,10 +37,10 @@ export const routes: Routes = [
                 path: "chi-tiet-san-pham/:productSlug",
                 loadChildren: () => import('./product-detail/product-detail-routing.module').then((route) => route.PRODUCT_DETAIL_ROUTES)
             },
-            // {
-            //     path: "**",
-            //     loadChildren: () => import('../../authentication/page404/page404-routing.module').then((route) => route.PAGE404_ROUTES)
-            // },
+            {
+                path: "tai-khoan",
+                loadChildren: () => import('../../authentication/account/account-routing.module').then((route) => route.ACCOUNT_ROUTES)
+            }
         ]
     },
     // {

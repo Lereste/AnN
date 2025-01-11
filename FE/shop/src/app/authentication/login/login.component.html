@@ -1,1 +1,78 @@
-<h1>Login work</h1>
+<div class="form-structor">
+    <!-- Log In -->
+    <div class="login">
+        <div (click)="toggleLogin($event)" class="form-wrapper-title" #login>{{LoginTitle}}</div>
+        <span class="forgot-password-title" *ngIf="isForgotPassword && isHideForgotPassword">Nhập vào địa chỉ email đã đăng ký tài khoản để lấy lại mật khẩu</span>
+
+        <form action="" class="form-wrapper-list">
+            <mat-form-field class="form-wrapper-item" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" placeholder="Ví dụ: user@gmail.com" formControlName="email">
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="!isForgotPassword" class="form-wrapper-item" appearance="outline">
+                <mat-label>Mật Khẩu</mat-label>
+                <input matInput type="password" placeholder="Nhập vào mật khẩu" formControlName="password">
+                <mat-icon matSuffix>keyboard</mat-icon>
+            </mat-form-field>
+        </form>
+
+        <ng-container *ngIf="!isForgotPassword">
+            <button class="is-forgot-password" (click)="onForgotPassword()">Quên mật khẩu?</button>
+            <button class="submit-btn" (click)="onLogin()">Đăng Nhập</button>
+        </ng-container>
+        
+        <ng-container *ngIf="isForgotPassword && isHideForgotPassword">
+            <button class="back-to-login" (click)="backToLogin()">
+                <div class="arrow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span>Quay lại đăng nhập</span>
+            </button>
+            <button class="submit-btn">Gửi</button>
+        </ng-container>
+    </div>
+
+
+    <!-- Sign Up -->
+    <div class="signup slide-up">
+        <div class="form-wrapper">
+            <div (click)="toggleSignUp($event)" class="form-wrapper-title" #signup>Đăng Ký</div>
+            <form class="form-wrapper-list">
+                <mat-form-field class="form-wrapper-item" appearance="outline">
+                    <mat-label>Họ và Tên</mat-label>
+                    <input matInput placeholder="Nhập vào tên của bạn" formControlName="name">
+                    <mat-icon matSuffix>face</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="form-wrapper-item" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Ví dụ: user@gmail.com" formControlName="email">
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="form-wrapper-item" appearance="outline">
+                    <mat-label>Số Điện Thoại</mat-label>
+                    <input matInput placeholder="Ví dụ: 0123.456.789" formControlName="phone">
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="form-wrapper-item" appearance="outline">
+                    <mat-label>Mật Khẩu</mat-label>
+                    <input matInput placeholder="Mật khẩu phải có ít nhất một chữ cái và số" formControlName="password">
+                    <mat-icon matSuffix>keyboard</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="form-wrapper-item" appearance="outline">
+                    <mat-label>Xác Nhận Mật Khẩu</mat-label>
+                    <input matInput placeholder="Nhập lại mật khẩu" formControlName="passwordConfirm">
+                    <mat-icon matSuffix>keyboard</mat-icon>
+                </mat-form-field>
+            </form>
+            <button class="submit-btn">Đăng Ký</button>
+        </div>
+    </div>
+</div>
