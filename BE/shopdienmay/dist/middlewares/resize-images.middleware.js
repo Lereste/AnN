@@ -5,7 +5,6 @@ const sharp_1 = tslib_1.__importDefault(require("sharp"));
 const catchAsync_1 = require("../utils/catchAsync");
 const resizeImageList = (0, catchAsync_1.catchAsync)((request, response, next) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const requestFiles = request.files;
-    console.log('[requestFiles]', requestFiles);
     // if (!requestFiles.image || !requestFiles.imageList) return;
     // Product image
     if (requestFiles.image) {
@@ -16,7 +15,7 @@ const resizeImageList = (0, catchAsync_1.catchAsync)((request, response, next) =
             request.body.image = `image-createdAt-${Date.now()}.jpeg`;
         }
         yield (0, sharp_1.default)(requestFiles.image[0].buffer)
-            .resize(2000, 1333)
+            .resize(600, 600)
             .toFormat("jpeg")
             .jpeg({ quality: 90 })
             .toFile(`src/assets/images/products/${request.body.image}`);
@@ -33,7 +32,7 @@ const resizeImageList = (0, catchAsync_1.catchAsync)((request, response, next) =
                 fileName = `imageList-createdAt-${Date.now()}-index-${idx + 1}.jpeg`;
             }
             yield (0, sharp_1.default)(file.buffer)
-                .resize(2000, 1333)
+                .resize(200, 200)
                 .toFormat("jpeg")
                 .jpeg({ quality: 90 })
                 .toFile(`src/assets/images/products/${fileName}`);

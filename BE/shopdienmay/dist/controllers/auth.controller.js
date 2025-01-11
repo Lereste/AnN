@@ -131,7 +131,8 @@ class AuthController {
         this.restrictTo = (...roles) => {
             return (request, response, next) => {
                 // roles ['admin', 'lead-guide']
-                if (!roles.includes(request.user.role)) {
+                console.log('request.user.role', request.user);
+                if (!request.user || !roles.includes(request.user.role)) {
                     return next(new appError_1.default('You do not have permission to perform this action', 403));
                 }
                 next();

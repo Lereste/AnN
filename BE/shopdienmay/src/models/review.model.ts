@@ -59,7 +59,6 @@ ReviewSchema.pre(/^find/, function (this: Query<any, IReviewModel>, next) {
   next();
 });
 
-
 ReviewSchema.statics.calculatorAverageRatings = async function (productId) {
   const stats = await this.aggregate([
     {
@@ -104,9 +103,11 @@ ReviewSchema.post('save', function () {
 });
 
 ReviewSchema.post(/^findOneAnd/, async function (docs) {
-  await (docs.constructor as IReviewModelStatic).calculatorAverageRatings(docs.tour);
+  if (docs) {
+    console.log('docs', docs)
+    await (docs.constructor as IReviewModelStatic).calculatorAverageRatings(docs.product);
+  }
 });
-
 
 const ReviewModel = model<IReviewModel, IReviewModelStatic>('Review', ReviewSchema)
 export default ReviewModel

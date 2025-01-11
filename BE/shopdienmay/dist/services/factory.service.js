@@ -4,8 +4,31 @@ const tslib_1 = require("tslib");
 const appError_1 = tslib_1.__importDefault(require("../utils/appError"));
 const catchAsync_1 = require("../utils/catchAsync");
 const apiFeatures_service_1 = tslib_1.__importDefault(require("./apiFeatures.service"));
+const product_model_1 = tslib_1.__importDefault(require("../models/product.model"));
+const user_model_1 = tslib_1.__importDefault(require("../models/user.model"));
+const category_model_1 = tslib_1.__importDefault(require("../models/category.model"));
+const url_slug_1 = tslib_1.__importDefault(require("url-slug"));
 class FactoryService {
     constructor() {
+        this._updateImageUrls = (item, baseImageUrl) => {
+            if (item.image) {
+                item.image = `${baseImageUrl}${item.image}`;
+            }
+            if (item.imageList) {
+                if (typeof item.imageList === 'string') {
+                    // Split the string by commas to create an array
+                    item.imageList = item.imageList.split(',').map((imageUrl) => {
+                        return `${baseImageUrl}${imageUrl.trim()}`; // Prepend base URL and remove extra spaces
+                    });
+                }
+                else if (Array.isArray(item.imageList)) {
+                    // If imageList is already an array, just prepend the base URL to each image
+                    item.imageList = item.imageList.map((imageUrl) => {
+                        return `${baseImageUrl}${imageUrl.trim()}`;
+                    });
+                }
+            }
+        };
         this.getAll = (Model) => (0, catchAsync_1.catchAsync)((request, response, next) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             /*
                 const reviewRouter = express.Router({mergeParams: true});
@@ -15,9 +38,8 @@ class FactoryService {
             let filter = {};
             if (request.params.productId) {
                 filter = { product: request.params.productId };
-                // console.log('filter', filter); // filter { tour: '5c88fa8cf4afda39709c2955' }
+                // console.log('filter', filter); // filter { product: '5c88fa8cf4afda39709c2955' }
             }
-            console.log('filter', filter);
             // Execute query
             const features = new apiFeatures_service_1.default(Model.find(filter), request.query)
                 .filter()
@@ -30,8 +52,8 @@ class FactoryService {
             response.status(200).json({
                 status: "success",
                 requestedAt: request.requestTime,
-                results: documents.length,
-                data: {
+                totals: documents.length,
+                results: {
                     data: documents,
                 },
             });
@@ -50,20 +72,40 @@ class FactoryService {
             response.status(200).json({
                 status: "success",
                 currentDocumentName: `${getOneDocument.name}`,
-                data: {
+                result: {
                     data: getOneDocument,
                 },
             });
         }));
         this.createOne = (Model, message) => (0, catchAsync_1.catchAsync)((request, response, next) => tslib_1.__awaiter(this, void 0, void 0, function* () {
-            // const newTour = new Tour({});
-            // newTour.save();
-            // console.log('[FactoryService] - Create: ', request.body);
-            const newDocument = yield Model.create(request.body);
+            if (Model === product_model_1.default || Model === user_model_1.default || Model === category_model_1.default) {
+                const { name } = request.body;
+                const nameExist = yield Model.exists({ name });
+                if (nameExist) {
+                    throw new appError_1.default('This Name is already in use. Please try another Name', 422);
+                }
+            }
+            let documment = request.body;
+            // Generate slug here based on product name
+            if (Model === product_model_1.default && documment.name) {
+                documment.slug = (0, url_slug_1.default)(documment.name, {
+                    dictionary: {
+                        đ: 'd',
+                        Đ: 'D',
+                    },
+                });
+                const { slug } = request.body;
+                const slugExist = yield Model.exists({ slug });
+                if (slugExist) {
+                    throw new appError_1.default('This Slug is already in use. Please try another Name', 422);
+                }
+                this._updateImageUrls(documment, 'http://localhost:1234/images/products/'); // Cập nhật URL cho hình ảnh sản phẩm
+            }
+            const newDocument = yield Model.create(documment);
             response.status(201).json({
                 status: 'success',
                 message,
-                data: {
+                result: {
                     data: newDocument
                 }
             });
@@ -73,7 +115,6 @@ class FactoryService {
                 new: true, // Return the modified document rather than the original
                 runValidators: true, // Validate the updated data against the model's schema
             });
-            console.log(updatedDocument);
             if (!updatedDocument) {
                 return next(new appError_1.default('No document found with that ID', 404));
             }
@@ -83,7 +124,7 @@ class FactoryService {
             response.status(200).json({
                 status: "success",
                 message,
-                data: {
+                result: {
                     data: updatedDocument,
                 },
             });

@@ -5,10 +5,10 @@ import UserModel from '../models/user.model';
 import AppError from '../utils/appError';
 import { catchAsync } from '../utils/catchAsync';
 import AuthService from '../services/auth.service';
-import { NextFunction, Request, Response } from 'express';
-import { AuthRequest } from '../interfaces/request.interface';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { sendEmailAsync } from '../utils/email';
 import * as crypto from 'crypto';
+import { HeaderRequest, RestrictToRequest } from '../interfaces/auth.interface';
 
 class AuthController {
   public authService = new AuthService();
@@ -82,7 +82,7 @@ class AuthController {
     });
   });
 
-  public protect = catchAsync(async (request: AuthRequest, response: Response, next: NextFunction) => {
+  public protect = catchAsync(async (request: HeaderRequest, response: Response, next: NextFunction) => {
     // const { passwordChangedAt } = request.body;
     // 1) Get the token and check if it is exit
     const headerAuthorization = request.headers.authorization;
@@ -129,7 +129,7 @@ class AuthController {
     next();
   });
 
-  public isLoggedIn = async (request: AuthRequest, response: Response, next: NextFunction) => {
+  public isLoggedIn = async (request: HeaderRequest, response: Response, next: NextFunction) => {
     if (request.cookies.jwt) {
       try {
         // 1) Verification token
@@ -158,10 +158,12 @@ class AuthController {
     next();
   };
 
-  public restrictTo = (...roles: string[]) => {
-    return (request: AuthRequest, response: Response, next: NextFunction) => {
+  public restrictTo = (...roles: string[]): RequestHandler => {
+    return (request: RestrictToRequest, response: Response, next: NextFunction) => {
       // roles ['admin', 'lead-guide']
-      if (!roles.includes(request.user.role)) {
+      console.log('request.user.role', request.user);
+      
+      if (!request.user || !roles.includes(request.user.role)) {
         return next(new AppError('You do not have permission to perform this action', 403));
       }
 
@@ -169,7 +171,7 @@ class AuthController {
     };
   };
 
-  public forgotPassword = catchAsync(async (request: AuthRequest, response: Response, next: NextFunction) => {
+  public forgotPassword = catchAsync(async (request: Request, response: Response, next: NextFunction) => {
     // 1) Get User based on POSTed email
     const user = await UserModel.findOne({ email: request.body.email });
     if (!user) {
@@ -207,7 +209,7 @@ class AuthController {
     }
   });
 
-  public resetPassword = catchAsync(async (request: AuthRequest, response: Response, next: NextFunction) => {
+  public resetPassword = catchAsync(async (request: Request, response: Response, next: NextFunction) => {
     // 1) Get user based on the token
     const hashedToken = crypto.createHash('sha256').update(request.params.token).digest('hex');
 

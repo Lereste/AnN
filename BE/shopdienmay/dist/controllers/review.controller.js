@@ -13,12 +13,12 @@ class ReviewController {
         this.deleteddMessage = 'Deleted Review Successfully!';
         this.setProductAndUserIds = (0, catchAsync_1.catchAsync)((request, response, next) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             console.log('request.body', request.body);
-            // Allow nested routes
+            // Allow nested routes: Assign productId from the params if not provided
             if (!request.body.product) {
-                request.body.product = request.params.productId;
+                request.body.product = request.params.productId; // From the parent route
             }
             if (!request.body.user) {
-                request.body.user = request.user.id;
+                request.body.user = request.user.id; // From the authenticated user
             }
             next();
         }));

@@ -6,7 +6,7 @@ import AuthController from '../controllers/auth.controller';
 import CategoryController from '../controllers/category.controller';
 
 class CategoryRouter {
-  public path = '/api/v1/categories/';
+  public path = '/categories/';
   public router = Router();
   public categoryController = new CategoryController();
   public authController = new AuthController();
@@ -19,7 +19,7 @@ class CategoryRouter {
     this.router.get(this.path, this.categoryController.getAllCategories);
     this.router.get(this.path + ':id', this.categoryController.getCategoryById);
 
-    this.router.use(this.authController.protect, this.authController.restrictTo('admin') as any); // Protect route
+    this.router.use(this.path, this.authController.protect, this.authController.restrictTo('admin', 'staff')); // Protect route
 
     this.router.post(this.path, this.categoryController.createNewCategory);
     this.router.patch(this.path + ':id', this.categoryController.updateCategoryById);
