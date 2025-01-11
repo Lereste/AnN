@@ -89,7 +89,10 @@ ReviewSchema.post('save', function () {
 });
 ReviewSchema.post(/^findOneAnd/, function (docs) {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
-        yield docs.constructor.calculatorAverageRatings(docs.tour);
+        if (docs) {
+            console.log('docs', docs);
+            yield docs.constructor.calculatorAverageRatings(docs.product);
+        }
     });
 });
 const ReviewModel = (0, mongoose_1.model)('Review', ReviewSchema);

@@ -8,14 +8,14 @@ import { IFilterUser } from '../interfaces/filterUserObject.interface';
 
 import multer from 'multer';
 import sharp from 'sharp';
-import { AuthRequest } from '../interfaces/request.interface';
+import { HeaderRequest } from 'src/interfaces/auth.interface';
 
 class UserController {
   private factoryService = new FactoryService();
   private createMessage: string = 'Created User Successfully!';
 
   // Use to update User Infomation with field: name, email, photo
-  public updateAccount = catchAsync(async (request: AuthRequest, response: Response, next: NextFunction) => {
+  public updateAccount = catchAsync(async (request: HeaderRequest, response: Response, next: NextFunction) => {
     // 1) Create error if user use POSTs password method
     if (request.body.password || request.body.passwordConfirm) {
       return next(new AppError('This route is not for Password Updates. Use /updateMyPassword instead', 400));

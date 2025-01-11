@@ -2,13 +2,11 @@ import sharp from "sharp";
 import { catchAsync } from "../utils/catchAsync";
 import { Request, Response, NextFunction } from "express";
 import { FileArray, UploadedFile } from "express-fileupload";
-import { AuthRequest, ResizeImageRequest } from "../interfaces/request.interface";
+import { HeaderRequest } from "../interfaces/auth.interface";
 
 const resizeImageList = catchAsync(
-    async (request: ResizeImageRequest, response: Response, next: NextFunction) => {
-        const requestFiles = request.files as any;
-        console.log('[requestFiles]', requestFiles);
-
+    async (request: HeaderRequest, response: Response, next: NextFunction) => {
+        const requestFiles = request.files;
         // if (!requestFiles.image || !requestFiles.imageList) return;
 
         // Product image
@@ -20,7 +18,7 @@ const resizeImageList = catchAsync(
             }
 
             await sharp(requestFiles.image[0].buffer)
-                .resize(2000, 1333)
+                .resize(600, 600)
                 .toFormat("jpeg")
                 .jpeg({ quality: 90 })
                 .toFile(`src/assets/images/products/${request.body.image}`);
@@ -41,7 +39,7 @@ const resizeImageList = catchAsync(
                     }
 
                     await sharp(file.buffer)
-                        .resize(2000, 1333)
+                        .resize(200, 200)
                         .toFormat("jpeg")
                         .jpeg({ quality: 90 })
                         .toFile(`src/assets/images/products/${fileName}`);
