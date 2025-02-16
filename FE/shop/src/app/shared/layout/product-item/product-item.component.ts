@@ -32,7 +32,7 @@ import urlSlug from 'url-slug';
     NgFor,
     NgIf,
     CarouselModule,
-    NgOptimizedImage,
+    // NgOptimizedImage,
     AngularToastifyModule,
   ],
   templateUrl: './product-item.component.html',
@@ -103,7 +103,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     this.newItemEvent.emit(this.owlCar);
   }
 
- 
+
 
   goToProductDetailPage(productItem: Products): void {
     this.router.navigate(['chi-tiet-san-pham/' + productItem.slug]);
