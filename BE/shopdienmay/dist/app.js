@@ -54,11 +54,10 @@ class App {
             products: path.join(__dirname, 'assets', 'images', 'products'),
             users: path.join(__dirname, 'assets', 'images', 'users'),
         };
-        // Hàm dùng để phục vụ hình ảnh từ một thư mục cụ thể
         const serveImages = (directory, urlPrefix) => {
             this._app.use(`/images/${urlPrefix}`, express_1.default.static(directory));
         };
-        // Cấu hình để phục vụ cả hình ảnh sản phẩm và hình ảnh người dùng
+        // Cấu hình nơi lưu ảnh products và users
         serveImages(IMAGE_DIRECTORIES.products, 'products');
         serveImages(IMAGE_DIRECTORIES.users, 'users');
         // Use helmet middleware to set a Content Security Policy (CSP)
