@@ -9,7 +9,7 @@ import { AccessoriesTypeComponent } from '../../layout/accessories-type/accessor
 import { ServiceSalesComponent } from '../../layout/service-sales/service-sales.component';
 import { HeroComponent } from '../../layout/hero/hero.component';
 import { SeoService } from 'src/app/core/service/seo/seo.service';
-import { environment } from 'src/app/environments/environment';
+import { environment } from 'src/app/environments/environment.production';
 import { ServiceProcessComponent } from '../../layout/service-process/service-process.component';
 import { SalesCommitmentComponent } from '../../layout/sales-commitment/sales-commitment.component';
 import { SwiperComponent } from '../../components/swiper/swiper.component';
@@ -19,7 +19,7 @@ import { SwiperComponent } from '../../components/swiper/swiper.component';
   standalone: true,
   imports: [
     HeroComponent,
-    LatestProductsComponent,
+    // LatestProductsComponent,
     SaleProductsComponent,
     CategoryMainComponent,
     ProductsTypeComponent,
@@ -28,7 +28,7 @@ import { SwiperComponent } from '../../components/swiper/swiper.component';
     ServiceSalesComponent,
     ServiceProcessComponent,
     SwiperComponent,
-    FooterComponent,
+    // FooterComponent,
     GoToTopComponent
   ],
   templateUrl: './home.component.html',
