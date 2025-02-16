@@ -22,7 +22,7 @@ class App {
         this._limiter = (0, express_rate_limit_1.default)({
             max: 100,
             windowMs: 60 * 60 * 1000,
-            message: "To many requests from this IP, please try again in 1 hour!"
+            message: 'To many requests from this IP, please try again in 1 hour!',
         });
         this._connectToMongooseDatabase(); // step 1
         this._createServer(); // step 2
@@ -35,7 +35,7 @@ class App {
     _connectToMongooseDatabase() {
         if (this._env === 'development') {
             (0, mongoose_1.set)('debug', true);
-            this._app.use((0, morgan_1.default)("dev"));
+            this._app.use((0, morgan_1.default)('dev'));
             mongoose_1.default.connect(databases_1.DB_CONNECTION_LOCAL.URL, databases_1.DB_CONNECTION_LOCAL.OPTIONS).then((con) => {
                 console.log('Local DB connection successfully !!!');
             });
@@ -48,7 +48,8 @@ class App {
     }
     _initializeMiddlewares() {
         this._app.use((0, cors_1.default)({
-            origin: 'http://localhost:1999',
+            origin: ['http://localhost:1999', 'https://dienlanhhoaian.netlify.app'],
+            credentials: true, // Nếu cần gửi cookie hoặc authentication headers
         }));
         const IMAGE_DIRECTORIES = {
             products: path.join(__dirname, 'assets', 'images', 'products'),
@@ -66,7 +67,7 @@ class App {
                 defaultSrc: ["'self'"],
                 scriptSrc: ["'self'", "'unsafe-inline'"],
                 // Add other directives as needed
-            }
+            },
         }));
         this._app.use(express_1.default.urlencoded({ extended: true, limit: '10kb' })); // parse application/x-www-form-urlencoded
         this._app.use(express_1.default.json({ limit: '10kb' }));
