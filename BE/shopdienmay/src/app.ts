@@ -20,7 +20,7 @@ export class App {
   private _limiter = rateLimit({
     max: 100,
     windowMs: 60 * 60 * 1000,
-    message: "To many requests from this IP, please try again in 1 hour!"
+    message: 'To many requests from this IP, please try again in 1 hour!',
   });
 
   constructor(routes: Routes[]) {
@@ -37,7 +37,7 @@ export class App {
   private _connectToMongooseDatabase() {
     if (this._env === 'development') {
       set('debug', true);
-      this._app.use(morgan("dev"));
+      this._app.use(morgan('dev'));
 
       mongoose.connect(DB_CONNECTION_LOCAL.URL, DB_CONNECTION_LOCAL.OPTIONS).then((con) => {
         console.log('Local DB connection successfully !!!');
@@ -50,9 +50,12 @@ export class App {
   }
 
   private _initializeMiddlewares(): void {
-    this._app.use(cors({
-      origin: 'http://localhost:1999',
-    }));
+    this._app.use(
+      cors({
+        origin: ['http://localhost:1999', 'https://dienlanhhoaian.netlify.app'],
+        credentials: true, // Nếu cần gửi cookie hoặc authentication headers
+      })
+    );
 
     const IMAGE_DIRECTORIES = {
       products: path.join(__dirname, 'assets', 'images', 'products'),
@@ -68,13 +71,15 @@ export class App {
     serveImages(IMAGE_DIRECTORIES.users, 'users');
 
     // Use helmet middleware to set a Content Security Policy (CSP)
-    this._app.use(helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'"],
-        // Add other directives as needed
-      }
-    }));
+    this._app.use(
+      helmet.contentSecurityPolicy({
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'"],
+          // Add other directives as needed
+        },
+      })
+    );
     this._app.use(express.urlencoded({ extended: true, limit: '10kb' })); // parse application/x-www-form-urlencoded
     this._app.use(express.json({ limit: '10kb' }));
     this._app.use(cookieParser());
