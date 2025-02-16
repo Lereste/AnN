@@ -1,177 +1,153 @@
-import AppError from "../utils/appError";
-import { catchAsync } from "../utils/catchAsync";
-import { Request, Response, NextFunction } from 'express';
-import APIFeatures from "./apiFeatures.service";
-import ReviewModel from "../models/review.model";
-import ProductModel from "../models/product.model";
-import mongoose from "mongoose";
-import UserModel from "../models/user.model";
-import CategoryModel from "../models/category.model";
-import convert from "url-slug";
+import { NextFunction, Request, Response } from 'express';
+import { catchAsync } from '../utils/catchAsync';
+import convert from 'url-slug';
+import CategoryModel from '../models/category.model';
+import ProductModel from '../models/product.model';
+import UserModel from '../models/user.model';
+import AppError from '../utils/appError';
+import APIFeatures from './apiFeatures.service';
 
 class FactoryService {
-    private _updateImageUrls = (item: any, baseImageUrl: string) => {
-        if (item.image) {
-            item.image = `${baseImageUrl}${item.image}`;
-        }
-
-        if (item.imageList) {
-            if (typeof item.imageList === 'string') {
-                // Split the string by commas to create an array
-                item.imageList = item.imageList.split(',').map((imageUrl: string) => {
-                    return `${baseImageUrl}${imageUrl.trim()}`;  // Prepend base URL and remove extra spaces
-                });
-            } else if (Array.isArray(item.imageList)) {
-                // If imageList is already an array, just prepend the base URL to each image
-                item.imageList = item.imageList.map((imageUrl: string) => {
-                    return `${baseImageUrl}${imageUrl.trim()}`;
-                });
-            }
-        }
-    }
-
-    public getAll = (Model: any) =>
-        catchAsync(async (request: any, response: Response, next: NextFunction) => {
-            /*
+  public getAll = (Model: any) =>
+    catchAsync(async (request: any, response: Response, next: NextFunction) => {
+      /*
                 const reviewRouter = express.Router({mergeParams: true});
                 Vì đã có mergeParams ở router, nên nếu ta call /tours/3123asd535(tourId)/review thì nó sẽ chạy getAll thay vì getOneTour theo id
             */
 
-            // To allow for nested GET reviews on Tour
-            let filter = {};
-            if (request.params.productId) {
-                filter = { product: request.params.productId }
-                // console.log('filter', filter); // filter { product: '5c88fa8cf4afda39709c2955' }
-            }
+      // To allow for nested GET reviews on Tour
+      let filter = {};
+      if (request.params.productId) {
+        filter = { product: request.params.productId };
+        // console.log('filter', filter); // filter { product: '5c88fa8cf4afda39709c2955' }
+      }
 
-            // Execute query
-            const features = new APIFeatures(Model.find(filter), request.query as any)
-                .filter()
-                .sort()
-                .limitFields()
-                .paginate();
+      // Execute query
+      const features = new APIFeatures(Model.find(filter), request.query as any)
+        .filter()
+        .sort()
+        .limitFields()
+        .paginate();
 
-            // const documents = await features.query.explain();
-            const documents = await features.query;
+      // const documents = await features.query.explain();
+      const documents = await features.query;
 
-            // Send response
-            response.status(200).json({
-                status: "success",
-                requestedAt: request.requestTime,
-                totals: documents.length,
-                results: {
-                    data: documents,
-                },
-            });
+      // Send response
+      response.status(200).json({
+        status: 'success',
+        requestedAt: request.requestTime,
+        totals: documents.length,
+        results: {
+          data: documents,
+        },
+      });
+    });
+
+  public getOne = (Model: any, populateOptions?: Object) =>
+    catchAsync(async (request: Request, response: Response, next: NextFunction) => {
+      // Model.findOne({ _id: request.params.id})
+      // const getOneDocument = await Model.findById(request.params.id).populate('reviews');
+      let query = Model.findById(request.params.id);
+      if (populateOptions) {
+        query = query.populate(populateOptions);
+      }
+
+      const getOneDocument = await query;
+
+      if (!getOneDocument) {
+        return next(new AppError('No document found with that ID', 404));
+      }
+
+      response.status(200).json({
+        status: 'success',
+        currentDocumentName: `${getOneDocument.name}`,
+        result: {
+          data: getOneDocument,
+        },
+      });
+    });
+
+  public createOne = (Model: any, message?: string) =>
+    catchAsync(async (request: Request, response: Response, next: NextFunction) => {
+      if (Model === ProductModel || Model === UserModel || Model === CategoryModel) {
+        const { name } = request.body;
+        const nameExist = await Model.exists({ name });
+
+        if (nameExist) {
+          throw new AppError('This Name is already in use. Please try another Name', 422);
+        }
+      }
+
+      let documment = request.body;
+
+      // Generate slug here based on product name
+      if (Model === ProductModel && documment.name) {
+        documment.slug = convert(documment.name as string, {
+          dictionary: {
+            đ: 'd',
+            Đ: 'D',
+          },
         });
 
-    public getOne = (Model: any, populateOptions?: Object) =>
-        catchAsync(async (request: Request, response: Response, next: NextFunction) => {
-            // Model.findOne({ _id: request.params.id})
-            // const getOneDocument = await Model.findById(request.params.id).populate('reviews');
-            let query = Model.findById(request.params.id);
-            if (populateOptions) {
-                query = query.populate(populateOptions);
-            }
+        const { slug } = request.body;
+        const isExistSlug = await Model.exists({ slug });
 
-            const getOneDocument = await query;
+        if (isExistSlug) {
+          throw new AppError('This Slug is already in use. Please try another Name', 422);
+        }
 
-            if (!getOneDocument) {
-                return next(new AppError('No document found with that ID', 404));
-            }
+        // updateImageUrls(documment, 'http://localhost:1234/images/products/'); // Cập nhật URL cho hình ảnh sản phẩm
+      }
 
-            response.status(200).json({
-                status: "success",
-                currentDocumentName: `${getOneDocument.name}`,
-                result: {
-                    data: getOneDocument,
-                },
-            });
-        })
+      const newDocument = await Model.create(documment);
 
-    public createOne = (Model: any, message?: string) =>
-        catchAsync(async (request: Request, response: Response, next: NextFunction) => {
-            if (Model === ProductModel || Model === UserModel || Model === CategoryModel) {
-                const { name } = request.body;
-                const nameExist = await Model.exists({ name });
+      response.status(201).json({
+        status: 'success',
+        message,
+        result: {
+          data: newDocument,
+        },
+      });
+    });
 
-                if (nameExist) {
-                    throw new AppError('This Name is already in use. Please try another Name', 422);
-                }
-            }
-            
-            let documment = request.body;
-            
-            // Generate slug here based on product name
-            if (Model === ProductModel && documment.name) {
-                documment.slug = convert(documment.name as string, {
-                    dictionary: {
-                        đ: 'd',
-                        Đ: 'D',
-                    },
-                });
+  public updateOne = (Model: any, message?: string) =>
+    catchAsync(async (request: Request, response: Response, next: NextFunction) => {
+      const updatedDocument = await Model.findByIdAndUpdate(request.params.id, request.body, {
+        new: true, // Return the modified document rather than the original
+        runValidators: true, // Validate the updated data against the model's schema
+      });
 
-                const { slug } = request.body;
-                const slugExist = await Model.exists({ slug });
+      if (!updatedDocument) {
+        return next(new AppError('No document found with that ID', 404));
+      }
 
-                if (slugExist) {
-                    throw new AppError('This Slug is already in use. Please try another Name', 422);
-                }
+      // await updatedDocument.save();
+      updatedDocument.changedAt = Date.now() - 1000; // Add a custom field to track when the review was last changed
+      updatedDocument.save();
 
-                this._updateImageUrls(documment, 'http://localhost:1234/images/products/');  // Cập nhật URL cho hình ảnh sản phẩm
-            }
+      response.status(200).json({
+        status: 'success',
+        message,
+        result: {
+          data: updatedDocument,
+        },
+      });
+    });
 
-            const newDocument = await Model.create(documment)
+  public deleteOne = (Model: any, message?: string) =>
+    catchAsync(async (request: Request, response: Response, next: NextFunction) => {
+      const deleteDocument = await Model.findByIdAndDelete(request.params.id);
 
-            response.status(201).json({
-                status: 'success',
-                message,
-                result: {
-                    data: newDocument
-                }
-            })
-        });
+      if (!deleteDocument) {
+        return next(new AppError('No documment found with that ID', 404));
+      }
 
-
-    public updateOne = (Model: any, message?: string) =>
-        catchAsync(async (request: Request, response: Response, next: NextFunction) => {
-
-            const updatedDocument = await Model.findByIdAndUpdate(request.params.id, request.body, {
-                new: true, // Return the modified document rather than the original
-                runValidators: true, // Validate the updated data against the model's schema
-            })
-
-            if (!updatedDocument) {
-                return next(new AppError('No document found with that ID', 404));
-            }
-
-            // await updatedDocument.save();
-            updatedDocument.changedAt = Date.now() - 1000; // Add a custom field to track when the review was last changed
-            updatedDocument.save();
-
-            response.status(200).json({
-                status: "success",
-                message,
-                result: {
-                    data: updatedDocument,
-                },
-            });
-        });
-
-    public deleteOne = (Model: any, message?: string) =>
-        catchAsync(async (request: Request, response: Response, next: NextFunction) => {
-            const deleteDocument = await Model.findByIdAndDelete(request.params.id)
-
-            if (!deleteDocument) {
-                return next(new AppError('No documment found with that ID', 404));
-            }
-
-            response.status(204).json({
-                status: "success",
-                message,
-                data: null
-            });
-        });
+      response.status(204).json({
+        status: 'success',
+        message,
+        data: null,
+      });
+    });
 }
 
-export default FactoryService
+export default FactoryService;

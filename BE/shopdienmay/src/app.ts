@@ -59,12 +59,11 @@ export class App {
       users: path.join(__dirname, 'assets', 'images', 'users'),
     };
 
-    // Hàm dùng để phục vụ hình ảnh từ một thư mục cụ thể
     const serveImages = (directory: string, urlPrefix: string) => {
       this._app.use(`/images/${urlPrefix}`, express.static(directory));
     };
 
-    // Cấu hình để phục vụ cả hình ảnh sản phẩm và hình ảnh người dùng
+    // Cấu hình nơi lưu ảnh products và users
     serveImages(IMAGE_DIRECTORIES.products, 'products');
     serveImages(IMAGE_DIRECTORIES.users, 'users');
 
