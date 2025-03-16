@@ -8,9 +8,6 @@ class CategoryController {
     private updatedMessage: string = "Updated Category Successfully!"
     private deleteddMessage: string = "Deleted Category Successfully!"
 
-    // public createUser = async (req: Request, res: Response, next: NextFunction) => {
-    // }
-
     public createNewCategory = this.factoryService.createOne(CategoryModel, this.createMessage);
     public getCategoryById = this.factoryService.getOne(CategoryModel, { path: 'products' })
     public getAllCategories = this.factoryService.getAll(CategoryModel)

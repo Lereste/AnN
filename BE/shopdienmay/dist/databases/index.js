@@ -23,7 +23,7 @@ exports.DB_CONNECTION_CLOUD = {
     OPTIONS: {
         // useNewUrlParser: true,
         // useUnifiedTopology: true,
-        dbName: 'shopdienmay-database',
+        dbName: 'dienlanhhoaian-database',
     },
 };
 //# sourceMappingURL=index.js.map

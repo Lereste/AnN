@@ -12,8 +12,6 @@ class ProductController {
         this.createMessage = 'Created Product Successfully!';
         this.updatedMessage = 'Created Product Successfully!';
         this.deleteddMessage = 'Deleted Product Successfully!';
-        // public createUser = async (req: Request, res: Response, next: NextFunction) => {
-        // }
         this.searchProductsBySlug = (0, catchAsync_1.catchAsync)((request, response, next) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             let { query } = request.query; // Get the search query from the query parameter
             if (!query || typeof query !== 'string') {
@@ -21,17 +19,15 @@ class ProductController {
             }
             const removedDiacritics = (0, removeDiacritics_1.removeVietnameseDiacritics)(query.toString().trim()); // Loại bỏ tất cả dấu cách ở 2 đầu trong query (nếu cần)
             const clearQuery = removedDiacritics.replace(/\s+/g, '-'); // Thay thế dấu cách bằng dấu gạch nối
-            // Tìm kiếm sản phẩm bằng slug
+            // Tìm kiếm slug không phân biệt chữ hoa chữ thường
             const products = yield product_model_1.default.find({
-                slug: { $regex: new RegExp(clearQuery, 'i') } // Tìm kiếm slug không phân biệt chữ hoa chữ thường
+                slug: { $regex: new RegExp(clearQuery, 'i') },
             })
-                .limit(10) // Giới hạn kết quả tìm kiếm là 5 sản phẩm
+                .limit(10) // Giới hạn kết quả tìm kiếm là 10 sản phẩm
                 .exec();
-            // Check if any products were found
             if (products.length === 0) {
                 return next(new appError_1.default('No products found matching the search criteria', 404));
             }
-            // Return the found products
             response.status(200).json({
                 status: 'success',
                 totals: products.length,
@@ -48,15 +44,13 @@ class ProductController {
             }
             const removedDiacritics = (0, removeDiacritics_1.removeVietnameseDiacritics)(query.toString().trim()); // Loại bỏ tất cả dấu cách ở 2 đầu trong query (nếu cần)
             const clearQuery = removedDiacritics.replace(/\s+/g, '-'); // Thay thế dấu cách bằng dấu gạch nối
-            // Tìm kiếm sản phẩm bằng slug
+            // Tìm kiếm slug không phân biệt chữ hoa chữ thường
             const product = yield product_model_1.default.findOne({
-                slug: { $regex: new RegExp(clearQuery, 'i') } // Tìm kiếm slug không phân biệt chữ hoa chữ thường
-            })
-                .exec();
+                slug: { $regex: new RegExp(clearQuery, 'i') },
+            }).exec();
             if (!product) {
                 return next(new appError_1.default('No product found matching the search criteria', 404));
             }
-            // Return the found products
             response.status(200).json({
                 status: 'success',
                 results: {
@@ -64,18 +58,6 @@ class ProductController {
                 },
             });
         }));
-        // public getProductBySlug = catchAsync(async (request: Request, response: Response, next: NextFunction) => {
-        //   const slug = request.params.productSlug;
-        //   const product = await ProductModel.findOne({ slug });
-        //   if (!product) {
-        //     return next(new AppError('No Product found with this Slug', 404));
-        //   }
-        //   // Return the found products
-        //   response.status(200).json({
-        //     status: 'success',
-        //     results: product,
-        //   });
-        // })
         this.getAllProducts = this.factoryService.getAll(product_model_1.default);
         this.getProductById = this.factoryService.getOne(product_model_1.default, { path: 'reviews' });
         this.createNewProduct = this.factoryService.createOne(product_model_1.default, this.createMessage);

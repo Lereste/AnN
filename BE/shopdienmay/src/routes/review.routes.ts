@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import ProductController from '../controllers/product.controller';
 import { uploadImages } from '../middlewares/upload-images.middleware';
-import resizeTourimageList from '../middlewares/resize-images.middleware';
+import resizeTourimageList from '../middlewares/base64-resize-images.middleware';
 import AuthController from '../controllers/auth.controller';
 import ReviewController from '../controllers/review.controller';
 

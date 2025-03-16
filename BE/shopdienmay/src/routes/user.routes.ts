@@ -2,7 +2,7 @@ import { Router } from 'express';
 import UserController from '../controllers/user.controller';
 import AuthController from '../controllers/auth.controller';
 import { uploadImages } from '../middlewares/upload-images.middleware';
-import resizeImageList from '../middlewares/resize-images.middleware';
+import resizeImageList from '../middlewares/base64-resize-images.middleware';
 
 class UserRouter {
   public path = '/users/';

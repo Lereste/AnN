@@ -44,6 +44,8 @@ class App {
             mongoose_1.default.connect(databases_1.DB_CONNECTION_CLOUD.URL, databases_1.DB_CONNECTION_CLOUD.OPTIONS).then((con) => {
                 console.log('Cloud DB connection successfully !!!');
             });
+            (0, mongoose_1.set)('debug', true);
+            this._app.use((0, morgan_1.default)('dev'));
         }
     }
     _initializeMiddlewares() {
