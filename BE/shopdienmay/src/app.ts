@@ -46,6 +46,9 @@ export class App {
       mongoose.connect(DB_CONNECTION_CLOUD.URL, DB_CONNECTION_CLOUD.OPTIONS).then((con) => {
         console.log('Cloud DB connection successfully !!!');
       });
+
+      set('debug', true);
+      this._app.use(morgan('dev'));
     }
   }
 

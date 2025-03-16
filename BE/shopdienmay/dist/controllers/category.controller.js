@@ -10,8 +10,6 @@ class CategoryController {
         this.getOneMessage = "Created Category Successfully!";
         this.updatedMessage = "Updated Category Successfully!";
         this.deleteddMessage = "Deleted Category Successfully!";
-        // public createUser = async (req: Request, res: Response, next: NextFunction) => {
-        // }
         this.createNewCategory = this.factoryService.createOne(category_model_1.default, this.createMessage);
         this.getCategoryById = this.factoryService.getOne(category_model_1.default, { path: 'products' });
         this.getAllCategories = this.factoryService.getAll(category_model_1.default);
