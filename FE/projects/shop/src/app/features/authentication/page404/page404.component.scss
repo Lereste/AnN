@@ -1,0 +1,22 @@
+@use 'styles' as *;
+
+
+.page-404 {
+   margin: 8rem auto 0;
+
+    &-title {
+        margin-top: 20rem;
+        color: #141010;
+        font-size: 3rem;
+        @include flex-center;
+    }
+
+    &-image {
+        @include flex-center;
+
+        img {
+            width: 70rem;
+            // margin: 0 auto;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+@use 'styles' as *;
+
+
+.all-products {
+   margin: 8rem auto 0;
+
+    &-container {
+        @include flex-center;
+        height: 60rem;
+        color: #141010;
+        font-size: 3rem;
+    }
+}
