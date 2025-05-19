@@ -1,0 +1,72 @@
+@use 'styles' as *;
+
+
+.order {
+    // border: 1px solid #141010;
+    // height: 32rem;
+    width: 100%;
+    // width: 24rem;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 0.2rem;
+    @include flex-center;
+
+    &-summary {
+        width: 100%;
+        padding: 0rem 0.8rem;
+        // display: flex;
+        // box-shadow: var(--mat-app-elevation-shadow-level-8, none);
+
+        &-title,
+        &-total-quantity,
+        &-ship,
+        &-total-price {
+            @include flex-space-between;
+            padding: 0.8rem;
+            border-bottom: 1px solid #ccc;
+
+            span:nth-child(2) {
+                font-weight: 500;
+                // color: to;
+            }
+        }
+
+        &-title,
+        &-checkout {
+            @include flex-center;
+        }
+
+        &-checkout {
+            padding: 0.8rem;
+
+            button {
+                width: 100%;
+                // height: 3rem;
+                padding: 0.8rem 1.6rem;
+
+                font-size: 1.6rem;
+                font-weight: bold;
+                background-color: #dc2f2f;
+                border-radius: 0.2rem;
+                border: 1px solid #dc2f2f;
+                color: white;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    transition: all 0.3s ease-in-out;
+                    color: white;
+                    border: 1px solid #141010;
+                    cursor: pointer;
+                    background-color: #141010;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .order {
+        &-summary {
+            min-width: 34rem;
+        }
+    }
+}

@@ -1,0 +1,106 @@
+@use 'styles' as *;
+
+
+
+.category__hero {
+    height: 44rem; // default 46rem
+
+    // &-container {
+    //     // padding: 0.4rem;
+    // }
+
+    background: #ffff;
+    border-radius: 0.2rem;
+    // border: 1px solid #ffff;
+    font-size: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 4px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+        rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.hero__category-parent-list {
+    cursor: pointer;
+    z-index: 100;
+
+    .hero__category-parent-item {
+        @include flex-space-between;
+        border-bottom: 0.04rem solid #ccc;
+        padding: 0.8rem 0.6rem;
+
+        &-left {
+            @include flex-center;
+
+            .hero__category-parent-item-image {
+                width: 2.2rem;
+                height: 2.2rem;
+            }
+
+            .hero__category-parent-item-name {
+                margin-left: 0.4rem;
+                font-size: 1.5rem;
+            }
+        }
+
+        i {
+            display: none;
+
+            &:hover {
+                display: inline-flex;
+            }
+        }
+
+        &:hover {
+            background-color: #f7d8d8;
+
+            i {
+                display: block;
+            }
+
+            .hero__category-children-list {
+                display: block;
+                z-index: 10;
+                background-color: transparent;
+                width: 28rem;
+                height: 44rem; // default 46rem
+                position: absolute;
+                top: 90px;
+                left: calc(30.8% - 8px); // (18% của ads bên trái + 12.8% của category-hero) - 8px padding = vừa khít
+            }
+
+            .hero__category-children-item {
+                background-color: #ffff;
+                margin-left: 12px;
+                padding: 0.94rem;
+                border: 1px solid #ccc;
+                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+                &:hover {
+                    background-color: #f78686;
+
+                    span {
+                        color: #fff
+                    }
+                }
+            }
+        }
+
+        .hero__category-children-list {
+            display: none;
+            color: #141010;
+        }
+    }
+}
+
+@media only screen and (max-width: 1700px) {
+    .hero__category-parent-list:hover {
+        .hero__category-children-list {
+            left: 27%;
+        }
+    }
+}
+
+// Mobile <740px
+@media only screen and (max-width: 46.1875em) {
+    .category__hero {
+            display: none;
+    }
+  }
