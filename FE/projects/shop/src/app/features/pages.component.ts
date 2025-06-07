@@ -23,11 +23,11 @@ export class PagesComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      window.scrollTo({
-        top: 0,
-        behavior: 'instant',
-      });
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    //   window.scrollTo({
+    //     top: 0,
+    //     behavior: 'instant',
+    //   });
+    // }
   }
 }

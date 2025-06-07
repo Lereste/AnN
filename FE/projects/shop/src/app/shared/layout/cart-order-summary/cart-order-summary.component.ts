@@ -10,10 +10,10 @@ import { ProductService } from '@core/service/product-service/product.service';
 import urlSlug from 'url-slug';
 
 @Component({
-    selector: 'app-cart-order-summary',
-    imports: [FormsModule, CommonModule, NgIf],
-    templateUrl: './cart-order-summary.component.html',
-    styleUrl: './cart-order-summary.component.scss'
+  selector: 'app-cart-order-summary',
+  imports: [FormsModule, CommonModule, NgIf],
+  templateUrl: './cart-order-summary.component.html',
+  styleUrl: './cart-order-summary.component.scss'
 })
 export class CartOrderSummaryComponent implements OnInit {
   unSubcribe$: Subject<any> = new Subject();
@@ -80,7 +80,7 @@ export class CartOrderSummaryComponent implements OnInit {
 
             _totalQuantity += Number(cartItem.quantity);
             this.totalQuantity = _totalQuantity;
-            console.log('lereste', this.totalQuantity)
+            // console.log('lereste', this.totalQuantity)
 
             _totalPrice += productItem.priceDiscount ? productItem.priceDiscount * cartItem.quantity : 0;
             this.totalPrice = _totalPrice

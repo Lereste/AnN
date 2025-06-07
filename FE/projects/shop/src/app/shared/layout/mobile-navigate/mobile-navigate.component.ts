@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CategoryMobileComponent } from '../../components/category-mobile/category-mobile.component';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { SearchComponent } from '../../components/search/search.component';
+import { filter } from 'rxjs';
 // import 'animate.css'
 
 @Component({
@@ -11,41 +12,21 @@ import { SearchComponent } from '../../components/search/search.component';
     templateUrl: './mobile-navigate.component.html',
     styleUrl: './mobile-navigate.component.scss'
 })
-export class MobileNavigateComponent implements OnInit, AfterViewInit {
-  isCategory: boolean = false;
-  isSearch: boolean = false;
+export class MobileNavigateComponent implements OnInit {
+  activeItem: 'category' | 'search' | null = null;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.activeItem = null;
+      });
   }
 
-  ngAfterViewInit(): void {
-  }
-
-  goToHomePage(): void {
-    this.router.navigate(['/']);
-
-    // hide another
-    this.isCategory = false;
-    this.isSearch = false;
-  }
-
-  showCategory(): void {
-    this.isCategory = !this.isCategory;
-
-    console.log('this.isCategory', this.isCategory);
-
-    // hide another
-    this.isSearch = false;
-  }
-
-  showSearch(): void {
-    this.isSearch = !this.isSearch;
-
-    // hide another
-    this.isCategory = false;
+  toggleItem(type: 'category' | 'search'): void {
+    this.activeItem = this.activeItem === type ? null : type;
   }
 
   goToAccount(): void {
@@ -54,5 +35,10 @@ export class MobileNavigateComponent implements OnInit, AfterViewInit {
 
   goToCart(): void {
     this.router.navigate(['gio-hang']);
+  }
+
+  goToHomePage(): void {
+    this.activeItem = null; // tắt các toggle
+    this.router.navigate(['/']);
   }
 }

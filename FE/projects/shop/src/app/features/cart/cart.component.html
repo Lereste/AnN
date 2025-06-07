@@ -18,39 +18,26 @@
         </div>
       </div>
 
-      <div class="cart-products-container" >
+      <div class="cart-products-container">
         <div class="cart-order-list" *ngIf="!isEmptyCart">
           <mat-table [dataSource]="cartDataSource" class="mat-elevation-z8">
-            <!--- Note that these columns can be defined in any order.
-                            The actual rendered columns are set as a property on the row definition" -->
-  
-            <!-- Position Column -->
-            <!-- <ng-container matColumnDef="position">
-                        <th mat-header-cell *matHeaderCellDef> Thứ tự </th>
-                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                      </ng-container> -->
-  
             <!-- product Column -->
             <ng-container matColumnDef="product">
               <mat-header-cell *matHeaderCellDef>Sản Phẩm</mat-header-cell>
               <mat-cell *matCellDef="let element">
                 <div class="cart-order-item-product">
-                  <img [src]="element.product.image" alt="" />
-                  <span> {{ element.product.name }} </span>
+                  <div class="cart-order-item-product-left">
+                    <img [src]="element.product.image" alt="" />
+                  </div>
+
+                  <div class="cart-order-item-product-right">
+                    <p>{{ element.product.name }}</p>
+                    <p>{{ element.product.priceDiscount | currency : 'VND' : 'symbol' }}</p>
+                  </div>
                 </div>
               </mat-cell>
             </ng-container>
-  
-            <!-- price Column -->
-            <ng-container matColumnDef="price">
-              <mat-header-cell *matHeaderCellDef>Đơn Giá</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                {{
-                  element.product.priceDiscount | currency : "VND" : 'symbol'
-                }}
-              </mat-cell>
-            </ng-container>
-  
+
             <!-- quantity Column -->
             <ng-container matColumnDef="quantity">
               <mat-header-cell *matHeaderCellDef>Số Lượng</mat-header-cell>
@@ -62,41 +49,37 @@
                   max="99"
                   [value]="element.quantity"
                   (keydown)="onValidateKeydown($event)"
-                  (blur)="onValidateBlur($event, element)"
+                  (blur)="onBlurQuantity($event, element)"
                   (keyup)="onSelectedQuantity($event)"
-                  (input)="updateCartItemQuantity($event, element, idx)"
                 />
               </mat-cell>
             </ng-container>
-  
+
             <!-- total Column -->
             <ng-container matColumnDef="total">
               <mat-header-cell *matHeaderCellDef>Thành Tiền</mat-header-cell>
               <mat-cell *matCellDef="let element; let idx = index">
                 <span class="cart-order-item-total">
-                  {{ getTotalPriceItem(idx) | currency : "VND" : 'symbol' }}
+                  {{ getTotalPriceItem(idx) | currency : 'VND' : 'symbol' }}
                 </span>
               </mat-cell>
             </ng-container>
-  
+
             <!-- action -->
             <ng-container matColumnDef="action">
               <mat-header-cell *matHeaderCellDef>Thao Tác</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <button
-                  class="cart-order-item-delete"
-                  (click)="deleteCartItem(element)"
-                >
+                <button class="cart-order-item-delete" (click)="deleteCartItem(element)">
                   <i class="fa-regular fa-trash-can"></i>
                 </button>
               </mat-cell>
             </ng-container>
-  
+
             <mat-header-row [hidden]="isEmptyCart" *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns; trackBy: trackBySlug"></mat-row>
           </mat-table>
         </div>
-  
+
         <div class="cart-order-summary">
           <app-cart-order-summary></app-cart-order-summary>
         </div>
@@ -104,7 +87,5 @@
     </div>
   </div>
 
-  <lib-toastify-toast-container
-    [position]="'top-right'"
-  ></lib-toastify-toast-container>
+  <lib-toastify-toast-container [position]="'top-right'"></lib-toastify-toast-container>
 </section>

@@ -87,20 +87,21 @@ export class CarouselComponent implements OnInit, AfterViewInit, AfterViewChecke
 
   // sets index of image on dot/indicator click
   selectImage(index: number): void {
+    if (!this.sliderNativeElement) return;
+
     this.selectedIndex = index;
 
-    this.cdr.detectChanges();
+    const childrenList = this.sliderNativeElement.children;
+    const clickedItem = childrenList[index];
 
-    // this.imagesDataInput.find((item:any, idx) => {
+    // Di chuyển tất cả các phần tử sao cho phần tử index được đưa lên đầu
+    for (let i = 0; i < index; i++) {
+      this.sliderNativeElement.append(childrenList[0]);
+    }
 
-    //   if (this.selectedIndex === idx) {
-    //     console.log('this.selectedIndex', this.selectedIndex);
-    //     const ccc = this.slider.nativeElement.children[idx]; // lấy ảnh ở index 5 là The Migration
-    //     console.log('ccc', ccc);
-    //     this.slider.nativeElement?.append(ccc);
-    //   }
-    // })
+    this.cdr.markForCheck();
   }
+
 
   onPrevClick(): void {
     if (this.selectedIndex === 0) {

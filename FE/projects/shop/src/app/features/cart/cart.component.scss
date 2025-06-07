@@ -1,6 +1,5 @@
 @use 'styles' as *;
 
-
 .cart {
   margin: 10rem auto 0;
 
@@ -59,6 +58,7 @@
           width: 75%;
 
           mat-table {
+            width: 100%;
             background-color: white;
 
             mat-header-cell {
@@ -73,11 +73,24 @@
                 &-product {
                   display: flex;
                   align-items: center;
+                  text-align: center;
                   margin: 0.8rem 0;
 
-                  img {
-                    width: 8rem;
-                    margin-right: 0.8rem;
+                  &-left {
+                    img {
+                      width: 7.2rem;
+                      margin-right: 0.8rem;
+                    }
+                  }
+
+                  &-right {
+                    p {
+                      margin: 1.2rem 0;
+
+                      &:last-child {
+                        color: #dc2f2f;
+                      }
+                    }
                   }
                 }
 
@@ -106,20 +119,16 @@
               flex: 0 0 45%;
             }
 
-            .mat-column-price {
-              flex: 0 0 17%;
-            }
-
             .mat-column-quantity {
-              flex: 0 0 12%;
+              flex: 0 0 15%;
             }
 
             .mat-column-total {
-              flex: 0 0 14%;
+              flex: 0 0 25%;
             }
 
             .mat-column-action {
-              flex: 0 0 12%;
+              flex: 0 0 15%;
             }
           }
         }
@@ -152,7 +161,7 @@
 
             .cart-order-item {
               &-product {
-                flex-direction: column-reverse;
+                // flex-direction: column-reverse;
 
                 span {
                   line-height: 1.8rem;
@@ -181,7 +190,6 @@
 
     &-container {
       padding: 0 0.8rem;
-
 
       .cart-back-to-home {
         // padding: 0 0.8rem;
@@ -218,11 +226,7 @@
               }
 
               .mat-column-product {
-                flex: 0 0 25%;
-              }
-
-              .mat-column-price {
-                flex: 0 0 22%;
+                flex: 0 0 40%;
               }
 
               .mat-column-quantity {
@@ -230,11 +234,11 @@
               }
 
               .mat-column-total {
-                flex: 0 0 23%;
+                flex: 0 0 25%;
               }
 
               .mat-column-action {
-                flex: 0 0 15%;
+                flex: 0 0 20%;
               }
             }
           }

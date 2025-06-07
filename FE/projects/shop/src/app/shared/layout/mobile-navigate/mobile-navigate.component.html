@@ -1,37 +1,32 @@
 <section class="mobile-navigate">
-    <div class="mobile-navigate-container">
-        <button class="mobile-navigate-item home" (click)="goToHomePage()">
-            <i class="fa-solid fa-house"></i>
-            <span>Trang Chủ</span>
-        </button>
+  <div class="mobile-navigate-container">
+    <button class="mobile-navigate-item home" (click)="goToHomePage()">
+      <i class="fa-solid fa-house"></i>
+      <span>Trang Chủ</span>
+    </button>
 
-        <button class="mobile-navigate-item categories" (click)="showCategory()">
-            <i class="fa-solid fa-bars"></i>
-            <span>Danh Mục</span>
-        </button>
+    <button class="mobile-navigate-item categories" (click)="toggleItem('category')">
+      <i class="fa-solid fa-bars"></i>
+      <span>Danh Mục</span>
+    </button>
 
-        <button class="mobile-navigate-item search" (click)="showSearch()">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span>Tìm Kiếm</span>
-        </button>
+    <button class="mobile-navigate-item search" (click)="toggleItem('search')">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Tìm Kiếm</span>
+    </button>
 
-        <button class="mobile-navigate-item article" (click)="goToAccount()">
-            <i class="fa-regular fa-user"></i>
-            <span>Tài Khoản</span>
-        </button>
+    <button class="mobile-navigate-item article" (click)="goToAccount()">
+      <i class="fa-regular fa-user"></i>
+      <span>Tài Khoản</span>
+    </button>
 
-        <button class="mobile-navigate-item cart" (click)="goToCart()">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>Giỏ Hàng</span>
-        </button>
+    <button class="mobile-navigate-item cart" (click)="goToCart()">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span>Giỏ Hàng</span>
+    </button>
+  </div>
 
-    </div>
-
-    <div *ngIf="isCategory">
-        <app-category-mobile></app-category-mobile>
-    </div>
-
-    <div *ngIf="isSearch">
-        <app-search></app-search>
-    </div>
+  <!-- Render component trực tiếp -->
+  <app-category-mobile *ngIf="activeItem === 'category'"></app-category-mobile>
+  <app-search *ngIf="activeItem === 'search'"></app-search>
 </section>

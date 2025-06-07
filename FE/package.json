@@ -5,8 +5,8 @@
     "ng": "ng",
     "admin": "ng serve admin",
     "shop": "ng serve shop",
-    "start:prod": "ng serve --port 1999 --configuration=production",
-    "build:prod": "ng build --configuration=production",
+    "build:admin": "ng run admin:esbuild:production",
+    "build:shop": "ng run shop:esbuild:production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
