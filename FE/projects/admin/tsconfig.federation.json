@@ -27,6 +27,10 @@
     "src/server.ts"
   ],
   "include": [
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "..\\..\\node_modules\\@angular\\platform-server\\fesm2022\\platform-server.mjs",
+    "..\\..\\node_modules\\@angular\\platform-server\\fesm2022\\init.mjs",
+    "..\\..\\node_modules\\@angular\\ssr\\fesm2022\\ssr.mjs",
+    "..\\..\\node_modules\\@angular\\ssr\\fesm2022\\node.mjs"
   ]
 }

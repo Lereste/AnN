@@ -1,7 +1,10 @@
 const { withNativeFederation, shareAll } = require('@angular-architects/native-federation/config');
 
 module.exports = withNativeFederation({
-
+  name: 'shop',
+  exposes: {
+    // Add your exposed components here
+  },
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
   },
