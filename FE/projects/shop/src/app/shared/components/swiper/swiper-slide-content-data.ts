@@ -4,7 +4,7 @@ export const SWIPER_SLIDE_CONTENTS_DATA: SwiperSlideContents[] = [
   {
     title: 'Computer',
     description: 'Description about computer...',
-    url: 'assets/image/swiper/dienlanhhoaian.png',
+    url: 'https://file.hstatic.net/200000837185/file/pre_order_msi_claw_2fc35b44abea434e903d8a652bd05d8a_master.jpg',
   },
   {
     title: 'Building',

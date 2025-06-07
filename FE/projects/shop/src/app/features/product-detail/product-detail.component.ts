@@ -1,11 +1,12 @@
-import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID, makeStateKey, TransferState, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID, makeStateKey, TransferState, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, isPlatformBrowser } from '@angular/common';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { Products } from '@core/models/product/product.model';
-import urlSlug from 'url-slug';
 import { ProductService } from '@core/service/product-service/product.service';
+import { HTTP_RESPONSE_STATUS } from '@core/constant/helper.const';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 enum DESCRIBE_TYPE {
   DESCRIPTION = 'description',
@@ -14,12 +15,12 @@ enum DESCRIBE_TYPE {
 }
 
 @Component({
-    selector: 'app-product-detail',
-    imports: [NgIf, FormsModule, CommonModule, AngularToastifyModule, NgSwitch, NgSwitchDefault, NgSwitchCase],
-    templateUrl: './product-detail.component.html',
-    styleUrl: './product-detail.component.scss'
+  selector: 'app-product-detail',
+  imports: [NgIf, FormsModule, CommonModule, AngularToastifyModule, NgSwitch, NgSwitchDefault, NgSwitchCase],
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent implements OnInit, AfterViewInit {
+export class ProductDetailComponent implements OnInit {
   saleProducts: Products[] = [];
   cloneSaleProducts: Products[] = [];
   currentProductDetailItem!: Products;
@@ -32,6 +33,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   DESCRIBE_TYPE = DESCRIBE_TYPE;
   selectedDescribe: string = DESCRIBE_TYPE.DESCRIPTION;
   SALE_PRODUCTS_KEY = makeStateKey<Products[]>('saleProducts');
+
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private router: Router,
@@ -46,62 +49,32 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      // Kiểm tra và lấy dữ liệu từ TransferState
-      const savedProducts = this.transferState.get(this.SALE_PRODUCTS_KEY, null);
+    const savedProducts = this.transferState.get(this.SALE_PRODUCTS_KEY, null);
 
-      if (savedProducts) {
-        console.log('lereste: Chạy khi back ra home rồi vào lại detail')
-        this.saleProducts = savedProducts;  // Sử dụng dữ liệu đã có từ TransferState
-      } else {
-        console.log('lereste: Chạy khi vào detail')
-        this.loadData(); // Gọi API nếu không có dữ liệu
-      }
-
+    if (savedProducts) {
+      this.saleProducts = savedProducts;
     }
-    console.log('lereste: client')
 
-    // Nếu saleProducts đã có dữ liệu sau khi loadData
-    if (this.saleProducts && this.saleProducts.length > 0) {
-      this.setProductDetail();
-    }
+    this.activatedRoute.params
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((params) => {
+        const productSlug = params['productSlug'];
+        this.loadData(productSlug);
+      });
   }
 
+  loadData(productSlug: string): void {
+    console.log('productSlug', productSlug);
 
-  ngAfterViewInit() {
-    // Make scroll to top when navigate to this page
-    if (isPlatformBrowser(this.platformId)) {
-      window.scrollTo({
-        top: 0,
-        behavior: 'instant'
-      })
-    }
-  }
-
-  loadData(): void {
-    this.productService.getAllProducts().subscribe({
-      next: (response) => {
-        this.saleProducts = response.results.data;
-        // Store the fetched data in TransferState to prevent another API call
-        this.transferState.set(this.SALE_PRODUCTS_KEY, this.saleProducts);
-        this.setProductDetail();
-        this.cdr.detectChanges();
+    this.productService.getProductBySlugName(productSlug).subscribe({
+      next: (response: any) => {
+        if (!response || response.status !== HTTP_RESPONSE_STATUS.SUCCESS) return;
+        console.log('response', response.results.product);
+        this.currentProductDetailItem = response.results.product;
       },
       error: (err) => {
         console.error('Error loading products', err);
-      }
-    })
-
-    // this.productService.getProductById().
-  }
-
-  setProductDetail(): void {
-    console.log('this.activatedRoute.snapshot.params', this.activatedRoute.snapshot.params['productSlug'])
-    // Lặp qua danh sách sản phẩm để tìm sản phẩm chi tiết
-    this.saleProducts.forEach(productItem => {
-      if (productItem.slug === this.activatedRoute.snapshot.params['productSlug']) {
-        this.currentProductDetailItem = productItem;
-      }
+      },
     });
   }
 

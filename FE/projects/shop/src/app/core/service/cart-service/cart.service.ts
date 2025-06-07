@@ -45,7 +45,7 @@ export class CartService {
       this.cart = JSON.parse(cartJsonString);
       this.cart$.next(this.cart);
     }
-    
+
     return this.cart;
   }
 
@@ -57,16 +57,13 @@ export class CartService {
     if (!cartItemExist) {
       cart.items?.push(cartItem);
     } else {
-      cart.items?.map(item => {
+      cart.items = cart.items?.map(item => {
         if (item.productSlug === cartItem.productSlug) {
-          if (isUpdateItemQuantity) {
-            return item.quantity = cartItem.quantity;
-          } else {
-            return item.quantity = item.quantity + cartItem.quantity;
-          }
+          const quantity = isUpdateItemQuantity ? cartItem.quantity : item.quantity + cartItem.quantity;
+          return { ...item, quantity };
         }
         return item;
-      });
+      }) || [];
     }
 
     localStorage.setItem(CART_KEY, JSON.stringify(cart));

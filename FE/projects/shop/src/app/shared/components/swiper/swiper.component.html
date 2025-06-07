@@ -1,24 +1,11 @@
 <swiper-container swiperDirective #swiperElementRef [config]="customSwiperOptions" autoplay [autoHeight]="true">
-  <swiper-slide *ngFor="let item of swiperSlideContents">
+  <!-- @if (!swiperSlideContents.length) {
+    <img [src]="default-banner.jpge" alt="">
+  }  -->
+
+  @for (item of swiperSlideContents; track item.url) {
+  <swiper-slide>
     <img [src]="item.url" alt="">
   </swiper-slide>
+  }
 </swiper-container>
-
-<!--
- [loop]="true"
-      [autoHeight]="true"
-      [allowTouchMove]="true"
-      [autoplay]="{ delay: 1000, disableOnInteraction: false }"
-      [pagination]="{ clickable: true }"
-      [navigation]="true"
-
-      [loop]="true"
-  [autoHeight]="false"
-  [css-mode]="true"
-  [navigation]="true"
-  [pagination]="{ clickable: true }"
-  [scrollbar]="false"
-  autoplay="true"
-  [autoplay]="{ delay: 2000, disableOnInteraction: false, pauseOnMouseEnter: true, }"
-  [allowTouchMove]="true" -->
-

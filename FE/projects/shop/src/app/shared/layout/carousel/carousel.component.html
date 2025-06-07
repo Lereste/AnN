@@ -1,34 +1,13 @@
-<!-- <div *ngIf="images && images.length > 0" class="carousel-container" #autoplay>
-    <img *ngFor="let image of images; let idx = index" [src]="image.imageSrc" [alt]="image.imageAlt"
-        [ngClass]="{'image-active': selectedIndex === idx}" class="fade" >
 
-    <div *ngIf="indicators" class="carousel-dot-container">
-        <span *ngFor="let dot of images; let idx = index" class="dot" [ngClass]="{'dot-active': selectedIndex === idx}"
-            (click)="selectImage(idx)"></span>
-    </div>
 
-    <button *ngIf="controls" class="btn-carousel btn-prev" (click)="onPrevClick()">
-        <i class="fas fa-arrow-circle-left icon-carousel icon-prev"></i>
-    </button>
-    <button *ngIf="controls" class="btn-carousel btn-next" (click)="onNextClick()">
-        <i class="fas fa-arrow-circle-right icon-carousel icon-next"></i>
-    </button>
-</div> -->
-
-<main>
+<section class="carousel">
   <ng-container *ngIf="imagesDataInput.length > 0" >
-    <!-- <img src="" alt=""> -->
-    <div class='slider' #slider #autoplay>
-      <img class='item' *ngFor="let image of imagesDataInput; let idx = index"
+    <div class='carousel__image' #slider #autoplay>
+      <img class='carousel__image-item' *ngFor="let image of imagesDataInput; let idx = index"
         [src]="image.imageSrc" [alt]="image.imageAlt" width="959" height="400" decoding="sync" loading="eager">
-        <!-- <div class='content'>
-          <h2 class='title'>{{image.content.title}}</h2>
-          <p class='description'>{{image.content.description}}</p>
-          <button class="buy">Mua Ngay</button>
-        </div> -->
     </div>
 
-    <div *ngIf="indicators" class="carousel-dot-container" >
+    <div *ngIf="indicators" class="carousel__dots">
       <span *ngFor="let image of imagesDataInput; let idx = index" class="dot"
         [ngClass]="{'dot-active': selectedIndex === idx}" (click)="selectImage(idx)"></span>
     </div>
@@ -43,4 +22,5 @@
       </button>
     </div>
   </ng-container>
-</main>
+</section>
+

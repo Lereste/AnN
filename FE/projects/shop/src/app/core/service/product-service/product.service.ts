@@ -20,11 +20,20 @@ export class ProductService {
     }))
   }
 
-  getProductById(productId: string): Observable<Products> {
-    return this.http.get<Products>(this.baseURL + '/' + productId).pipe(catchError((error) => {
-      throw error;
-    }))
+  getProductBySlugName(productSlug: string): Observable<Products> {
+    return this.http.get<Products>(this.baseURL + '/productItem?query=' + productSlug)
+      .pipe(catchError((error) => {
+        throw error;
+      }))
   }
+
+  searchProductsByName(searchValue: string): Observable<Products> {
+    return this.http.get<Products>(this.baseURL + '/search?query=' + searchValue)
+      .pipe(catchError((error) => {
+        throw error;
+      }))
+  }
+
 
   //   searchIntraUserByKnoxID(searchPayload: SearchIntraUserPayloadModel): Observable<IntraUserModel[]> {
   //     const url = `${this.baseURL}/searchIntraUser`;

@@ -43,15 +43,18 @@ export const APP_ROUTES: Routes = [
   {
     path: 'admin',
     loadChildren: () =>
-      loadRemoteModule({
-        remoteName: 'admin',
-        exposedModule: './routes',
-      }).then((m) => m.ADMIN_APP_ROUTES),
+      typeof window === 'undefined'
+        ? import('./features/authentication/authentication.module').then((m) => m.AuthenticationModule)
+        : loadRemoteModule({
+          remoteName: 'admin',
+          exposedModule: './routes',
+          fallback: () => import('./features/authentication/page404/page404.component').then(m => m.Page404Component)
+        }).then((m) => m.ADMIN_APP_ROUTES),
   },
-  {
-    path: 'remote',
-    loadComponent: () => loadRemoteModule('admin', './Component').then((m) => m.AppComponent),
-  },
+  // {
+  //   path: 'remote',
+  //   loadComponent: () => loadRemoteModule('admin', './Component').then((m) => m.AppComponent),
+  // },
   {
     path: '**',
     loadComponent: () => import('./features/authentication/page404/page404.component').then((route) => route.Page404Component)
