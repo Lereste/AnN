@@ -62,6 +62,25 @@
           }
         },
         "esbuild": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "target": "shop:esbuild-original:development",
+            "rebuildDelay": 0,
+            "dev": false
+          },
+          "configurations": {
+            "production": {
+              "target": "shop:esbuild-original:production",
+              "dev": false
+            },
+            "development": {
+              "target": "shop:esbuild-original:development",
+              "dev": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "esbuild-original": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/shop",
@@ -181,6 +200,25 @@
           }
         },
         "esbuild": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "target": "admin:esbuild-original:development",
+            "rebuildDelay": 0,
+            "dev": false
+          },
+          "configurations": {
+            "production": {
+              "target": "admin:esbuild-original:production",
+              "dev": false
+            },
+            "development": {
+              "target": "admin:esbuild-original:development",
+              "dev": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "esbuild-original": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/admin",
