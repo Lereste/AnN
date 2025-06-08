@@ -4,5 +4,5 @@ import { ADMIN_APP_ROUTES } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(ADMIN_APP_ROUTES), provideClientHydration(withEventReplay())]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(ADMIN_APP_ROUTES), provideClientHydration(withEventReplay())],
 };

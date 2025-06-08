@@ -5,7 +5,7 @@ console.log('Starting SSR for Host');
 (async () => {
   await initNodeFederation({
     remotesOrManifestUrl: {
-      'admin': 'http://localhost:2000/remoteEntry.json'
+      'admin': 'https://dienlanhhoaian-admin.vercel.app/remoteEntry.json'
     },
     relBundlePath: 'dist/shop/browser/'
   });
