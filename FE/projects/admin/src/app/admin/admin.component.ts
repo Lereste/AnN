@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-crud',
+  selector: 'app-admin',
   imports: [RouterOutlet],
-  templateUrl: './crud.component.html',
-  styleUrl: './crud.component.scss'
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.scss'
 })
-export class CrudComponent {
+export class AdminComponent {
   constructor() {
     console.log('admin');
 

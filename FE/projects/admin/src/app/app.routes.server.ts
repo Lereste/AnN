@@ -2,23 +2,23 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
   {
-    path: 'crud',
+    path: 'admin',
     renderMode: RenderMode.Server
   },
   {
-    path: 'crud/create',
+    path: 'admin/create',
     renderMode: RenderMode.Client,
   },
   {
-    path: 'crud/read',
+    path: 'admin/read',
     renderMode: RenderMode.Client,
   },
   {
-    path: 'crud/update',
+    path: 'admin/update',
     renderMode: RenderMode.Client,
   },
   {
-    path: 'crud/delete',
+    path: 'admin/delete',
     renderMode: RenderMode.Client,
   },
   {

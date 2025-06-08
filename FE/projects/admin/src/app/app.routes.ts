@@ -2,24 +2,24 @@ import { Routes } from '@angular/router';
 
 export const ADMIN_APP_ROUTES: Routes = [
   {
-    path: 'crud',
-    loadComponent: () => import('./crud/crud.component').then(m => m.CrudComponent),
+    path: 'admin',
+    loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent),
     children: [
       {
         path: 'create',
-        loadComponent: () => import('./crud/create/create.component').then(m => m.CreateComponent)
+        loadComponent: () => import('./admin/create/create.component').then(m => m.CreateComponent)
       },
       {
         path: 'read',
-        loadComponent: () => import('./crud/read/read.component').then(m => m.ReadComponent)
+        loadComponent: () => import('./admin/read/read.component').then(m => m.ReadComponent)
       },
       {
         path: 'update',
-        loadComponent: () => import('./crud/update/update.component').then(m => m.UpdateComponent)
+        loadComponent: () => import('./admin/update/update.component').then(m => m.UpdateComponent)
       },
       {
         path: 'delete',
-        loadComponent: () => import('./crud/delete/delete.component').then(m => m.DeleteComponent)
+        loadComponent: () => import('./admin/delete/delete.component').then(m => m.DeleteComponent)
       },
       {
         path: '',
@@ -30,11 +30,11 @@ export const ADMIN_APP_ROUTES: Routes = [
   },
   {
     path: '',
-    redirectTo: 'crud',
+    redirectTo: 'admin',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'crud'
+    redirectTo: 'admin'
   }
 ];
