@@ -1,0 +1,10 @@
+{
+  "headers": [
+    {
+      "source": "/remoteEntry.json",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
+  ]
+}
