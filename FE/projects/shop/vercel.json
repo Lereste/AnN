@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/admin/:path*", "destination": "https://dienlanhhoaian-admin.vercel.app/:path*" }
+  ]
+}
