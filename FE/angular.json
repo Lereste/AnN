@@ -27,10 +27,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "shop:esbuild:production"
+              "buildTarget": "shop:esbuild-original:production"
             },
             "development": {
-              "buildTarget": "shop:esbuild:development"
+              "buildTarget": "shop:esbuild-original:development"
             }
           },
           "defaultConfiguration": "development",
@@ -165,10 +165,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "admin:esbuild:production"
+              "buildTarget": "admin:esbuild-original:production"
             },
             "development": {
-              "buildTarget": "admin:esbuild:development"
+              "buildTarget": "admin:esbuild-original:development"
             }
           },
           "defaultConfiguration": "development",
