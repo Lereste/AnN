@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/admin/:match*",
+      "destination": "https://dienlanhhoaian-admin.vercel.app/:match*"
+    }
+  ]
+}
