@@ -8,7 +8,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(ADMIN_APP_ROUTES),
-    { provide: APP_BASE_HREF, useValue: '/admin' },
+    { provide: APP_BASE_HREF, useValue: '/admin/' },
     provideClientHydration(withEventReplay()),
   ],
 };
