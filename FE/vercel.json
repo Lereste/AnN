@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/admin/:path*",
-      "destination": "https://admin-dienlanhhoaian.vercel.app/:path*"
+      "destination": "https://admin-dienlanhhoaian.vercel.app/admin/:path*"
     }
   ]
 }
