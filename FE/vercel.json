@@ -1,8 +1,16 @@
 {
   "rewrites": [
     {
-      "source": "/admin/:match*",
-      "destination": "https://dienlanhhoaian-admin.vercel.app/:match*"
+      "source": "/:match*",
+      "destination": "https://admin-dienlanhhoaian.vercel.app/:match*"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "https://admin-dienlanhhoaian.vercel.app/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://shop-dienlanhhoaian.vercel.app/:path*"
     }
   ]
 }
