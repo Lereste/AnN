@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const ADMIN_APP_ROUTES: Routes = [
   {
-    path: 'admin',
+    path: '',
     loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent),
     children: [
       {
@@ -30,11 +30,11 @@ export const ADMIN_APP_ROUTES: Routes = [
   },
   {
     path: '',
-    redirectTo: 'admin',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'admin'
+    redirectTo: ''
   }
 ];
