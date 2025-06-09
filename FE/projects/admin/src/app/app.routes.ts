@@ -1,5 +1,11 @@
 import { Routes } from '@angular/router';
 
+/*
+
+  ============ Note:
+  When deloy on Vercel, you need to change index.html to --> <base href="/admin/"> for load asset (JS, CSS)
+  When running on localhost: index.html --> <base href="/"> OR localhost:2000/admin instead of localhost:2000
+*/
 export const ADMIN_APP_ROUTES: Routes = [
   {
     path: '',
