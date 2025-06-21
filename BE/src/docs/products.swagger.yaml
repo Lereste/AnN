@@ -1,0 +1,108 @@
+tags:
+  - name: Products
+    description: Quản lý sản phẩm
+
+paths:
+  products:
+    get:
+      summary: Lấy tất cả sản phẩm
+      tags: [Products]
+      responses:
+        200:
+          description: Danh sách sản phẩm
+    post:
+      summary: Tạo mới sản phẩm
+      tags: [Products]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+      responses:
+        201:
+          description: Tạo thành công
+        422:
+          description: Tên hoặc slug đã tồn tại
+
+  products/search:
+    get:
+      summary: Tìm kiếm sản phẩm theo slug
+      tags: [Products]
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: true
+          description: Từ khóa slug sản phẩm
+      responses:
+        200:
+          description: Danh sách sản phẩm phù hợp
+        400:
+          description: Thiếu query
+        404:
+          description: Không tìm thấy sản phẩm
+
+  products/{id}:
+    get:
+      summary: Lấy sản phẩm theo ID
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID sản phẩm
+      responses:
+        200:
+          description: Thông tin sản phẩm
+        404:
+          description: Không tìm thấy sản phẩm
+    patch:
+      summary: Cập nhật sản phẩm
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID sản phẩm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+      responses:
+        200:
+          description: Cập nhật thành công
+        404:
+          description: Không tìm thấy sản phẩm
+    delete:
+      summary: Xóa sản phẩm
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID sản phẩm
+      responses:
+        204:
+          description: Xóa thành công
+        404:
+          description: Không tìm thấy sản phẩm 
