@@ -13,6 +13,8 @@ import { Routes } from './interfaces/routes.interface';
 import path = require('path');
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './config/swagger';
 
 export class App {
   private _app: Express = express();
@@ -96,6 +98,7 @@ export class App {
     routes.forEach((route) => {
       this._app.use('/api/v1', route.router);
     });
+    this._app.use('docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
 
   public listenServer(): void {
