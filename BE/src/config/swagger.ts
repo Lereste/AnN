@@ -2,7 +2,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import YAML from 'yamljs';
 import path from 'path';
 
-const productDocs = YAML.load(path.join(__dirname, '../docs/products.swagger.yaml'));
+const productDocs = YAML.load(path.join(process.cwd(), 'src/docs/products.swagger.yaml'));
 
 const options: swaggerJSDoc.Options = {
   definition: {
@@ -14,7 +14,7 @@ const options: swaggerJSDoc.Options = {
     },
     servers: [
       {
-        url: 'https://api-shopdienmay.vercel.app/api/v1/',
+        url: 'https://api-shopdienmay.vercel.app/api/v1',
       },
     ],
     ...productDocs,

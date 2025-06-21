@@ -3,7 +3,7 @@ tags:
     description: Quản lý sản phẩm
 
 paths:
-  products:
+  /products:
     get:
       summary: Lấy tất cả sản phẩm
       tags: [Products]
@@ -30,7 +30,7 @@ paths:
         422:
           description: Tên hoặc slug đã tồn tại
 
-  products/search:
+  /products/search:
     get:
       summary: Tìm kiếm sản phẩm theo slug
       tags: [Products]
@@ -49,7 +49,7 @@ paths:
         404:
           description: Không tìm thấy sản phẩm
 
-  products/{id}:
+  /products/{id}:
     get:
       summary: Lấy sản phẩm theo ID
       tags: [Products]
