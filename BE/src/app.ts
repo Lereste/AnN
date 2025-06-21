@@ -98,7 +98,7 @@ export class App {
     routes.forEach((route) => {
       this._app.use('/api/v1', route.router);
     });
-    this._app.use('docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    this._app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
 
   public listenServer(): void {
