@@ -2,7 +2,8 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import YAML from 'yamljs';
 import path from 'path';
 
-const productDocs = YAML.load(path.join(process.cwd(), 'src/docs/products.swagger.yaml'));
+// Load product docs from YAML
+const productDocs = YAML.load(path.resolve(__dirname, '../docs/products.swagger.yaml'));
 
 const options: swaggerJSDoc.Options = {
   definition: {
