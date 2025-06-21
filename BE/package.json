@@ -15,8 +15,8 @@
     "ts.check": "tsc --project tsconfig.json",
     "build": "rimraf dist && tsc && set NODE_ENV=production",
     "add-build": "git add dist",
-    "webpack-build:dev": "set NODE_ENV=development&& webpack --config webpack.config.dev.js --mode development",
-    "webpack-build:prod": "set NODE_ENV=production&& webpack --config webpack.config.prod.js --mode production"
+    "build:dev": "set NODE_ENV=development&& webpack --config webpack.config.dev.js --mode development",
+    "build:prod": "set NODE_ENV=production&& webpack --config webpack.config.prod.js --mode production"
   },
   "author": "Lereste",
   "license": "ISC",

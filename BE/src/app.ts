@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import * as http from 'http';
 import mongoose, { set } from 'mongoose';
 import { APP_PORT_CLOUD, APP_PORT_LOCAL, NODE_ENV } from './config';
+import { CORS_ORIGINS } from './config/cors';
 import { DB_CONNECTION_CLOUD, DB_CONNECTION_LOCAL } from './databases';
 import { Routes } from './interfaces/routes.interface';
 import path = require('path');
@@ -47,15 +48,15 @@ export class App {
         console.log('Cloud DB connection successfully !!!');
       });
 
-      set('debug', true);
-      this._app.use(morgan('dev'));
+      // set('debug', true);
+      // this._app.use(morgan('dev'));
     }
   }
 
   private _initializeMiddlewares(): void {
     this._app.use(
       cors({
-        origin: ['http://localhost:1999', 'https://dienlanhhoaian.netlify.app'],
+        origin: CORS_ORIGINS,
         credentials: true, // Nếu cần gửi cookie hoặc authentication headers
       })
     );

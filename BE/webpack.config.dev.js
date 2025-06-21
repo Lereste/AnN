@@ -2,12 +2,12 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     target: 'node',
     entry: './src/server.ts',
     output: {
         filename: 'server.js',
-        path: path.resolve(__dirname, './webpack-build-prod'),
+        path: path.resolve(__dirname, './dist/development'),
         clean: {
             dry: true, // hiển thị những file sẽ xoá thay vì xoá nó
             // keep: /\.css/
@@ -17,7 +17,7 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$|\.ts?$|\.js?$/,
-                use: 'ts-loader',
+                use: ['ts-loader'],
                 exclude: ['/node_modules/']
             }
         ]
@@ -34,6 +34,6 @@ module.exports = {
         }),
     ],
     optimization: {
-        minimize: true
+        minimize: false
     },
 }
