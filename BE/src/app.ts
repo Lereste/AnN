@@ -78,11 +78,16 @@ export class App {
 
     // Use helmet middleware to set a Content Security Policy (CSP)
     this._app.use(
-      helmet.contentSecurityPolicy({
-        directives: {
-          defaultSrc: ["'self'"],
-          scriptSrc: ["'self'", "'unsafe-inline'"],
-          // Add other directives as needed
+      helmet({
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "blob:"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", "data:", "blob:"],
+            connectSrc: ["'self'", "blob:"],
+            workerSrc: ["'self'", "blob:"],
+          },
         },
       })
     );
