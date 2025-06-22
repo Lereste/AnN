@@ -1,0 +1,85 @@
+tags:
+  - name: Categories
+    description: Category management
+
+paths:
+  /categories:
+    get:
+      summary: Get all categories
+      tags: [Categories]
+      responses:
+        200:
+          description: List of categories
+    post:
+      summary: Create a new category
+      tags: [Categories]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        201:
+          description: Created successfully
+        422:
+          description: Name already exists
+
+  /categories/{id}:
+    get:
+      summary: Get category by ID
+      tags: [Categories]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Category ID
+      responses:
+        200:
+          description: Category information
+        404:
+          description: Category not found
+    patch:
+      summary: Update category
+      tags: [Categories]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Category ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        200:
+          description: Updated successfully
+        404:
+          description: Category not found
+    delete:
+      summary: Delete category
+      tags: [Categories]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Category ID
+      responses:
+        204:
+          description: Deleted successfully
+        404:
+          description: Category not found 

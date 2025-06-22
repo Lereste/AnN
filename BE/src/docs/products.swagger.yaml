@@ -1,17 +1,17 @@
 tags:
   - name: Products
-    description: Quản lý sản phẩm
+    description: Product management
 
 paths:
   /products:
     get:
-      summary: Lấy tất cả sản phẩm
+      summary: Get all products
       tags: [Products]
       responses:
         200:
-          description: Danh sách sản phẩm
+          description: List of products
     post:
-      summary: Tạo mới sản phẩm
+      summary: Create a new product
       tags: [Products]
       requestBody:
         required: true
@@ -26,13 +26,13 @@ paths:
                   type: number
       responses:
         201:
-          description: Tạo thành công
+          description: Created successfully
         422:
-          description: Tên hoặc slug đã tồn tại
+          description: Name or slug already exists
 
   /products/search:
     get:
-      summary: Tìm kiếm sản phẩm theo slug
+      summary: Search products by slug
       tags: [Products]
       parameters:
         - in: query
@@ -40,18 +40,18 @@ paths:
           schema:
             type: string
           required: true
-          description: Từ khóa slug sản phẩm
+          description: Product slug keyword
       responses:
         200:
-          description: Danh sách sản phẩm phù hợp
+          description: List of matching products
         400:
-          description: Thiếu query
+          description: Missing query
         404:
-          description: Không tìm thấy sản phẩm
+          description: Product not found
 
   /products/{id}:
     get:
-      summary: Lấy sản phẩm theo ID
+      summary: Get product by ID
       tags: [Products]
       parameters:
         - in: path
@@ -59,14 +59,14 @@ paths:
           schema:
             type: string
           required: true
-          description: ID sản phẩm
+          description: Product ID
       responses:
         200:
-          description: Thông tin sản phẩm
+          description: Product information
         404:
-          description: Không tìm thấy sản phẩm
+          description: Product not found
     patch:
-      summary: Cập nhật sản phẩm
+      summary: Update product
       tags: [Products]
       parameters:
         - in: path
@@ -74,7 +74,7 @@ paths:
           schema:
             type: string
           required: true
-          description: ID sản phẩm
+          description: Product ID
       requestBody:
         required: true
         content:
@@ -88,11 +88,11 @@ paths:
                   type: number
       responses:
         200:
-          description: Cập nhật thành công
+          description: Updated successfully
         404:
-          description: Không tìm thấy sản phẩm
+          description: Product not found
     delete:
-      summary: Xóa sản phẩm
+      summary: Delete product
       tags: [Products]
       parameters:
         - in: path
@@ -100,9 +100,9 @@ paths:
           schema:
             type: string
           required: true
-          description: ID sản phẩm
+          description: Product ID
       responses:
         204:
-          description: Xóa thành công
+          description: Deleted successfully
         404:
-          description: Không tìm thấy sản phẩm 
+          description: Product not found 

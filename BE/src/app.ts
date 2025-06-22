@@ -115,7 +115,6 @@ export class App {
       this._app.use('/api/v1', route.router);
     });
 
-    
     this._app.use(
       '/api/v1/docs',
       swaggerUi.serve,

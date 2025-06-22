@@ -1,0 +1,160 @@
+tags:
+  - name: Users
+    description: User management and authentication
+
+paths:
+  /users/signup:
+    post:
+      summary: Register a new user
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                passwordConfirm:
+                  type: string
+      responses:
+        201:
+          description: User registered successfully
+        422:
+          description: Email already exists
+
+  /users/login:
+    post:
+      summary: User login
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Login successful
+        401:
+          description: Invalid credentials
+
+  /users/logout:
+    get:
+      summary: User logout
+      tags: [Users]
+      responses:
+        200:
+          description: Logout successful
+
+  /users/forgotPassword:
+    post:
+      summary: Forgot password
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        200:
+          description: Password reset email sent
+        404:
+          description: User not found
+
+  /users/resetPassword/{token}:
+    patch:
+      summary: Reset password
+      tags: [Users]
+      parameters:
+        - in: path
+          name: token
+          schema:
+            type: string
+          required: true
+          description: Reset token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                passwordConfirm:
+                  type: string
+      responses:
+        200:
+          description: Password reset successful
+        400:
+          description: Invalid or expired token
+
+  /users/updateMyPassword:
+    patch:
+      summary: Update my password
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                passwordCurrent:
+                  type: string
+                password:
+                  type: string
+                passwordConfirm:
+                  type: string
+      responses:
+        200:
+          description: Password updated successfully
+        401:
+          description: Incorrect current password
+
+  /users/updateMe:
+    patch:
+      summary: Update my account
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                photo:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Account updated successfully
+        400:
+          description: Invalid data
+
+  /users:
+    get:
+      summary: Get all users (admin only)
+      tags: [Users]
+      responses:
+        200:
+          description: List of users 
