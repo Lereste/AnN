@@ -1,0 +1,91 @@
+tags:
+  - name: Reviews
+    description: Review management
+
+paths:
+  /reviews:
+    get:
+      summary: Get all reviews
+      tags: [Reviews]
+      responses:
+        200:
+          description: List of reviews
+    post:
+      summary: Create a new review
+      tags: [Reviews]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                review:
+                  type: string
+                rating:
+                  type: number
+                product:
+                  type: string
+      responses:
+        201:
+          description: Created successfully
+        422:
+          description: Duplicate review or invalid data
+
+  /reviews/{id}:
+    get:
+      summary: Get review by ID
+      tags: [Reviews]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Review ID
+      responses:
+        200:
+          description: Review information
+        404:
+          description: Review not found
+    patch:
+      summary: Update review
+      tags: [Reviews]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Review ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                review:
+                  type: string
+                rating:
+                  type: number
+      responses:
+        200:
+          description: Updated successfully
+        404:
+          description: Review not found
+    delete:
+      summary: Delete review
+      tags: [Reviews]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Review ID
+      responses:
+        204:
+          description: Deleted successfully
+        404:
+          description: Review not found 
