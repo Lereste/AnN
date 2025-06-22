@@ -37,7 +37,10 @@ const options: swaggerJSDoc.Options = {
         url: 'https://api-shopdienmay.vercel.app/api/v1',
       },
     ],
-    ...mergedDocs,
+    ...productDocs,
+    ...categoryDocs,
+    ...reviewDocs,
+    ...userDocs,
   },
   apis: ['src/routes/*.ts', 'src/controllers/*.ts', 'src/models/*.ts'],
 };
