@@ -1,12 +1,24 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 import YAML from 'yamljs';
 import path from 'path';
+import fs from 'fs';
+
+
+function safeLoadYaml(file: string) {
+  const fullPath = path.resolve(__dirname, file);
+  if (fs.existsSync(fullPath)) {
+    return YAML.load(fullPath);
+  } else {
+    console.warn(`⚠️ Missing swagger file: ${file}`);
+    return { tags: [], paths: {} };
+  }
+}
 
 // Load individual Swagger docs
-const productDocs = YAML.load(path.resolve(__dirname, '../docs/products.swagger.yaml'));
-const categoryDocs = YAML.load(path.resolve(__dirname, '../docs/categories.swagger.yaml'));
-const reviewDocs = YAML.load(path.resolve(__dirname, '../docs/reviews.swagger.yaml'));
-const userDocs = YAML.load(path.resolve(__dirname, '../docs/users.swagger.yaml'));
+const productDocs = safeLoadYaml('../docs/products.swagger.yaml');
+const categoryDocs = safeLoadYaml('../docs/categories.swagger.yaml');
+const reviewDocs = safeLoadYaml('../docs/reviews.swagger.yaml');
+const userDocs = safeLoadYaml('../docs/users.swagger.yaml');
 
 // Merge tags + paths only
 function mergeDocs(...docs: any[]) {
