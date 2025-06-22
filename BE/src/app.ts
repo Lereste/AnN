@@ -78,18 +78,7 @@ export class App {
 
     // Use helmet middleware to set a Content Security Policy (CSP)
     this._app.use(
-      helmet({
-        contentSecurityPolicy: {
-          directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "blob:"],
-            styleSrc: ["'self'", "'unsafe-inline'"],
-            imgSrc: ["'self'", "data:", "blob:"],
-            connectSrc: ["'self'", "blob:"],
-            workerSrc: ["'self'", "blob:"],
-          },
-        },
-      })
+      helmet()
     );
     this._app.use(express.urlencoded({ extended: true, limit: '10kb' })); // parse application/x-www-form-urlencoded
     this._app.use(express.json({ limit: '10kb' }));
