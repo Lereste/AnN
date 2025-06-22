@@ -78,7 +78,18 @@ export class App {
 
     // Use helmet middleware to set a Content Security Policy (CSP)
     this._app.use(
-      helmet()
+      helmet({
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'blob:'],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", 'data:', 'blob:'],
+            connectSrc: ["'self'", 'blob:'],
+            workerSrc: ["'self'", 'blob:'],
+          },
+        },
+      })
     );
     this._app.use(express.urlencoded({ extended: true, limit: '10kb' })); // parse application/x-www-form-urlencoded
     this._app.use(express.json({ limit: '10kb' }));
@@ -92,7 +103,13 @@ export class App {
     routes.forEach((route) => {
       this._app.use('/api/v1', route.router);
     });
-    this._app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    this._app.use(
+      '/api/v1/docs',
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerSpec, {
+        customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui.min.css',
+      })
+    );
   }
 
   public listenServer(): void {
