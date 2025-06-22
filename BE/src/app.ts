@@ -87,7 +87,8 @@ export class App {
               "'unsafe-inline'",
               "'unsafe-eval'",
               'blob:',
-              'https://cdnjs.cloudflare.com'
+              'https://cdnjs.cloudflare.com',
+              'https://vercel.live'
             ],
             styleSrc: [
               "'self'",
@@ -114,11 +115,6 @@ export class App {
       this._app.use('/api/v1', route.router);
     });
 
-    this._app.get('/api/v1/docs/swagger.json', (_, res) => {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(swaggerSpec);
-    });
-
     
     this._app.use(
       '/api/v1/docs',
@@ -129,19 +125,6 @@ export class App {
           'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui-bundle.min.js',
           'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui-standalone-preset.min.js',
         ],
-        customJsStr: `
-          window.onload = function() {
-            SwaggerUIBundle({
-              url: '/api/v1/docs/swagger.json',
-              dom_id: '#swagger-ui',
-              presets: [
-                SwaggerUIBundle.presets.apis,
-                SwaggerUIStandalonePreset
-              ],
-              layout: 'BaseLayout'
-            });
-          }
-        `,
       })
     );
     
