@@ -82,8 +82,18 @@ export class App {
         contentSecurityPolicy: {
           directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'blob:'],
-            styleSrc: ["'self'", "'unsafe-inline'"],
+            scriptSrc: [
+              "'self'",
+              "'unsafe-inline'",
+              "'unsafe-eval'",
+              'blob:',
+              'https://cdnjs.cloudflare.com'
+            ],
+            styleSrc: [
+              "'self'",
+              "'unsafe-inline'",
+              'https://cdnjs.cloudflare.com'
+            ],
             imgSrc: ["'self'", 'data:', 'blob:'],
             connectSrc: ["'self'", 'blob:'],
             workerSrc: ["'self'", 'blob:'],
@@ -103,13 +113,38 @@ export class App {
     routes.forEach((route) => {
       this._app.use('/api/v1', route.router);
     });
+
+    this._app.get('/api/v1/docs/swagger.json', (_, res) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(swaggerSpec);
+    });
+
+    
     this._app.use(
       '/api/v1/docs',
       swaggerUi.serve,
       swaggerUi.setup(swaggerSpec, {
         customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui.min.css',
+        customJs: [
+          'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui-bundle.min.js',
+          'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui-standalone-preset.min.js',
+        ],
+        customJsStr: `
+          window.onload = function() {
+            SwaggerUIBundle({
+              url: '/api/v1/docs/swagger.json',
+              dom_id: '#swagger-ui',
+              presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIStandalonePreset
+              ],
+              layout: 'BaseLayout'
+            });
+          }
+        `,
       })
     );
+    
   }
 
   public listenServer(): void {
