@@ -118,15 +118,16 @@ export class App {
 
     this._app.use(
       '/api/v1/docs',
-      swaggerUi.serveFiles(swaggerSpec, {
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerSpec, {
         customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui.min.css',
         customJs: [
           'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui-bundle.min.js',
           'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.25.2/swagger-ui-standalone-preset.min.js',
         ],
-      }),
-      swaggerUi.setup(swaggerSpec)
+      })
     );
+    
   }
 
   public listenServer(): void {
