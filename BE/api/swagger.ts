@@ -15,10 +15,10 @@ function safeLoadYaml(file: string) {
 }
 
 // Load individual Swagger docs
-const productDocs = safeLoadYaml('../docs/products.swagger.yaml');
-const categoryDocs = safeLoadYaml('../docs/categories.swagger.yaml');
-const reviewDocs = safeLoadYaml('../docs/reviews.swagger.yaml');
-const userDocs = safeLoadYaml('../docs/users.swagger.yaml');
+const productDocs = safeLoadYaml('./swagger/products.swagger.yaml');
+const categoryDocs = safeLoadYaml('./swagger/categories.swagger.yaml');
+const reviewDocs = safeLoadYaml('./swagger/reviews.swagger.yaml');
+const userDocs = safeLoadYaml('./swagger/users.swagger.yaml');
 
 // Merge tags + paths only
 function mergeDocs(...docs: any[]) {
