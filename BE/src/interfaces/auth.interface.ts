@@ -4,7 +4,7 @@ import { Request } from 'express';
 interface File extends Express.Multer.File {}
 
 interface Files {
-    photo: File[]; // The 'photo' field contains an array of File objects
+    photo: File[];
     image: File[];
     imageList: File[];
     [fieldname: string]: File[];

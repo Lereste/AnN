@@ -51,13 +51,6 @@ const ProductSchema: Schema = new Schema(
     },
     priceDiscount: {
       type: Number,
-      validate: {
-        validator: function (value: number) {
-          // "this" only points to current doc on CREATE (NEW) document creation
-          return value < this.price // 100 < 200
-        },
-        message: 'Discount price ({VALUE}) should be below regular price',
-      },
     },
   },
   // Cách 1: để thẳng vào trong đây

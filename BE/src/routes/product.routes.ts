@@ -4,7 +4,8 @@ import { uploadImages } from '../middlewares/upload-images.middleware';
 import AuthController from '../controllers/auth.controller';
 import ReviewRouter from './review.routes';
 import resizeImageListWithBase64 from '../middlewares/base64-resize-images.middleware';
-import resizeImageListWithCloudinary from '../middlewares/cloudinary-resize-images.middleware';
+import { validateProductDiscountMiddleware } from '../middlewares/validate-product-discount.middleware';
+import resizeImageListWithCloudinaryMiddleware from '../middlewares/cloudinary-resize-images.middleware';
 
 class ProductRouter {
   public path = '/products/';
@@ -33,9 +34,15 @@ class ProductRouter {
     // =========== Protect route
     this.router.use(this.path, this.authController.protect, this.authController.restrictTo('admin', 'staff')); 
     
-    this.router.post(this.path, uploadImages, resizeImageListWithCloudinary, this.productController.createNewProduct);
+    this.router.post(this.path, uploadImages, resizeImageListWithCloudinaryMiddleware, this.productController.createNewProduct);
     
-    this.router.patch(this.path + ':id', uploadImages, resizeImageListWithCloudinary, this.productController.updateProductById);
+    this.router.patch(
+      this.path + ':id',
+      uploadImages,
+      resizeImageListWithCloudinaryMiddleware,
+      validateProductDiscountMiddleware,
+      this.productController.updateProductById
+    );
     
     this.router.delete(this.path + ':id', this.productController.delelteProductById);
   }

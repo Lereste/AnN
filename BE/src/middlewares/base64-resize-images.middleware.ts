@@ -13,7 +13,7 @@ const resizeImageListWithBase64 = catchAsync(async (request: HeaderRequest, resp
       await sharp(requestFiles.image[0].buffer)
         .resize(1000, 1000)
         .toFormat('webp')
-        .webp({ quality: 80 }) // Chuyển sang WebP, giảm chất lượng để tối ưu
+        .webp({ quality: 80 })
         .toBuffer()
     ).toString('base64');
 
@@ -44,7 +44,7 @@ const resizeImageListWithBase64 = catchAsync(async (request: HeaderRequest, resp
       await sharp(requestFiles.photo[0].buffer)
         .resize(500, 500)
         .toFormat('webp')
-        .webp({ quality: 80 }) // Chuyển sang WebP, giảm chất lượng để tối ưu
+        .webp({ quality: 80 })
         .toBuffer()
     ).toString('base64');
 
