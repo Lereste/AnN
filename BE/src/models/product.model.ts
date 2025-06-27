@@ -28,7 +28,6 @@ const ProductSchema: Schema = new Schema(
       type: String,
       default: 'default-product-image.jpeg',
     },
-
     imageList: [String],
     categoryId: {
       type: String,
@@ -51,6 +50,10 @@ const ProductSchema: Schema = new Schema(
     },
     priceDiscount: {
       type: Number,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
     },
   },
   // Cách 1: để thẳng vào trong đây
