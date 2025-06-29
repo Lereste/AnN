@@ -26,11 +26,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductService } from '@core/service/product-service/product.service';
 import { Products } from '../../../core/models/product/product.model';
 import { Router } from '@angular/router';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ScrollingModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
   changeDetection: ChangeDetectionStrategy.Default
@@ -59,7 +60,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.searchControl.valueChanges
       .pipe(
-        debounceTime(500),
+        debounceTime(300),
         distinctUntilChanged(),
         takeUntilDestroyed(this.destroyRef)
       )
@@ -144,5 +145,15 @@ export class SearchComponent implements OnInit, AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       loopDeleting();
     }
+  }
+
+  get viewportHeight(): string {
+    const itemSize = 80;
+    const maxHeight = 360;
+    return Math.min((this.products?.length || 0) * itemSize, maxHeight) + 'px';
+  }
+
+  trackByProductName(index: number, product: Products): string {
+    return product.name as string;
   }
 }
