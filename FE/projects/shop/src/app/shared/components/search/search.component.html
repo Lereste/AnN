@@ -1,5 +1,5 @@
-<section class="search animate__animated animate__fadeInUp">
-  <div class="search__container">
+<section class="search ">
+  <div class="search__container" [class.has-products]="products && products.length > 0">
     <!-- Title -->
     <div class="search__container-title">
       <span>Nhập vào sản phẩm cần tìm</span>
@@ -17,21 +17,18 @@
     </div>
     }
 
-
     <!-- Product list -->
     @if (products && products.length > 0) {
     <div class="search__container-result">
-      <div class="search__product-list">
-        @for (product of products; track product.name) {
-        <div class="product-item" (click)="goToProductDetailPage(product)">
+      <cdk-virtual-scroll-viewport itemSize="80" class="search__product-list" [style.height]="viewportHeight">
+        <div *cdkVirtualFor="let product of products; trackBy: trackByProductName" class="product-item" (click)="goToProductDetailPage(product)">
           <img class="product-item__image" [src]="product.image" [alt]="product.name" />
           <div class="product-item__info">
             <h3 class="product-item__name">{{ product.name }}</h3>
             <p class="product-item__price">{{ product.price }}</p>
           </div>
         </div>
-        }
-      </div>
+      </cdk-virtual-scroll-viewport>
     </div>
     }
 

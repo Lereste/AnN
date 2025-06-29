@@ -1,0 +1,123 @@
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 600px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: box-shadow 0.2s;
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+}
+
+.product-image {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  position: relative;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 12px;
+    background: #f7f7f7;
+  }
+  .favorite-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #bbb;
+    cursor: pointer;
+    &:hover {
+      color: #ff4d4f;
+    }
+  }
+}
+
+.product-info {
+  text-align: center;
+  .product-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    min-height: 40px;
+  }
+  .product-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .buy-btn {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover {
+      background: #222;
+    }
+  }
+}
+
+.product-list-viewport {
+  height: calc(320px * 2); // 2 rows, mỗi row 320px (card + gap)
+  width: 100%;
+  min-width: 1000px;
+  overflow: auto;
+  padding: 0 16px;
+  display: block;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+  min-width: 900px;
+}
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.load-more-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #222;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
