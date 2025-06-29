@@ -21,6 +21,11 @@ const ProductSchema: Schema = new Schema(
       require: true,
       unique: true,
     },
+    brandId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Brand',
+      required: [true, 'A Product must have a brandId'],
+    },
     description: {
       type: String,
     },
@@ -31,7 +36,7 @@ const ProductSchema: Schema = new Schema(
     imageList: [String],
     categoryId: {
       type: String,
-      required: [true, 'A Product must have a Category Id'],
+      required: [true, 'A Product must have a categoryId'],
     },
     ratingsAverage: {
       type: Number,

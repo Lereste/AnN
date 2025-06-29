@@ -29,7 +29,10 @@ const resizeImageListWithCloudinaryMiddleware = catchAsync(
     // Product image (single)
     if (requestFiles.image) {
       const buffer = await sharp(requestFiles.image[0].buffer)
-        .resize(1000, 1000)
+        .resize(500, 500, {
+          fit: 'contain',
+          background: { r: 255, g: 255, b: 255, alpha: 1 }, // Nền trắng, có thể đổi alpha: 0 nếu muốn trong suốt
+        })
         .toFormat('webp')
         .webp({ quality: 80 })
         .toBuffer();
@@ -43,7 +46,14 @@ const resizeImageListWithCloudinaryMiddleware = catchAsync(
 
       await Promise.all(
         requestFiles.imageList.map(async (file: any) => {
-          const buffer = await sharp(file.buffer).resize(200, 200).toFormat('webp').webp({ quality: 80 }).toBuffer();
+          const buffer = await sharp(file.buffer)
+          .resize(500, 500, {
+            fit: 'contain',
+            background: { r: 255, g: 255, b: 255, alpha: 1 }, // Nền trắng, có thể đổi alpha: 0 nếu muốn trong suốt
+          })
+          .toFormat('webp')
+          .webp({ quality: 80 })
+          .toBuffer();
           const imageUrl = await uploadToCloudinary(buffer, 'product-list');
           request.body.imageList.push(imageUrl);
         })
@@ -53,12 +63,29 @@ const resizeImageListWithCloudinaryMiddleware = catchAsync(
     // User photo (single)
     if (requestFiles.photo) {
       const buffer = await sharp(requestFiles.photo[0].buffer)
-        .resize(500, 500)
+        .resize(500, 500, {
+          fit: 'contain',
+          background: { r: 255, g: 255, b: 255, alpha: 1 }, // Nền trắng, có thể đổi alpha: 0 nếu muốn trong suốt
+        })
         .toFormat('webp')
         .webp({ quality: 80 })
         .toBuffer();
 
       request.body.photo = await uploadToCloudinary(buffer, 'users');
+    }
+
+    // Brand logo (single)
+    if (requestFiles.logo) {
+      const buffer = await sharp(requestFiles.logo[0].buffer)
+        .resize(500, 500, {
+          fit: 'contain',
+          background: { r: 255, g: 255, b: 255, alpha: 1 }, // Nền trắng, có thể đổi alpha: 0 nếu muốn trong suốt
+        })
+        .toFormat('webp')
+        .webp({ quality: 80 })
+        .toBuffer();
+
+      request.body.logo = await uploadToCloudinary(buffer, 'brands');
     }
 
     next();

@@ -24,7 +24,8 @@ export const uploadImages = upload.fields([
     // name is the key  in req.files
     { name: 'image', maxCount: 1 }, // product image
     { name: 'imageList', maxCount: 3 }, // product imageList
-    { name: 'photo', maxCount: 1} // user photo
+    { name: 'photo', maxCount: 1}, // user photo
+    { name: 'logo', maxCount: 1} // brand logo
 ]);
 
 // export default uploadImages;

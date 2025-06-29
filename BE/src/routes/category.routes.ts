@@ -18,6 +18,7 @@ class CategoryRouter {
   initializeRoutes() {
     this.router.get(this.path, this.categoryController.getAllCategories);
     this.router.get(this.path + ':id', this.categoryController.getCategoryById);
+    this.router.get(this.path + ':id/brands', this.categoryController.getBrandsByCategory);
 
     this.router.use(this.path, this.authController.protect, this.authController.restrictTo('admin', 'staff')); // Protect route
 

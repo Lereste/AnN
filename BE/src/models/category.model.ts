@@ -12,9 +12,10 @@ const CategorySchema: Schema = new Schema(
       type: String,
       unique: true,
       required: [true, 'A category must have a name'],
-      maxlength: [50, 'A category name must have less or equal than 50 characters'],
-      minlength: [10, 'A category name must have more or equal then 10 characters'],
+      maxlength: [30, 'A category name must have less or equal than 50 characters'],
+      minlength: [5, 'A category name must have more or equal then 10 characters'],
     },
+
     // Cách 1: Để products trong đây (line 37)
     // products: [
     //   {
@@ -42,7 +43,11 @@ CategorySchema.virtual('products', {
   localField: '_id', // The field in the Category model that you want to match against
 })
 
-
+CategorySchema.virtual('brands', {
+  ref: 'Product',
+  foreignField: 'brandId',
+  localField: '_id',
+})
 
 const CategoryModel = model<ICategoryModel>('Category', CategorySchema)
 export default CategoryModel
