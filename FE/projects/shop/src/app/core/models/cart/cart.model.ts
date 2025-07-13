@@ -1,4 +1,4 @@
-import { Products } from "../product/product.model";
+import { Product } from "../product/product.model";
 
 export class CartItem {
   // productId!: string;
@@ -11,6 +11,6 @@ export class Cart {
 }
 
 export class CartItemDetailed {
-  product!: Products;
+  product!: Product;
   quantity!: number;
 }

@@ -19,7 +19,7 @@ import {
   OwlOptions,
 } from 'ngx-owl-carousel-o';
 import { CartItem } from '@core/models/cart/cart.model';
-import { Products } from '@core/models/product/product.model';
+import { Product } from '@core/models/product/product.model';
 import { CartService } from '@core/service/cart-service/cart.service';
 // import slugify from 'slugify';
 import urlSlug from 'url-slug';
@@ -68,10 +68,10 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     nav: false,
   };
 
-  newProductItem!: Products;
+  newProductItem!: Product;
 
   isZoom: boolean = false;
-  zoomProductItem!: Products;
+  zoomProductItem!: Product;
 
   hasExisted: boolean = true;
   private readonly platformId = inject(PLATFORM_ID);
@@ -80,7 +80,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('owlCar') owlCar: CarouselComponent | undefined;
   @Output() newItemEvent = new EventEmitter<CarouselComponent>();
-  @Input() productList: Products[] = [];
+  @Input() productList: Product[] = [];
 
   constructor(
     private router: Router,
@@ -103,11 +103,11 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-  goToProductDetailPage(productItem: Products): void {
+  goToProductDetailPage(productItem: Product): void {
     this.router.navigate(['chi-tiet-san-pham/' + productItem.slug]);
   }
 
-  previewProductInformation(productItem: Products): void {
+  previewProductInformation(productItem: Product): void {
     this.isZoom = !this.isZoom;
 
     this.zoomProductItem = productItem;
@@ -118,7 +118,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isZoom = false;
   }
 
-  addProductToCart(productItem: Products): void {
+  addProductToCart(productItem: Product): void {
     const newProduct = productItem;
 
     const cartItem: CartItem = {

@@ -1,7 +1,7 @@
 import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, HostListener, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { Products } from '@core/models/product/product.model';
+import { Product } from '@core/models/product/product.model';
 import { ProductService } from '@core/service/product-service/product.service';
 import { ProductItemComponent } from '@layout/product-item/product-item.component';
 
@@ -13,7 +13,7 @@ import { ProductItemComponent } from '@layout/product-item/product-item.componen
 })
 
 export class SaleProductsComponent implements OnInit {
-  saleProducts: Products[] = [];
+  saleProducts: Product[] = [];
   scrWidth: number = 0;
   owlCar: any;
 

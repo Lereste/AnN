@@ -1,7 +1,7 @@
 import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ProductItemComponent } from '../product-item/product-item.component';
-import { Products } from '@core/models/product/product.model';
+import { Product } from '@core/models/product/product.model';
 import { ProductService } from '@core/service/product-service/product.service';
 
 export enum ACCESSORIES_TYPE {
@@ -21,9 +21,9 @@ export class AccessoriesTypeComponent implements OnInit {
   ACCESSORIES_TYPE = ACCESSORIES_TYPE;
   selectedAccessories: string = ACCESSORIES_TYPE.GUITAR;
 
-  guitarAccessories: Products[] = [];
-  pianoAccessories: Products[] = [];
-  organAccessories: Products[] = [];
+  guitarAccessories: Product[] = [];
+  pianoAccessories: Product[] = [];
+  organAccessories: Product[] = [];
 
   constructor(
     private productService: ProductService,

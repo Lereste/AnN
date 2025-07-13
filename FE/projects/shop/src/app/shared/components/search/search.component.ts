@@ -24,7 +24,7 @@ import {
 } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductService } from '@core/service/product-service/product.service';
-import { Products } from '../../../core/models/product/product.model';
+import { Product } from '../../../core/models/product/product.model';
 import { Router } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -53,9 +53,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
   textElement: string = '';
 
   searchControl = new FormControl('');
-  products: Products[] = [];
+  products: Product[] = [];
   notFound = false;
-  private cache = new Map<string, Products[]>();
+  private cache = new Map<string, Product[]>();
 
   ngOnInit() {
     this.searchControl.valueChanges
@@ -104,7 +104,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
   }
 
-  goToProductDetailPage(productItem: Products): void {
+  goToProductDetailPage(productItem: Product): void {
     this.router.navigate(['chi-tiet-san-pham/' + productItem.slug]);
   }
 
@@ -153,7 +153,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     return Math.min((this.products?.length || 0) * itemSize, maxHeight) + 'px';
   }
 
-  trackByProductName(index: number, product: Products): string {
+  trackByProductName(index: number, product: Product): string {
     return product.name as string;
   }
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
-import { Products } from '@core/models/product/product.model';
+import { Product } from '@core/models/product/product.model';
 import { ProductService } from '@core/service/product-service/product.service';
 import { HTTP_RESPONSE_STATUS } from '@core/constant/helper.const';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -21,9 +21,9 @@ enum DESCRIBE_TYPE {
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
-  saleProducts: Products[] = [];
-  cloneSaleProducts: Products[] = [];
-  currentProductDetailItem!: Products;
+  saleProducts: Product[] = [];
+  cloneSaleProducts: Product[] = [];
+  currentProductDetailItem!: Product;
 
 
   decreaseQuantity: number = 0;
@@ -32,7 +32,7 @@ export class ProductDetailComponent implements OnInit {
 
   DESCRIBE_TYPE = DESCRIBE_TYPE;
   selectedDescribe: string = DESCRIBE_TYPE.DESCRIPTION;
-  SALE_PRODUCTS_KEY = makeStateKey<Products[]>('saleProducts');
+  SALE_PRODUCTS_KEY = makeStateKey<Product[]>('saleProducts');
 
   private destroyRef = inject(DestroyRef);
 

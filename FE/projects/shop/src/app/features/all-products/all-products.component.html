@@ -1,33 +1,35 @@
 <div class="all-products">
-  <aside class="all-products__sidebar">
-    <div class="all-products__filter-group">
-      <h4 class="all-products__filter-title">Thương hiệu</h4>
-      <div class="all-products__checkbox-list">
-        <mat-checkbox *ngFor="let brand of brandList" class="all-products__checkbox" [checked]="selectedBrands.includes(brand.id)" (change)="onBrandCheckboxChange(brand.id, $event.checked)">
-          {{ brand.name }}
-        </mat-checkbox>
-      </div>
-    </div>
-    <div class="all-products__filter-group">
-      <h4 class="all-products__filter-title">Danh mục</h4>
-      <div class="all-products__checkbox-list">
-        <mat-checkbox *ngFor="let cat of categoryList" class="all-products__checkbox" [checked]="selectedCategories.includes(cat.id)" (change)="onCategoryCheckboxChange(cat.id, $event.checked)">
-          {{ cat.name }}
-        </mat-checkbox>
-      </div>
-    </div>
-  </aside>
+  <app-product-filter
+    [brandList]="brandList"
+    [selectedBrands]="selectedBrands"
+    [categoryList]="categoryList"
+    [selectedCategories]="selectedCategories"
+    [minPriceDiscount]="minPrice"
+    [maxPriceDiscount]="maxPrice"
+    [selectedMinPriceDiscount]="selectedMinPrice"
+    [selectedMaxPriceDiscount]="selectedMaxPrice"
+    [showPriceRange]="showPriceRange"
+    (filterChange)="onFilterChange($event)"
+    (resetAll)="onResetAllFilters()"
+  ></app-product-filter>
 
-  <main class="all-products__main">
-    <div class="all-products__header">
+  <main class="all-products__main responsive-main">
+    <div class="all-products__header responsive-header">
       <span class="all-products__count">Tổng số sản phẩm: {{ products.length }}</span>
-      <select class="all-products__sort" (change)="onSortChange($event)">
+      <select class="all-products__sort responsive-sort" (change)="onSortChange($event)">
         <option value="createdAtDesc">Ngày thêm mới nhất</option>
         <option value="createdAtAsc">Ngày thêm cũ nhất</option>
         <option value="priceAsc">Giá: từ thấp -> cao</option>
-        <option value="priceDesc">Giá: cao đến thấp</option>
+        <option value="priceDesc">Giá: từ cao -> thấp</option>
       </select>
     </div>
-    <app-product-list [productList]="products" (loadMore)="onLoadMore()" [showLoadMore]="showLoadMore"></app-product-list>
+
+    <app-product-list
+      [productList]="products"
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      [length]="totalProducts"
+      (pageChange)="onPageChange($event)">
+    </app-product-list>
   </main>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { ProductItemComponent } from '../product-item/product-item.component';
-import { Products } from '@core/models/product/product.model';
+import { Product } from '@core/models/product/product.model';
 import { ProductService } from '@core/service/product-service/product.service';
 
 export enum PRODUCT_TYPE {
@@ -21,9 +21,9 @@ export class ProductsTypeComponent implements OnInit {
   PRODUCT_TYPE = PRODUCT_TYPE;
   selectedProduct: string = PRODUCT_TYPE.GUITAR;
 
-  guitarProducts: Products[] = [];
-  pianoProducts: Products[] = [];
-  organProducts: Products[] = [];
+  guitarProducts: Product[] = [];
+  pianoProducts: Product[] = [];
+  organProducts: Product[] = [];
 
   constructor(
     private productService: ProductService

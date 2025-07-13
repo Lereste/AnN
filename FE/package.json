@@ -8,7 +8,8 @@
     "build:admin": "ng run admin:esbuild:production",
     "build:shop": "ng run shop:esbuild:production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +53,7 @@
     "@types/google.maps": "^3.58.1",
     "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~5.1.0",
+    "husky": "^9.1.7",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

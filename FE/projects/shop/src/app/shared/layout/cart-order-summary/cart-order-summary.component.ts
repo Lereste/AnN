@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Cart, CartItem, CartItemDetailed } from '@core/models/cart/cart.model';
-import { Products } from '@core/models/product/product.model';
+import { Product } from '@core/models/product/product.model';
 import { CartService } from '@core/service/cart-service/cart.service';
 import { ProductService } from '@core/service/product-service/product.service';
 import urlSlug from 'url-slug';
@@ -18,7 +18,7 @@ import urlSlug from 'url-slug';
 export class CartOrderSummaryComponent implements OnInit {
   unSubcribe$: Subject<any> = new Subject();
 
-  cartProducts: Products[] = [];
+  cartProducts: Product[] = [];
   // cloneCartProducts: Products[] = [];
 
   totalQuantity!: number;
@@ -73,7 +73,7 @@ export class CartOrderSummaryComponent implements OnInit {
 
         // chỗ này sẽ đổi thành call api getProductBySlug
         // VD: this.ordersService.getProductBySlug(item.productSlug as string).pipe(takeUntil(this.unSubcribe$)).subscribe(productItem => {})
-        this.cartProducts.forEach((productItem: Products) => {
+        this.cartProducts.forEach((productItem: Product) => {
 
           if (productItem.slug === cartItem.productSlug) {
             // productItem sẽ là respone trả về của api

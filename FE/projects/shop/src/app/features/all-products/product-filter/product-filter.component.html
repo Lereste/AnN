@@ -1,0 +1,54 @@
+<aside class="product-filter">
+  <div class="product-filter__header">
+    <span class="product-filter__header-title">Lọc sản phẩm</span>
+    <button mat-icon-button type="button" (click)="resetAllFilters()" matTooltip="Đặt lại bộ lọc">
+      <mat-icon class="product-filter__header-icon">refresh</mat-icon>
+    </button>
+  </div>
+  <mat-accordion [multi]="true">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <h4 class="product-filter__filter-title">Thương hiệu</h4>
+      </mat-expansion-panel-header>
+      <div class="product-filter__checkbox-list">
+        <mat-checkbox
+          *ngFor="let brand of brandList"
+          class="product-filter__checkbox"
+          [checked]="selectedBrands.includes(brand.id)"
+          (change)="onBrandCheckboxChange(brand.id, $event.checked)"
+        >
+          {{ brand.name }}
+        </mat-checkbox>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <h4 class="product-filter__filter-title">Danh mục</h4>
+      </mat-expansion-panel-header>
+      <div class="product-filter__checkbox-list">
+        <mat-checkbox
+          *ngFor="let cat of categoryList"
+          class="product-filter__checkbox"
+          [checked]="selectedCategories.includes(cat.id)"
+          (change)="onCategoryCheckboxChange(cat.id, $event.checked)"
+        >
+          {{ cat.name }}
+        </mat-checkbox>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div *ngIf="showPriceRange">
+    <div class="product-filter__filter-group product-filter__price-group">
+      <h4 class="product-filter__filter-title">Khoảng giá</h4>
+      <mat-slider [min]="minPriceDiscount" [max]="maxPriceDiscount" [step]="10">
+        <input [value]="selectedMinPriceDiscount" matSliderStartThumb (input)="onMinThumbInput($event)" />
+        <input [value]="selectedMaxPriceDiscount" matSliderEndThumb (input)="onMaxThumbInput($event)" />
+      </mat-slider>
+      <div class="product-filter__price-values">
+        <span>{{ selectedMinPriceDiscount | number }}đ</span>
+        <span>{{ selectedMaxPriceDiscount | number }}đ</span>
+      </div>
+    </div>
+  </div>
+</aside>

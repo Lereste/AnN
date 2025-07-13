@@ -1,0 +1,35 @@
+<div class="product-list">
+  <mat-paginator
+    class="paginator-top"
+    [length]="length"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+
+  <div class="product-row">
+    <ng-container *ngFor="let product of productList">
+      <div class="product-card" *ngIf="product">
+        <div class="product-image">
+          <img [src]="product?.image" [alt]="product?.name" />
+          <button class="favorite-btn">
+            <span>&#9825;</span>
+          </button>
+        </div>
+        <div class="product-info">
+          <div class="product-title">{{ product?.name }}</div>
+          <div class="product-price">${{ product?.priceDiscount }}</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <mat-paginator
+    class="paginator-bottom"
+    [length]="length"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

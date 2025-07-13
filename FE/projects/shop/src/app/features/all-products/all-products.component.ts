@@ -1,121 +1,132 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { ProductService } from '../../core/service/product-service/product.service';
-import { Products } from '../../core/models/product/product.model';
-import { NgFor } from '@angular/common';
-import { ProductListComponent } from '../../shared/layout/product-list/product-list.component';
+import { IProductQueryParams, Product } from '../../core/models/product/product.model';
 import { CategoryService } from '../../core/service/category-service/category.service';
-import { Categories } from '../../core/models/category.model';
+import { Categories } from '../../core/models/category/category.model';
 import { BrandService } from '../../core/service/brand-service/brand.service';
-import { MatListModule } from '@angular/material/list';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductFilterComponent, FilterChangeEvent } from './product-filter/product-filter.component';
+import { forkJoin } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
+import { switchMap } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DestroyRef } from '@angular/core';
 
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
   styleUrl: './all-products.component.scss',
-  imports: [ProductListComponent, NgFor, MatListModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule, MatOptionModule],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [ProductListComponent, ProductFilterComponent, MatSelectModule, MatOptionModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllProductsComponent implements OnInit {
-  products: Products[] = [];
+  private readonly DEFAULT_PAGE: number = 1;
+  private readonly DEFAULT_LIMIT: number = 8;
+  private readonly DEFAULT_MIN_PRICE: number = 0;
+  private readonly DEFAULT_MAX_PRICE: number = 0;
+  private readonly DEFAULT_SORT: string = '-createdAt';
+
+  products: Product[] = [];
   categoryList: Categories[] = [];
   brandList: any[] = [];
   selectedCategories: string[] = [];
   selectedBrands: string[] = [];
-  selectedCategory: string | null = null;
-  selectedBrand: string | null = null;
-  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef)
+  allFilteredProducts: Product[] = [];
+  pageIndex: number = this.DEFAULT_PAGE - 1;
+  pageSize: number = this.DEFAULT_LIMIT;
+  totalProducts = 0;
 
-  currentParams: any = { page: 1, limit: 8 };
-  isLoading = false;
-  showLoadMore = true;
+  currentParams: IProductQueryParams = {
+    page: this.DEFAULT_PAGE,
+    limit: this.DEFAULT_LIMIT,
+    minPrice: this.DEFAULT_MIN_PRICE,
+    maxPrice: this.DEFAULT_MAX_PRICE,
+    sort: this.DEFAULT_SORT,
+  };
 
-  constructor(
-    private productService: ProductService,
-    private categoryService: CategoryService,
-    private brandService: BrandService
-  ) {}
+  // Thêm biến state cho filter giá
+  minPrice: number = 0;
+  maxPrice: number = 0;
+  selectedMinPrice: number = 0;
+  selectedMaxPrice: number = 0;
+
+  private totalProductsRequest$ = new Subject<{ min: number; max: number }>();
+  private destroyRef = inject(DestroyRef);
+
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly productService = inject(ProductService);
+  private readonly categoryService = inject(CategoryService);
+  private readonly brandService = inject(BrandService);
 
   ngOnInit(): void {
-    this.loadProducts(true);
+    this.loadInitialData();
+  }
+
+
+  getTotalProducts(min: number, max: number): void {
+    this.totalProductsRequest$.next({ min, max });
+  }
+
+  private loadInitialData(): void {
+    this.loadPriceRange();
     this.loadCategories();
     this.loadBrands();
+
+    this.loadTotalProducts();
   }
 
-  loadProducts(reset: boolean = false): void {
-    if (reset) {
-      this.currentParams = { ...this.currentParams, page: 1, limit: 8 };
-      this.showLoadMore = true;
-    }
-    this.productService.getAllProducts(this.currentParams).subscribe((response) => {
-      const data = response.results.data || [];
-      this.products = reset ? data : [...this.products, ...data];
-      if (data.length < this.currentParams.limit) {
-        this.showLoadMore = false;
-      }
-      this.cdr.markForCheck();
-    });
-  }
-
-  onSortChange(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value;
-    if (value === 'rating') {
-      this.currentParams.sort = '-ratingsAverage';
-    } else if (value === 'createdAtDesc') {
-      this.currentParams.sort = '-createdAt';
-    } else if (value === 'createdAtAsc') {
-      this.currentParams.sort = 'createdAt';
-    } else if (value === 'priceAsc') {
-      this.currentParams.sort = 'priceDiscount';
-    } else if (value === 'priceDesc') {
-      this.currentParams.sort = '-priceDiscount';
-    } else {
-      delete this.currentParams.sort;
-    }
-    this.loadProducts(true);
-  }
-
-  onLoadMore(): void {
-    if (this.isLoading || !this.showLoadMore) return;
-    this.isLoading = true;
-    this.currentParams.page += 1;
-    this.currentParams.limit = 4;
-    this.productService.getAllProducts(this.currentParams).subscribe((response) => {
-      const data = response.results.data || [];
-      if (data.length === 0) {
-        this.showLoadMore = false;
-        this.isLoading = false;
+  private loadTotalProducts(): void {
+    this.totalProductsRequest$
+      .pipe(
+        switchMap(({ min, max }) => this.productService.getTotalProductByRangePrice(min, max)),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((totals: number) => {
+        this.totalProducts = totals;
         this.cdr.markForCheck();
-        return;
-      }
-      this.products = [...this.products, ...data];
-      if (data.length < 4) this.showLoadMore = false;
-      this.isLoading = false;
+      });
+  }
+
+  // Khi khởi tạo, gọi loadProducts với currentParams và subscribe để lấy dữ liệu
+  private loadPriceRange(): void {
+    this.productService.getMinMaxPriceDiscount().subscribe(({ min, max }) => {
+      this.minPrice = min;
+      this.maxPrice = max;
+      this.selectedMinPrice = min;
+      this.selectedMaxPrice = max;
+
+      this.currentParams.minPrice = min;
+      this.currentParams.maxPrice = max;
+      this.getTotalProducts(min, max);
+
+      this.loadProduct();
       this.cdr.markForCheck();
+
+      // Sau khi có min/max, gọi loadProducts
+
     });
   }
 
-  // Ví dụ: gọi API chỉ lấy một số field
-  getNameAndPriceOnly() {
-    this.currentParams.fields = 'name,price';
-    this.currentParams.limit = 5;
-    this.currentParams.page = 1;
-    this.loadProducts(true);
-  }
+  loadProduct(): void {
+    console.log('this.currentParams.minPrice', this.currentParams.minPrice);
 
-  // Ví dụ: filter nâng cao
-  filterByPriceAndRating() {
-    this.currentParams = {
-      ...this.currentParams,
-      'price[lt]': 1000,
-      'ratingsAverage[gte]': 4.7,
-      page: 1,
-      limit: 8
-    };
-    this.loadProducts(true);
+    this.productService
+        .getProductsByFilterConditions(
+          this.currentParams.page,
+          this.currentParams.limit,
+          this.currentParams.minPrice,
+          this.currentParams.maxPrice,
+          this.currentParams.sort
+        )
+        .subscribe((response: any) => {
+          console.log('this.currentParams 1', this.currentParams);
+
+          this.products = response.results?.data || [];
+          this.cdr.markForCheck();
+        });
   }
 
   loadCategories(): void {
@@ -132,101 +143,171 @@ export class AllProductsComponent implements OnInit {
     });
   }
 
-  onCategoryChange(categoryId: string, checked: boolean): void {
-    if (checked) {
-      this.selectedCategories.push(categoryId);
+  onPageChange(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
+    this.currentParams.page = this.pageIndex + this.DEFAULT_PAGE;
+    if (this.allFilteredProducts.length > 0) {
+      this.products = this.paginate(this.allFilteredProducts);
+      this.cdr.markForCheck();
     } else {
-      this.selectedCategories = this.selectedCategories.filter(id => id !== categoryId);
-    }
-    this.filterProducts();
-  }
-
-  onBrandChange(brandId: string, checked: boolean): void {
-    if (checked) {
-      this.selectedBrands.push(brandId);
-    } else {
-      this.selectedBrands = this.selectedBrands.filter(b => b !== brandId);
-    }
-    this.filterProducts();
-  }
-
-  filterProducts(): void {
-    this.currentParams = { ...this.currentParams, page: 1 };
-    if (this.selectedCategories.length > 0) {
-      this.currentParams.category = this.selectedCategories.join(',');
-    } else {
-      delete this.currentParams.category;
-    }
-    if (this.selectedBrands.length > 0) {
-      this.currentParams.brand = this.selectedBrands.join(',');
-    } else {
-      delete this.currentParams.brand;
-    }
-    this.loadProducts(true);
-  }
-
-  onCategoryDropdownChange(categoryId: string) {
-    this.selectedCategory = categoryId;
-    if (categoryId) {
-      this.categoryService.getProductsByCategoryId(categoryId).subscribe((res: any) => {
-        this.products = res.result.data.products || [];
+      this.productService
+        .getProductsByFilterConditions(
+        this.currentParams.page,
+        this.currentParams.limit,
+        this.currentParams.minPrice,
+        this.currentParams.maxPrice,
+        this.currentParams.sort
+      ).subscribe((response: any) => {
+        this.products = response.results?.data || [];
+        // this.loadTotalProducts();
         this.cdr.markForCheck();
       });
-    } else {
-      this.loadProducts(true);
     }
   }
 
-  onBrandDropdownChange(brandId: string) {
+  onSortChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    const sortMap: { [key: string]: string } = {
+      createdAtDesc: '-createdAt',
+      createdAtAsc: 'createdAt',
+      priceAsc: 'priceDiscount',
+      priceDesc: '-priceDiscount',
+    };
+    this.currentParams.sort = sortMap[value] || '';
+    this.resetPagination();
+    this.productService
+        .getProductsByFilterConditions(
+      this.currentParams.page,
+      this.currentParams.limit,
+      this.currentParams.minPrice,
+      this.currentParams.maxPrice,
+      this.currentParams.sort
+    ).subscribe((response: any) => {
+      this.products = response.results?.data || [];
+      // this.loadTotalProducts();
+      this.cdr.markForCheck();
+    });
+  }
 
-    this.selectedBrand = brandId;
-    if (brandId) {
-      this.brandService.getProductsByBrandId(brandId).subscribe((res: any) => {
-        console.log('resssssss', res);
-        this.products = res.result.data.products || [];
+  onFilterChange(event: FilterChangeEvent): void {
+    this.selectedBrands = event.selectedBrands;
+    this.selectedCategories = event.selectedCategories;
 
+    this.selectedMinPrice = event.priceRange.min;
+    this.selectedMaxPrice = event.priceRange.max;
+
+    this.currentParams.minPrice = event.priceRange.min;
+    this.currentParams.maxPrice = event.priceRange.max;
+
+    this.resetPagination();
+    this.applyComprehensiveFilter();
+  }
+
+  onResetAllFilters(): void {
+    this.selectedBrands = [];
+    this.selectedCategories = [];
+    this.selectedMinPrice = this.minPrice;
+    this.selectedMaxPrice = this.maxPrice;
+    this.currentParams = {
+      page: this.DEFAULT_PAGE,
+      limit: this.DEFAULT_LIMIT,
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      sort: this.DEFAULT_SORT,
+    };
+    this.pageIndex = this.DEFAULT_PAGE - 1;
+    this.loadProduct();
+    this.getTotalProducts(this.minPrice, this.maxPrice);
+    this.cdr.markForCheck();
+  }
+
+  private resetPagination(): void {
+    console.log('currentParams', this.currentParams);
+
+    this.pageIndex = this.DEFAULT_PAGE - 1;
+    // Chỉ reset page về 1, giữ nguyên limit hiện tại
+    this.currentParams.page = this.DEFAULT_PAGE;
+    // Không reset limit: this.currentParams.limit = this.DEFAULT_LIMIT;
+  }
+
+  private paginate(list: Product[]): Product[] {
+    const start = this.pageIndex * this.pageSize;
+    const end = start + this.pageSize;
+    return list.slice(start, end);
+  }
+
+  // Khi filter giá, category, brand, gọi loadProducts với giá trị filter tương ứng
+  private applyComprehensiveFilter(): void {
+    if (this.selectedBrands.length > 0 || this.selectedCategories.length > 0) {
+      this.filterByBrandsAndCategories();
+      return;
+    }
+    this.cdr.markForCheck();
+
+    this.productService
+        .getProductsByFilterConditions(
+      this.currentParams.page,
+      this.currentParams.limit,
+      this.currentParams.minPrice,
+      this.currentParams.maxPrice,
+      this.currentParams.sort
+    ).subscribe((response: any) => {
+      this.products = response.results?.data || [];
+      // Chỉ gọi loadTotalProducts sau khi products đã cập nhật xong
+      // this.totalProducts = response.totals
+      this.getTotalProducts(this.currentParams.minPrice as number, this.currentParams.maxPrice as number);
+      this.cdr.markForCheck();
+    });
+  }
+
+  filterByBrandsAndCategories(): void {
+    const categoryRequests = this.selectedCategories.map((id) => this.categoryService.getProductsByCategoryId(id));
+    const brandRequests = this.selectedBrands.map((id) => this.brandService.getProductsByBrandId(id));
+    const allRequests = [...categoryRequests, ...brandRequests];
+
+    forkJoin(allRequests).subscribe({
+      next: (results: any[]) => {
+        const categoryProducts = this.mergeResults(results.slice(0, this.selectedCategories.length));
+        const brandProducts = this.mergeResults(results.slice(this.selectedCategories.length));
+
+        let filtered: Product[];
+        if (this.selectedCategories.length && this.selectedBrands.length) {
+          filtered = this.intersectProducts(categoryProducts, brandProducts);
+        } else if (this.selectedCategories.length) {
+          filtered = categoryProducts;
+        } else {
+          filtered = brandProducts;
+        }
+
+        console.log('this.totalProducts', this.totalProducts);
+
+        this.allFilteredProducts = filtered;
+        this.totalProducts = filtered.length;
+        this.products = this.paginate(filtered);
         this.cdr.markForCheck();
-      });
-    } else {
-      this.loadProducts(true);
-    }
-  }
-
-  onBrandCheckboxChange(brandId: string, checked: boolean) {
-    if (checked) {
-      this.selectedBrands.push(brandId);
-    } else {
-      this.selectedBrands = this.selectedBrands.filter(id => id !== brandId);
-    }
-    this.filterByBrandsAndCategories();
-  }
-
-  onCategoryCheckboxChange(categoryId: string, checked: boolean) {
-    if (checked) {
-      this.selectedCategories.push(categoryId);
-    } else {
-      this.selectedCategories = this.selectedCategories.filter(id => id !== categoryId);
-    }
-    this.filterByBrandsAndCategories();
-  }
-
-  filterByBrandsAndCategories() {
-    // Ưu tiên filter theo category nếu có chọn, nếu không thì theo brand, nếu không thì load all
-    if (this.selectedCategories.length > 0) {
-      // Nếu API không hỗ trợ nhiều id, gọi từng cái rồi gộp
-      const requests = this.selectedCategories.map(id => this.categoryService.getProductsByCategoryId(id));
-      Promise.all(requests.map(r => r.toPromise())).then(results => {
-        this.products = results.flatMap((res: any) => res.result.data.products || []);
+      },
+      error: () => {
+        this.allFilteredProducts = [];
+        this.products = [];
+        this.totalProducts = 0;
         this.cdr.markForCheck();
-      });
-    } else if (this.selectedBrands.length > 0) {
-      const requests = this.selectedBrands.map(id => this.brandService.getProductsByBrandId(id));
-      Promise.all(requests.map(r => r.toPromise())).then(results => {
-        this.products = results.flatMap((res: any) => res.result.data.products || []);
-        this.cdr.markForCheck();
-      });
-    } else {
-      this.loadProducts(true);
-    }
+      },
+    });
+  }
+
+  /** Gộp kết quả từ nhiều response, loại trùng id */
+  private mergeResults(results: any[]): Product[] {
+    const all = results.flatMap((res) => res.result?.data?.products || []);
+    return Array.from(new Map(all.map((item) => [(item as any).id, item])).values());
+  }
+
+  /** Lấy giao giữa 2 mảng sản phẩm theo id */
+  private intersectProducts(listA: Product[], listB: Product[]): Product[] {
+    const idsB = new Set(listB.map((p) => (p as any).id));
+    return listA.filter((p) => idsB.has((p as any).id));
+  }
+
+  get showPriceRange(): boolean {
+    return this.selectedBrands.length === 0 && this.selectedCategories.length === 0;
   }
 }

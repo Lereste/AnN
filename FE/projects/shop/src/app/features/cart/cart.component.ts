@@ -9,7 +9,7 @@ import { CartItem, CartItemDetailed } from '../../core/models/cart/cart.model';
 import { CommonModule, Location, NgIf, isPlatformBrowser } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
-import { Products } from '../../core/models/product/product.model';
+import { Product } from '../../core/models/product/product.model';
 import { CartService } from '../../core/service/cart-service/cart.service';
 import { CartOrderSummaryComponent } from '../../shared/layout/cart-order-summary/cart-order-summary.component';
 import { ProductService } from '../../core/service/product-service/product.service';
@@ -23,9 +23,9 @@ import { ProductService } from '../../core/service/product-service/product.servi
 export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = ['product', 'quantity', 'total', 'action'];
 
-  allProducts: Products[] = [];
+  allProducts: Product[] = [];
   // cloneCartProducts: Products[] = [];
-  currentCartDetailItem!: Products;
+  currentCartDetailItem!: Product;
 
   unSubscribe$: Subject<unknown> = new Subject();
 

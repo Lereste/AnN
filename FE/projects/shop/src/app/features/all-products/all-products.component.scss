@@ -14,40 +14,11 @@
 
 .all-products {
   display: flex;
-  gap: 2rem;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
   margin: 12rem auto 2rem;
   max-width: 1400px;
-
-  &__sidebar {
-    width: 260px;
-    background: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  &__filter-group {
-    margin-bottom: 2rem;
-  }
-
-  &__filter-title {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-
-  &__checkbox-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  &__checkbox {
-    margin-bottom: 0.2rem;
-  }
 
   &__main {
     flex: 1;
@@ -73,6 +44,20 @@
     border: 1px solid #ccc;
     font-size: 1rem;
   }
+}
+
+app-product-filter {
+  flex: 0 0 30%;
+  // max-width: 350px;
+  // min-width: 220px;
+  width: 100%;
+  transition: flex-basis 0.3s, width 0.3s;
+}
+
+.all-products__main {
+  flex: 1 1 70%;
+  min-width: 0;
+  width: 100%;
 }
 
 .filter-group h4 {
@@ -111,4 +96,64 @@
   border-radius: 0.5rem;
   border: 1px solid #ccc;
   font-size: 1rem;
+}
+
+.responsive-main {
+  padding: 32px 24px;
+}
+.responsive-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.responsive-sort {
+  min-width: 180px;
+  font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .all-products {
+    flex-direction: column;
+    gap: 20px;
+  }
+  // app-product-filter {
+  //   width: 100%;
+  //   max-width: 100%;
+  //   flex: unset;
+  //   margin-bottom: 16px;
+  // }
+  .all-products__main {
+    width: 100%;
+    min-width: 0;
+    flex: unset;
+  }
+  .responsive-main {
+    padding: 24px 12px;
+  }
+  .responsive-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .responsive-sort {
+    min-width: 140px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .responsive-main {
+    padding: 12px 4px;
+  }
+  .responsive-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .responsive-sort {
+    min-width: 100px;
+    font-size: 0.9rem;
+  }
 }

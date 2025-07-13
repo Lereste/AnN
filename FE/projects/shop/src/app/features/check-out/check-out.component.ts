@@ -12,7 +12,7 @@ import { ReplaySubject, Subject, last, take, takeUntil } from 'rxjs';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { CartService } from '@core/service/cart-service/cart.service';
 import { MatTableModule } from '@angular/material/table';
-import { Products } from '@core/models/product/product.model';
+import { Product } from '@core/models/product/product.model';
 import urlSlug from 'url-slug';
 import { Cart, CartItem, CartItemDetailed } from '@core/models/cart/cart.model';
 import { ProductService } from '@core/service/product-service/product.service';
@@ -65,7 +65,7 @@ export class CheckOutComponent implements OnInit, AfterViewInit {
   cartDataSource: any;
 
   unSubcribe$: Subject<any> = new Subject();
-  checkoutProducts: Products[] = [];
+  checkoutProducts: Product[] = [];
   // cloneCheckoutProducts: Products[] = [];
   totalPrice?: number;
 
@@ -214,7 +214,7 @@ export class CheckOutComponent implements OnInit, AfterViewInit {
       cartResponse.items.forEach((cartItem: CartItem) => {
         // chỗ này sẽ đổi thành call api getProductBySlug
         // VD: this.ordersService.getProductBySlug(cartItem.productSlug).subscribe(response => {
-        this.checkoutProducts.forEach((productItem: Products) => {
+        this.checkoutProducts.forEach((productItem: Product) => {
           if (productItem.slug === cartItem.productSlug) {
             // productItem sẽ là respone trả về của api
 
