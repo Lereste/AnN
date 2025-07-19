@@ -105,7 +105,7 @@
             "server": "projects/shop/src/main.server.ts",
             "outputMode": "server",
             "ssr": {
-              "entry": "projects/shop/src/server.ts"
+              "entry": "projects/shop/src/bootstrap-server.ts"
             },
             "prerender": false
           },
@@ -243,7 +243,7 @@
             "server": "projects/admin/src/main.server.ts",
             "outputMode": "server",
             "ssr": {
-              "entry": "projects/admin/src/server.ts"
+              "entry": "projects/admin/src/bootstrap-server.ts"
             },
             "prerender": false
           },
