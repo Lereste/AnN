@@ -1,19 +1,19 @@
 const path = require('path');
 const fs = require('fs');
 
-const serverDistPath = path.join(process.cwd(), 'dist/shop/server/server.mjs');
+const serverDistPath = path.join(process.cwd(), 'server/server.mjs');
 
 module.exports = async function handler(req, res) {
   // Debug log: list files in dist/shop/server
   try {
-    const serverDir = path.join(process.cwd(), 'dist/shop');
+    const serverDir = path.join(process.cwd(), 'server/');
     if (fs.existsSync(serverDir)) {
-      console.log('Files in dist/:', fs.readdirSync(serverDir));
+      console.log('Files in server/:', fs.readdirSync(serverDir));
     } else {
-      console.log('dist/ directory does not exist');
+      console.log('server/ directory does not exist');
     }
   } catch (e) {
-    console.log('Error reading dist/ directory:', e);
+    console.log('Error reading server/ directory:', e);
   }
 
   if (!fs.existsSync(serverDistPath)) {
