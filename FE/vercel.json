@@ -27,7 +27,7 @@
     { "source": "/(.*)", "destination": "/api" }
   ],
   "functions": {
-    "api/index.ts": {
+    "api/index.js": {
       "includeFiles": "dist/shop/**"
     }
   }
