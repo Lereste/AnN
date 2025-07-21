@@ -28,7 +28,7 @@
   ],
   "functions": {
     "api/index.js": {
-      "includeFiles": "/**"
+      "includeFiles": "dist/shop/**"
     }
   }
 }
