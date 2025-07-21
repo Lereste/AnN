@@ -84,7 +84,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/shop",
-            "index": "projects/shop/src/index.html",
+            "index": "projects/shop/src/indexFile.html",
             "browser": "projects/shop/src/main.ts",
             "polyfills": ["zone.js", "es-module-shims"],
             "tsConfig": "projects/shop/tsconfig.app.json",
@@ -106,8 +106,7 @@
             "outputMode": "server",
             "ssr": {
               "entry": "projects/shop/src/server.ts"
-            },
-            "prerender": false
+            }
           },
           "configurations": {
             "production": {
@@ -222,7 +221,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/admin",
-            "index": "projects/admin/src/index.html",
+            "index": "projects/admin/src/indexFile.html",
             "browser": "projects/admin/src/main.ts",
             "polyfills": ["zone.js", "es-module-shims"],
             "tsConfig": "projects/admin/tsconfig.app.json",
@@ -244,8 +243,7 @@
             "outputMode": "server",
             "ssr": {
               "entry": "projects/admin/src/server.ts"
-            },
-            "prerender": false
+            }
           },
           "configurations": {
             "production": {

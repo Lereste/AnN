@@ -23,6 +23,12 @@
     {
       "source": "/admin/:match*",
       "destination": "https://admin-dienlanhhoaian.vercel.app/:match*"
+    },
+    { "source": "/(.*)", "destination": "/api" }
+  ],
+  "functions": {
+    "api/index.ts": {
+      "includeFiles": "dist/shop/**"
     }
-  ]
+  }
 }
