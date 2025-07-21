@@ -6,7 +6,7 @@ const serverDistPath = path.join(process.cwd(), 'dist/shop/server/server.mjs');
 module.exports = async function handler(req, res) {
   // Debug log: list files in dist/shop/server
   try {
-    const serverDir = path.join(process.cwd(), 'dist');
+    const serverDir = path.join(process.cwd(), 'dist/shop');
     if (fs.existsSync(serverDir)) {
       console.log('Files in dist/:', fs.readdirSync(serverDir));
     } else {
