@@ -1,5 +1,7 @@
 import { loadRemoteModule } from "@angular-architects/native-federation";
 import { Routes } from "@angular/router";
+import { WrapperMfeComponent } from "./wrapper-mfe/wrapper-mfe.component";
+import { WrapperConfig } from "./wrapper-mfe/wrapper-config";
 
 export const APP_ROUTES: Routes = [
   {
@@ -42,15 +44,38 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () =>
-      typeof window === 'undefined'
-        ? import('./features/authentication/authentication.module').then((m) => m.AuthenticationModule)
-        : loadRemoteModule({
-          remoteName: 'admin',
-          exposedModule: './routes',
-          fallback: () => import('./features/authentication/page404/page404.component').then(m => m.Page404Component)
-        }).then((m) => m.ADMIN_APP_ROUTES),
+    component: WrapperMfeComponent,
+    data: {
+      config: {
+        remoteEntry: 'https://admin-dienlanhhoaian.vercel.app/remoteEntry.json',
+        remoteName: 'admin',
+        exposedModule: './routes',
+        elementName: 'admin-root',
+      } as WrapperConfig,
+    },
   },
+  // {
+  //   path: 'admin',
+  //   loadChildren: () =>
+  //     typeof window === 'undefined'
+  //       ? import('./features/authentication/authentication.module').then((m) => m.AuthenticationModule)
+  //       : loadRemoteModule({
+  //         remoteName: 'admin',
+  //         exposedModule: './routes',
+  //         fallback: () => import('./features/authentication/page404/page404.component').then(m => m.Page404Component)
+  //       }).then((m) => m.ADMIN_APP_ROUTES),
+  // },
+  // {
+  //   path: 'admin2',
+  //   component: WrapperMfeComponent,
+  //   data: {
+  //     config: {
+  //       remoteName: 'admin',
+  //       exposedModule: './web-components',
+  //       elementName: 'admin-root',
+  //     } as WrapperConfig,
+  //   },
+  // },
   // {
   //   path: 'remote',
   //   loadComponent: () => loadRemoteModule('admin', './Component').then((m) => m.AppComponent),

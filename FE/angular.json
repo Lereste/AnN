@@ -106,8 +106,7 @@
             "outputMode": "server",
             "ssr": {
               "entry": "projects/shop/src/server.ts"
-            },
-            "prerender": false
+            }
           },
           "configurations": {
             "production": {
@@ -244,8 +243,7 @@
             "outputMode": "server",
             "ssr": {
               "entry": "projects/admin/src/server.ts"
-            },
-            "prerender": false
+            }
           },
           "configurations": {
             "production": {

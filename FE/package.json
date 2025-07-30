@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "admin": "ng serve admin",
+    "admin:ssr": "npm run build:admin && node dist/admin/server/server.mjs",
     "shop": "ng serve shop",
+    "shop:ssr": "npm run build:shop && node dist/shop/server/server.mjs",
     "build:admin": "ng run admin:esbuild:production",
     "build:shop": "ng run shop:esbuild:production",
     "watch": "ng build --watch --configuration development",
@@ -18,6 +20,7 @@
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
+    "@angular/elements": "^19.2.14",
     "@angular/forms": "^19.2.0",
     "@angular/google-maps": "^19.2.14",
     "@angular/material": "^19.2.19",

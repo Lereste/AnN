@@ -59,6 +59,23 @@ if (isMainModule(import.meta.url)) {
   });
 }
 
+/*
+  Note: If you want to run SSR in localhost
+  1- comment this line if (isMainModule(import.meta.url)) {}
+  2- change angular.json:
+    From:
+    "ssr": {
+      "entry": "projects/shop/src/server.ts"
+    }
+
+    To:
+    "ssr": {
+      "entry": "projects/shop/src/bootstrap-server.ts"
+    }
+  3- package.json:
+    "shop:ssr": "npm run build:shop && node dist/shop/server/server.mjs",
+*/
+
 /**
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */
