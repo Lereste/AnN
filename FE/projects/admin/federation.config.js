@@ -4,7 +4,7 @@ module.exports = withNativeFederation({
   name: 'admin',
 
   exposes: {
-    './Component': './projects/admin/src/app/app.component.ts',
+    // './Component': './projects/admin/src/app/app.component.ts',
     "./routes": "./projects/admin/src/app/app.routes.ts",
   },
 
